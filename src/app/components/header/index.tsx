@@ -13,7 +13,7 @@ export function NavbarHome(props: any) {
   return (
     <div>
       <div className="format home_navbar">
-        <Container>
+        <Container className="zor">
           <Stack
             flexDirection={"row"}
             className="navbar_config"

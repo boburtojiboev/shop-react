@@ -3,8 +3,6 @@
   height: 90px;
   display: flex;
   background-color: #8e8e8ee2;
-  /* background: url("/public/restaurant/header_restaurant.png"); */
-  background-size: cover;
 }
 
 .format.home_navbar .navbar_config {

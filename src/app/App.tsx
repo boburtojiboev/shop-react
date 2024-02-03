@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../css/App.css";
 import "../css/navbar.css";
+import "../css/footer.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ProductsPage } from "./screens/ProductsPage";
 import { ShopPage } from "./screens/ShopPage";
@@ -13,6 +14,7 @@ import { HomePage } from "./screens/HomePage";
 import { NavbarHome } from "./components/header";
 import { NavbarShop } from "./components/header/shop";
 import { NavbarOthers } from "./components/header/others";
+import { Footer } from "./components/footer";
 
 function App() {
     const [path, setPath] = useState();
@@ -57,6 +59,7 @@ function App() {
           <HomePage />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   );
 }
