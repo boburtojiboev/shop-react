@@ -1,0 +1,73 @@
+.homepage .static_frame {
+  width: 100%;
+  /* background: #f3efe9; */
+}
+
+.homepage .free_ship {
+  margin-right: 0px;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: url("/public/home/free.png");
+  background-size: cover;
+}
+
+.homepage .pay_meth {
+  margin-left: 20px;
+  position: relative;
+  width: 62px;
+  height: 60px;
+  background: url("/public/home/payment.png");
+  background-size: cover;
+}
+
+.homepage .online_sup {
+  margin-left: 20px;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: url("/public/home/online.png");
+  background-size: cover;
+}
+
+.homepage .packaging {
+  margin-left: 20px;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: url("/public/home/package.png");
+  background-size: cover;
+}
+
+.homepage .static_box {
+  width: 191px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.homepage .static_box .static_num {
+  font-family: "Poppins";
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 10px;
+  color: #220f0f;
+}
+
+.homepage .static_text {
+  width: 191.351px;
+  height: 24px;
+  font-family: "Poppins";
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 20px;
+
+  color: rgb(73, 71, 71);
+}
