@@ -5,7 +5,7 @@ import React from "react";
 export function CollectionType() {
   return (
     <div className="collection_frame">
-      <Container>
+      <Container sx={{ padding: "0px" }}>
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Box className="category_title">Collections Types</Box>
           <Stack
