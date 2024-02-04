@@ -1,6 +1,6 @@
 .homepage .static_frame {
   width: 100%;
-  /* background: #f3efe9; */
+  background: #f3efe9;
 }
 
 .homepage .free_ship {
@@ -70,4 +70,81 @@
   line-height: 20px;
 
   color: rgb(73, 71, 71);
+}
+
+/* collections type */
+.homepage .collection_frame {
+  margin-top: 20px;
+  width: 100%;
+  height: 480px;
+  display: flex;
+}
+
+.homepage .category_title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  font-family: "Roboto";
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 42px;
+  color: #0f0c08;
+  
+}
+
+.image_box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.homepage .collection_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.homepage .collection_box .collection_img {
+  position: relative;
+  width: 380px;
+  height: 380px;
+  background-size: cover;
+  /* border-radius: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.homepage .view_btn {
+  width: 180px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: rgba(132, 185, 136, 0.59);
+  border: 2px solid #77b36ae1;
+  border-radius: 5px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+.view_btn:active {
+    background-color: #170809a0;
+    border: 2px solid #1a0606ca;
+    color: rgba(61, 224, 80, 0.91);
+}
+
+.homepage .collection_img:hover .view_btn {
+  opacity: 1;
 }
