@@ -28,7 +28,7 @@ export function BestProducts() {
               <Card
                 className="img_cart"
                 variant="outlined"
-                sx={{ minHeight: 320, minWidth: 280 }}
+                sx={{ minHeight: 320, minWidth: 280, }}
               >
                 <CardOverflow>
                   <AspectRatio ratio="1">
@@ -235,7 +235,7 @@ export function BestProducts() {
                     gap: 1.5,
                     py: 0.8,
                     borderTop: ".4px solid",
-                    // bgcolor: "Background.level1",
+                    bgcolor: "Background.level1",
                     justifyContent: "flex-end",
                   }}
                 >

@@ -8,6 +8,14 @@ import {
 } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import EastIcon from "@mui/icons-material/East";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+// import { useNavigate } from "react-router-dom";
 
 export function NavbarHome(props: any) {
   return (
@@ -96,9 +104,94 @@ export function NavbarHome(props: any) {
           </Stack>
         </Container>
       </div>
-      <Stack className="head_information">
+      {/* <Stack className="head_information">
         <h1 className="info_store">Brand Name</h1>
-      </Stack>
+      </Stack> */}
+      <Swiper
+        spaceBetween={0}
+        loop={true}
+        centeredSlides={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Autoplay, Pagination]}
+        className="mySwiper"
+      >
+        <SwiperSlide>
+          <Stack className="head_information1">
+            <Stack className="box_head">
+              <h2 className="head_title">All collections about shoe...</h2>
+              <p className="head_text">
+                The type of shoe you should buy depends on how you travel. Try
+                to consider the practicalities before being enticed by the
+                endless colours and styles available!
+              </p>
+              <button className="info_store">Get Your Shoes</button>
+            </Stack>
+          </Stack>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Stack className="head_information2">
+            <Stack className="box_head">
+              <h2 className="head_title">All collections about shoe...</h2>
+              <p className="head_text">
+                The type of shoe you should buy depends on how you travel. Try
+                to consider the practicalities before being enticed by the
+                endless colours and styles available!
+              </p>
+              <button className="info_store">Get Your Shoes</button>
+            </Stack>
+          </Stack>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Stack className="head_information3">
+            <Stack className="box_head">
+              <h2 className="head_title">All collections about shoe...</h2>
+              <p className="head_text">
+                The type of shoe you should buy depends on how you travel. Try
+                to consider the practicalities before being enticed by the
+                endless colours and styles available!
+              </p>
+              <button className="info_store">Get Your Shoes</button>
+            </Stack>
+          </Stack>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Stack className="head_information4">
+            <Stack className="box_head">
+              <h2 className="head_title">All collections about shoe...</h2>
+              <p className="head_text">
+                The type of shoe you should buy depends on how you travel. Try
+                to consider the practicalities before being enticed by the
+                endless colours and styles available!
+              </p>
+              <button className="info_store">Get Your Shoes</button>
+            </Stack>
+          </Stack>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Stack className="head_information5">
+            <Stack className="box_head">
+              <h2 className="head_title">All collections about shoe...</h2>
+              <p className="head_text">
+                The type of shoe you should buy depends on how you travel. Try
+                to consider the practicalities before being enticed by the
+                endless colours and styles available!
+              </p>
+              <button className="info_store">Get Your Shoes</button>
+            </Stack>
+          </Stack>
+        </SwiperSlide>
+
+      </Swiper>
     </div>
   );
 }
