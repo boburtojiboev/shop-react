@@ -97,7 +97,6 @@ export function NavbarShop(props: any) {
         </Container>
       </div>
       <Stack className="shop_information">
-        <h1 className="info_store">Collections</h1>
       </Stack>
     </div>
   );

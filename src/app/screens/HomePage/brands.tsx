@@ -5,7 +5,6 @@ import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
 import { CssVarsProvider } from "@mui/joy/styles";
 import { Box, Container, Stack } from "@mui/material";
-import ColorLensIcon from "@mui/icons-material/ColorLens";
 import { AspectRatio, Link } from "@mui/joy";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";

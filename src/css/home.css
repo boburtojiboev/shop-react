@@ -224,7 +224,7 @@
 }
 .img_cart:hover {
   transform: scale(1.1);
-  /* border: 1px solid rgb(213, 67, 67); */
+  border: 1px solid rgb(213, 67, 67);
 }
 
 .img_carts_brands:hover {
@@ -266,28 +266,7 @@
 
 
 
-.img-magnifier {
-    width: 500px;
-    height: 500px;
-    /* background: url("/public/shops/3.webp"); */
-    background-size: cover;
-}
 
-* {box-sizing: border-box;}
-
-.img-magnifier{
-  position: relative;
-}
-
-.img-magnifier-glass {
-  position: absolute;
-  border: 3px solid #000;
-  border-radius: 50%;
-  cursor: none;
-  /*Set the size of the magnifier glass:*/
-  width: 100px;
-  height: 100px;
-}
 
 .brand_info {
   /* margin-top: 75px; */
@@ -307,3 +286,76 @@
   justify-content: space-between;
   margin-bottom: 10px;
 }
+
+.review_for_restaurant {
+    /* margin-top: 60px; */
+    width: 100%;
+    height: 700px;
+
+    display: flex;
+    /* background-color: #0d1518; */
+}
+
+ .category_title_review {
+    font-family: "Dancing Script";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 43px;
+    color: #000000;
+  }
+  .review_box_review {
+    margin-top: 10px;
+    padding: 20px;
+    height: 480px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffff;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25),
+    inset 0px 4px 4px rgba(0, 0, 0, 0.25),
+    inset 0px 4px 16px rgba(242, 189, 87, 0.04);
+    border-radius: 16px;
+  }
+  .review_img_review {
+    width: 260px;
+    height: 250px;
+
+    filter: drop-shadow(0px 4px 4px  rgba(0, 0, 0, 0.25));
+    border-radius: 16px;
+  }
+
+  .review_name_review {
+    margin-top: 10px;
+    font-family: "Commissioner";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 20px;
+    color: #08090d;
+  }
+  .review_box_review:hover {
+    border: 1px solid bisque;
+  }
+    .review_box_review:hover .review_img_review  {
+    border: 1px solid rgb(18, 17, 16);
+  }
+
+ .review_prof_rev {
+    font-family: "Commissioner";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 10px;
+    color: #08090d;
+  }
+  .review_desc_rev {
+    margin-top: 10px;
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #616164;
+  }

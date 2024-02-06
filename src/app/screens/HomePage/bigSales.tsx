@@ -9,15 +9,22 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import { AspectRatio, Link } from "@mui/joy";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 
 export function BigSales() {
   return (
     <div className="big_sale_frame">
-      <Container sx={{ pt: "30px", mt: "0px" }}>
+      <Container sx={{ pt: "30px", mb: "0px" }}>
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Box className="category_title">Big sale</Box>
+          <Box className="category_title_box">
+            <Box className="more_than">
+              <ListAltIcon style={{ height: "40px" }} />
+              more than
+            </Box>
+          </Box>
           <Stack
-            sx={{ mt: "30px", gap: "40px" }}
+            sx={{ mt: "30px", mb: "50px", gap: "40px" }}
             justifyContent={"space-between"}
             flexDirection={"row"}
           >
@@ -503,9 +510,9 @@ export function BigSales() {
               </Card>
             </CssVarsProvider>
           </Stack>
-          <Stack  width= "100%" flexDirection={"row"} justifyContent={"flex-end"}>
+          {/* <Stack  width= "100%" flexDirection={"row"} justifyContent={"flex-end"}>
             <button className={"checkbox"}>Check More</button>
-          </Stack>
+          </Stack> */}
         </Stack>
       </Container>
     </div>

@@ -8,6 +8,7 @@ import { Box, Container, Stack } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ColorLensIcon from "@mui/icons-material/ColorLens";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 import {
   AspectRatio,
   Link,
@@ -19,6 +20,12 @@ export function BestProducts() {
       <Container sx={{ mt: "60px" }}>
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Box className="category_title">Best Products</Box>
+          <Box className="category_title_box">
+            <Box className="more_than">
+              <ListAltIcon style={{ height: "40px" }} />
+              more than
+            </Box>
+          </Box>
           <Stack
             sx={{ mt: "30px", gap: "40px" }}
             justifyContent={"space-between"}
@@ -28,7 +35,7 @@ export function BestProducts() {
               <Card
                 className="img_cart"
                 variant="outlined"
-                sx={{ minHeight: 320, minWidth: 280, }}
+                sx={{ minHeight: 320, minWidth: 280 }}
               >
                 <CardOverflow>
                   <AspectRatio ratio="1">
