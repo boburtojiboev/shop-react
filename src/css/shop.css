@@ -1,0 +1,116 @@
+.shop_page{
+    position: relative;
+    width: 100%;
+    height: auto;
+    /* background: #0b0e11; */
+}
+.shop_page .all_shop .fit_search_box {
+    position: relative;
+    width: 100%;
+    height: 33px;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .fit_box{
+    width: 100%;
+     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .shop_page .all_shop .all_shop_box {
+    position: relative;
+    width: 1305px;
+    height: auto;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .shop_cart{
+ box-shadow: 0 3px 4px 0 #0e1e251f, 0 2px 16px 0 #09151a52;
+ cursor: pointer;
+  }
+  .shop_cart:hover {
+    border: 1px solid black;
+    transform: translate3d(0px, -10px, 0px);
+  }
+.shop_like{
+    cursor: pointer;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.shop_cart:hover .shop_like{
+    opacity: 1;
+}
+
+  .shop_page .all_shop .restaurant_box {
+    margin: 13px;
+    padding: 5px;
+    width: 300px;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    background: #ffffff;
+    border: 1px solid #ededed;
+    border-radius: 8px;
+  }
+  .shop_page .all_shop .restaurant_img {
+    width: 280px;
+    height: 330px;
+    border-radius: 5px;
+    background-size: cover;
+  }
+
+  .shop_page .all_shop .restaurant_title_text {
+    font-family: "GT Walsheim Pro";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 26px;
+    text-transform: capitalize;
+    color: #140342;
+  }
+
+  .shop_page .all_shop .restaurant_desc_text {
+    margin-top: 6px;
+    font-family: "?????";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+
+  .shop_page .all_shop .bottom_box {
+    position: relative;
+    width: 100%;
+    height: 168px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+   /* .line_img_left {
+    transform: matrix(1, 0, 1, -10, 100);
+    width: 100px;
+    height: 100px;
+    transition: 0.2s;
+  }
+
+  .line_img_left:hover {
+    transform: scale(1.1);
+  } */

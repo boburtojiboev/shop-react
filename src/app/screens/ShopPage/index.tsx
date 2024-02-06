@@ -4,11 +4,12 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { ChosenProduct } from "./chosenProduct";
 import { OneShop } from "./oneShop";
 import { AllShops } from "./allShops";
+import "../../../css/shop.css";
 
 export function ShopPage() {
   let shop = useRouteMatch();
   return (
-    <div className="restaurant_page">
+    <div className="shop_page">
       <Switch>
         <Route path={`${shop.path}/product/:product_id`}>
           <ChosenProduct />
