@@ -10,10 +10,8 @@ import {
 import { Box, Button, Container, Stack } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
-
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
 import { Call, Favorite, LocationOnRounded, Search } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import * as React from "react";
@@ -69,7 +67,6 @@ export function AllShops() {
                 </RadioGroup>
               </FormControl>
               {/* <img className="line_img_left" src={"/icons/nike.png"} alt="" /> */}
-             
             </Box>
           </Box>
           <Stack className={"all_shop_box"}>
@@ -181,7 +178,6 @@ export function AllShops() {
           </Stack>
 
           <Stack className="bottom_box">
-            {/* <img className="line_img_left" src={"/icons/nike.png"} alt="" /> */}
             <Pagination
               count={3}
               page={1}
@@ -196,8 +192,6 @@ export function AllShops() {
                 />
               )}
             />
-
-            {/* <img className="line_img_right" src={"/icons/yellow.png"} alt="" /> */}
           </Stack>
         </Stack>
       </Container>

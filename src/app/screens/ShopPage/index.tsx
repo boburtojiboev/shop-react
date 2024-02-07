@@ -14,7 +14,7 @@ export function ShopPage() {
         <Route path={`${shop.path}/product/:product_id`}>
           <ChosenProduct />
         </Route>
-        <Route path={`${shop.path}/:restaurant_id`}>
+        <Route path={`${shop.path}/:shop_id`}>
           <OneShop />
         </Route>
         <Route path={`${shop.path}`}>
