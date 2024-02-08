@@ -14,7 +14,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Call, Favorite, LocationOnRounded, Search } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Close, Home, } from "@mui/icons-material";
+import { Close, Home } from "@mui/icons-material";
 import * as React from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -27,7 +27,7 @@ const order_list = Array.from(Array(8).keys());
 console.log(order_list);
 
 export function AllShops() {
-     const history = useHistory();
+  const history = useHistory();
   return (
     <div className="all_shop">
       <Container>
@@ -39,20 +39,14 @@ export function AllShops() {
             </Box>
             <p className="">/</p>
             <Box onClick={() => history.push("/")} className="home_link">
-              Product
+              Shop
               <Close className="close" />
             </Box>
           </Box>
           <Box className={"fit_search_box"}>
             <Box className={"fit_box"}>
-              {/* <a>Zo'r</a>
-              <a>Mashhur</a>
-              <a>Trendagi</a>
-              <a>Yangi</a> */}
               <FormControl>
-                <FormLabel id="demo-row-radio-buttons-group-label">
-                  Sorting
-                </FormLabel>
+                <p color="black">Sorting</p>
                 <RadioGroup
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
@@ -81,7 +75,6 @@ export function AllShops() {
                   />
                 </RadioGroup>
               </FormControl>
-              {/* <img className="line_img_left" src={"/icons/nike.png"} alt="" /> */}
             </Box>
           </Box>
           <Stack className={"all_shop_box"}>

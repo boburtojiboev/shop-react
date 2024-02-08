@@ -8,8 +8,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import InputLabel from "@mui/material/InputLabel";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
@@ -127,12 +125,10 @@ export function OneShop() {
             flexDirection={"row"}
             justifyContent={"flex-start"}
             width={"100%"}
-            sx={{ mt: "65px", color: "secondary" }}
+            sx={{ mt: "65px", color: "black" }}
           >
             <FormControl>
-              <FormLabel id="demo-row-radio-buttons-group-label">
-                Sorting
-              </FormLabel>
+              <p color="black">Sorting</p>
               <RadioGroup
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
@@ -157,12 +153,9 @@ export function OneShop() {
                 <FormControlLabel value="new" control={<Radio />} label="new" />
               </RadioGroup>
             </FormControl>
-            <FormControl
-              style={{ width: "180px", marginTop: "10px", marginLeft: "30px" }}
-            >
-              <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                Filter
-              </InputLabel>
+            <FormControl style={{ width: "180px", marginLeft: "30px" }}>
+              {" "}
+              <p>Filter</p>
               <NativeSelect
                 defaultValue={"All"}
                 inputProps={{
