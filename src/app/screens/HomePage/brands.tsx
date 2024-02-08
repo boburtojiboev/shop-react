@@ -84,7 +84,7 @@ export function Brands() {
                 delay: 3000,
                 disableOnInteraction: false,
               }}
-              modules={[Autoplay]}
+              // modules={[Autoplay]}
             >
               {events_list.map((value, number) => {
                 return (

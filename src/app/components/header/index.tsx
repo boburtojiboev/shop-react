@@ -118,10 +118,10 @@ export function NavbarHome(props: any) {
         pagination={{
           clickable: true,
         }}
-        modules={[Autoplay, Pagination]}
-        className="mySwiper"
+        // modules={[Autoplay, Pagination]}
+        // className="mySwiper"
       >
-        <SwiperSlide>
+        <SwiperSlide >
           <Stack className="head_information1">
             <Stack className="box_head">
               <h2 className="head_title">All collections about shoe...</h2>

@@ -48,7 +48,7 @@ export function ProductsPage() {
                 Home
               </Box>
               <p className="">/</p>
-              <Box onClick={() => history.push("/store")} className="home_link">
+              <Box onClick={() => history.push("/")} className="home_link">
                 Products
                 <Close className="close" />
               </Box>

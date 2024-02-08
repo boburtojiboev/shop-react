@@ -2,14 +2,23 @@
   width: 100%;
   height: 90px;
   display: flex;
-  background-color: #8e8e8ee2;
+  /* background-color: #8e8e8ee2; */
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333333bd;
+    color: #fff;
+    padding: 10px;
+    z-index: 999;
+    align-items: center;
 }
 
 .format.home_navbar .navbar_config {
   width: 1244.69px;
   height: 46px;
   margin-left: 10px;
-  margin-top: 25px;
+  margin-top: 10px;
 }
 
 .home_navbar .navbar_links {
@@ -45,7 +54,7 @@
 
 .head_information1 {
   width: 100%;
-  height: 500px;
+  height: 570px;
   background: url("/public/shops/1.png");
   background-size: cover;
   display: flex;
@@ -54,7 +63,7 @@
 }
 .head_information2 {
   width: 100%;
-  height: 500px;
+  height: 570px;
   background: url("/public/shops/2.png");
   background-size: cover;
   display: flex;
@@ -63,7 +72,7 @@
 }
 .head_information3 {
   width: 100%;
-  height: 500px;
+  height: 570px;
   background: url("/public/shops/3.webp");
   background-size: cover;
   display: flex;
@@ -73,7 +82,7 @@
 
 .head_information4 {
   width: 100%;
-  height: 500px;
+  height: 570px;
   background: url("/public/shops/4.png");
   background-size: cover;
   display: flex;
@@ -83,20 +92,21 @@
 
 .head_information5 {
   width: 100%;
-  height: 500px;
+  height: 570px;
   background: url("/public/shops/6.webp");
   background-size: cover;
   display: flex;
   position: relative;
   flex-direction: row;
-}
+  
+} 
 
 .box_head {
   width: 800px;
   height: 350px;
   margin-left: 255px;
-  margin-top: 80px;
-  background-color: #0a08085d;
+  margin-top: 160px;
+  background-color: #0d09095d;
 }
 .box_head:hover {
   border: 1px solid red;
@@ -136,7 +146,7 @@
   background-color: rgba(58, 57, 57, 0.593);
 }
 .info_store:hover{
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.588);
   border: 1px solid black;
 }
 .info_store:active{
@@ -163,3 +173,4 @@
   justify-content: center;
   align-items: center;
 }
+

@@ -29,7 +29,7 @@ import { Close, Home, Visibility } from "@mui/icons-material";
 import NativeSelect from "@mui/material/NativeSelect";
 import { Favorite } from "@mui/icons-material";
 import SwiperCore, { Autoplay, Navigation } from "swiper";
-SwiperCore.use([Autoplay, Navigation, Pagination]);
+// SwiperCore.use([Autoplay, Navigation, Pagination]);
 
 const shop_list = Array.from(Array(12).keys());
 const product_list = Array.from(Array(8).keys());
