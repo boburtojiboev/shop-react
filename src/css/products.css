@@ -1,0 +1,181 @@
+.products_page {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.product_page {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+.box_link {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.home_link {
+  width: 100px;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  align-items: center;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 2px 8px;
+  transition: all 0.3s;
+}
+.home_link:hover {
+  background-color: rgb(235, 233, 233);
+}
+
+.box_link p {
+  font-size: 24px;
+}
+.hover-line a {
+  color: #190e0e;
+}
+
+.products_page .product_page .avatar_big_box {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.products_page .product_page .top_text {
+  position: relative;
+  width: 100%;
+  height: 43px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.products_page .product_page .top_text p {
+  position: relative;
+  margin-right: 240px;
+
+  font-family: "Dancing Script";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 43px;
+
+  color: #070604;
+}
+
+.products_page .product_page .Single_search_big_box {
+  position: relative;
+  width: 300px;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  background: #fffcfc;
+  border: 1px solid #ffffff;
+  box-shadow: 0px 4px 4px rgba(213, 213, 213, 0.25);
+  border-radius: 15.5px;
+  box-sizing: border-box;
+}
+
+.products_page .product_page .Single_search_form {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.products_page .product_page .Single_searchInput {
+  position: relative;
+  width: 200px;
+  height: 28px;
+  margin-left: 10px;
+
+  display: flex;
+  border: none;
+  border-radius: 15.5px 0px 0px 15.5px;
+  font-family: "GT Walsheim Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 26px;
+  color: #4f547b;
+}
+
+.products_page .product_page .Single_button_search {
+  position: relative;
+  width: 100px;
+  height: 33px;
+  display: flex;
+
+  border-radius: 18.5px;
+  background: #282626;
+}
+
+/* .products_page .product_page .prev_btn,
+.product_page .next_btn {
+  width: 10%;
+  height: 147px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+.products_page .product_page .single_shop_box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  width: 100%;
+}
+
+.products_page .product_page .bottom_box {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.products_page .product_page .member_reviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.sorting_box {
+  border: 1px solid black;
+  height: 700px;
+  width: 22%;
+}
+
+.filter_box {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+.sortin_top {
+    width: 100%;
+    height: 50px;
+    background-color: rgb(235, 233, 233);
+    align-items: center;
+    color: #110e0e;
+    font-size: 20px;
+    padding-left: 15px;
+    display: flex;
+}
