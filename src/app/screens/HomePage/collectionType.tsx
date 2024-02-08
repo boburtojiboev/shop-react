@@ -1,5 +1,4 @@
 import { Box, Container, Stack } from "@mui/material";
-import { MonetizationOn } from "@mui/icons-material";
 import React from "react";
 
 export function CollectionType() {

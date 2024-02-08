@@ -13,6 +13,7 @@ import InputLabel from "@mui/material/InputLabel";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
+import { useHistory } from "react-router-dom";
 import {
   Card,
   CardOverflow,
@@ -26,7 +27,7 @@ import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Visibility } from "@mui/icons-material";
+import { Close, Home, Visibility } from "@mui/icons-material";
 import NativeSelect from "@mui/material/NativeSelect";
 import { Favorite } from "@mui/icons-material";
 import SwiperCore, { Autoplay, Navigation } from "swiper";
@@ -36,10 +37,26 @@ const shop_list = Array.from(Array(12).keys());
 const product_list = Array.from(Array(8).keys());
 
 export function OneShop() {
+  const history = useHistory();
   return (
     <div className="single_shop">
       <Container>
         <Stack flexDirection={"column"} alignItems={"center"}>
+          <Box className="box_link">
+            <Box onClick={() => history.push("/")} className="home_link">
+              <Home />
+              Home
+            </Box>
+            <p className="">/</p>
+            <Box onClick={() => history.push("/store")} className="home_link">
+              Shop{" "}
+            </Box>
+            <p className="">/</p>
+            <Box onClick={() => history.push("/store")} className="home_link">
+              Product
+              <Close className="close" />
+            </Box>
+          </Box>
           <Stack
             style={{ width: "100%", display: "flex" }}
             flexDirection={"row"}
@@ -120,6 +137,7 @@ export function OneShop() {
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
+                defaultValue={"Price"}
               >
                 <FormControlLabel
                   value="Price"

@@ -14,21 +14,35 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Call, Favorite, LocationOnRounded, Search } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { Close, Home, } from "@mui/icons-material";
 import * as React from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import { useHistory } from "react-router-dom";
 
 const order_list = Array.from(Array(8).keys());
 console.log(order_list);
 
 export function AllShops() {
+     const history = useHistory();
   return (
     <div className="all_shop">
       <Container>
         <Stack flexDirection={"column"} alignItems={"center"}>
+          <Box className="box_link">
+            <Box onClick={() => history.push("/")} className="home_link">
+              <Home />
+              Home
+            </Box>
+            <p className="">/</p>
+            <Box onClick={() => history.push("/")} className="home_link">
+              Product
+              <Close className="close" />
+            </Box>
+          </Box>
           <Box className={"fit_search_box"}>
             <Box className={"fit_box"}>
               {/* <a>Zo'r</a>
@@ -43,6 +57,7 @@ export function AllShops() {
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
+                  defaultValue={"best"}
                 >
                   <FormControlLabel
                     value="best"
