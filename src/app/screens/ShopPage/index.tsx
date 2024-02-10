@@ -4,11 +4,13 @@ import { ChosenProduct } from "./chosenProduct";
 import { OneShop } from "./oneShop";
 import { AllShops } from "./allShops";
 import "../../../css/shop.css";
+import { NavbarShop } from "../../components/header/shop";
 
 export function ShopPage() {
   let shop = useRouteMatch();
   return (
     <div className="shop_page">
+      <NavbarShop/>
       <Switch>
         <Route path={`${shop.path}/product/:product_id`}>
           <ChosenProduct />

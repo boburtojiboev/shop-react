@@ -2,16 +2,25 @@
   width: 100%;
   height: 90px;
   display: flex;
-  /* background-color: #8e8e8ee2; */
   position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333333bd;
-    color: #fff;
-    padding: 10px;
-    z-index: 999;
-    align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333333bd;
+  color: #fff;
+  padding: 10px;
+  z-index: 999;
+  align-items: center;
+}
+.msg_box {
+  width: 90px;
+  height: 90px;
+  position: fixed;
+  z-index: 999;
+  top: 80%;
+  left: 92%;
+  display: flex;justify-content: center;
+  /* background-color: #d7b686; */
 }
 
 .format.home_navbar .navbar_config {
@@ -30,7 +39,7 @@
   text-decoration: none;
 }
 
-.home_navbar .hover-line a {
+.home_navbar .hover-line a{
   color: #ffffff;
 }
 
@@ -98,8 +107,7 @@
   display: flex;
   position: relative;
   flex-direction: row;
-  
-} 
+}
 
 .box_head {
   width: 800px;
@@ -124,13 +132,13 @@
 .head_text {
   width: 670px;
   height: 60px;
-  font-family: "Rubik", sans-serif Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: "Rubik", sans-serif Impact, Haettenschweiler, "Arial Narrow Bold",
+    sans-serif;
   font-size: 22px;
   color: #ffffff;
   font-weight: 400;
   margin-left: 40px;
 }
-
 
 .info_store {
   margin-top: 30px;
@@ -145,19 +153,18 @@
   color: #f1dede;
   background-color: rgba(58, 57, 57, 0.593);
 }
-.info_store:hover{
+.info_store:hover {
   background-color: rgba(0, 0, 0, 0.588);
   border: 1px solid black;
 }
-.info_store:active{
+.info_store:active {
   border: 1px solid rgb(255, 255, 255);
 }
-
 
 .shop_information {
   width: 100%;
   height: 400px;
-  background: url("/public/shops/kerak.png");
+  background: url("/public/shops/onhand.png");
   background-size: cover;
   justify-content: center;
   align-items: center;
@@ -173,4 +180,125 @@
   justify-content: center;
   align-items: center;
 }
+
+ .chat_frame {
+  width: 300px;
+  height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  background: #d0deeb;
+  border: 1px solid #ffffff;
+  border-radius: 17px;
+}
+
+.chat_frame .chat_top {
+  width: 100%;
+  height: 70px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(228, 228, 228, 0.83);
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 54px;
+  color: #000000;
+}
+
+.chat_content {
+  position: relative;
+  padding: 17px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+ .chat_content .chat_main {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  font-size: 14px;
+}
+
+.chat_main .msg_left {
+  margin-left: 10px;
+  padding: 9px;
+  width: auto;
+  height: auto;
+  display: flex;
+  background: rgba(228, 228, 228, 0.83);
+  border-radius: 20px 20px 20px 0px;
+}
+
+ .msg_right {
+  padding: 9px;
+  width: auto;
+  height: auto;
+  display: flex;
+  background: #d0ece8;
+  border-radius: 20px 20px 0px 20px;
+}
+
+.chat_frame .chat_bott {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgba(228, 228, 228, 0.83);
+}
+
+.chat_bott .msg_input {
+  padding-left: 20px;
+  width: 200px;
+  height: 45px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f7f7f7;
+  border-radius: 20px;
+  border: none;
+  outline-color: #257677;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  /* line-height: 24px; */
+}
+
+ .chat_bott .send_msg_btn {
+  margin-left: 5px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #55a99d 0%, #007665 100%);
+  border: none;
+}
+
+.chat_icon {
+  color: #018094;
+  cursor: pointer;
+  
+}
+.chat_icon:hover{
+  color: #807f35;
+  
+}
+
+/* end */
+
 

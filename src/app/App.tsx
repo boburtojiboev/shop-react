@@ -15,13 +15,14 @@ import { NavbarHome } from "./components/header";
 import { NavbarShop } from "./components/header/shop";
 import { NavbarOthers } from "./components/header/others";
 import { Footer } from "./components/footer";
+import { Header } from "./components/header/header";
 
 function App() {
     const [path, setPath] = useState();
     const main_path = window.location.pathname;
   return (
     <Router>
-      {main_path == "/" ? (
+      {/* {main_path == "/" ? (
         <NavbarHome setPath={setPath} />
       ) : main_path.includes("/products") ? (
         <NavbarShop setPath={setPath} />
@@ -29,7 +30,8 @@ function App() {
         <NavbarShop setPath={setPath} />
       ) : (
         <NavbarOthers setPath={setPath} />
-      )}
+      )} */}
+      {<Header setPath={setPath}/>}
 
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

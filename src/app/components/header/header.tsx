@@ -1,20 +1,11 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Container,
-  IconButton,
-  Stack,
-} from "@mui/material";
-import React from "react";
+import { Badge, Box, Button, Container, IconButton, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { Header } from "./header";
+import { Chatting } from "./chatting";
 
-export function NavbarShop(props: any) {
-  return (
-    <div>
-      {/* <div className="format home_navbar">
-        <Container>
+export function Header(props: any) {
+    return (
+      <div className="format home_navbar">
+        <Container className="zor">
           <Stack
             flexDirection={"row"}
             className="navbar_config"
@@ -95,11 +86,8 @@ export function NavbarShop(props: any) {
               </Box>
             </Stack>
           </Stack>
+          <Box className="msg_box"><Chatting/></Box>
         </Container>
-      </div> */}
-      {/* <Header/> */}
-      <Stack className="shop_information">
-      </Stack>
-    </div>
-  );
+      </div>
+    );
 }

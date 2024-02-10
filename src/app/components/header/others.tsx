@@ -8,11 +8,12 @@ import {
 } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Header } from "./header";
 
 export function NavbarOthers(props: any) {
   return (
     <div>
-      <div className="format home_navbar">
+      {/* <div className="format home_navbar">
         <Container>
           <Stack
             flexDirection={"row"}
@@ -95,7 +96,8 @@ export function NavbarOthers(props: any) {
             </Stack>
           </Stack>
         </Container>
-      </div>
+      </div> */}
+      {/* <Header/> */}
       <Stack className="others_information">
       </Stack>
     </div>

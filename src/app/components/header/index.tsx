@@ -7,20 +7,18 @@ import {
   Stack,
 } from "@mui/material";
 import React from "react";
-import { NavLink } from "react-router-dom";
-import EastIcon from "@mui/icons-material/East";
+import { NavLink, useHistory } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-// import { useNavigate } from "react-router-dom";
+import { Header } from "./header";
 
 export function NavbarHome(props: any) {
+  const history = useHistory();
   return (
     <div>
-      <div className="format home_navbar">
+      {/* <div className="format home_navbar">
         <Container className="zor">
           <Stack
             flexDirection={"row"}
@@ -102,11 +100,14 @@ export function NavbarHome(props: any) {
               </Box>
             </Stack>
           </Stack>
+          <Box className="msg_box">msg</Box>
         </Container>
-      </div>
+      </div> */}
+      {/* <Header/> */}
       {/* <Stack className="head_information">
         <h1 className="info_store">Brand Name</h1>
       </Stack> */}
+
       <Swiper
         spaceBetween={0}
         loop={true}
@@ -121,7 +122,7 @@ export function NavbarHome(props: any) {
         // modules={[Autoplay, Pagination]}
         // className="mySwiper"
       >
-        <SwiperSlide >
+        <SwiperSlide>
           <Stack className="head_information1">
             <Stack className="box_head">
               <h2 className="head_title">All collections about shoe...</h2>
@@ -130,7 +131,12 @@ export function NavbarHome(props: any) {
                 to consider the practicalities before being enticed by the
                 endless colours and styles available!
               </p>
-              <button className="info_store">Get Your Shoes</button>
+              <button
+                onClick={() => history.push("/store")}
+                className="info_store"
+              >
+                Get Your Shoes
+              </button>
             </Stack>
           </Stack>
         </SwiperSlide>
@@ -144,7 +150,12 @@ export function NavbarHome(props: any) {
                 to consider the practicalities before being enticed by the
                 endless colours and styles available!
               </p>
-              <button className="info_store">Get Your Shoes</button>
+              <button
+                onClick={() => history.push("/store")}
+                className="info_store"
+              >
+                Get Your Shoes
+              </button>
             </Stack>
           </Stack>
         </SwiperSlide>
@@ -158,7 +169,12 @@ export function NavbarHome(props: any) {
                 to consider the practicalities before being enticed by the
                 endless colours and styles available!
               </p>
-              <button className="info_store">Get Your Shoes</button>
+              <button
+                onClick={() => history.push("/store")}
+                className="info_store"
+              >
+                Get Your Shoes
+              </button>
             </Stack>
           </Stack>
         </SwiperSlide>
@@ -172,7 +188,12 @@ export function NavbarHome(props: any) {
                 to consider the practicalities before being enticed by the
                 endless colours and styles available!
               </p>
-              <button className="info_store">Get Your Shoes</button>
+              <button
+                onClick={() => history.push("/store")}
+                className="info_store"
+              >
+                Get Your Shoes
+              </button>
             </Stack>
           </Stack>
         </SwiperSlide>
@@ -186,11 +207,15 @@ export function NavbarHome(props: any) {
                 to consider the practicalities before being enticed by the
                 endless colours and styles available!
               </p>
-              <button className="info_store">Get Your Shoes</button>
+              <button
+                onClick={() => history.push("/store")}
+                className="info_store"
+              >
+                Get Your Shoes
+              </button>
             </Stack>
           </Stack>
         </SwiperSlide>
-
       </Swiper>
     </div>
   );

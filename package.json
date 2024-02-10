@@ -23,6 +23,7 @@
     "@types/redux-logger": "^3.0.12",
     "@types/socket.io-client": "^3.0.0",
     "@types/styled-components": "^5.1.26",
+    "antd": "^5.13.2",
     "assert": "^2.1.0",
     "axios": "^1.6.2",
     "moment": "^2.29.4",

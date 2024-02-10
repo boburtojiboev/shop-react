@@ -8,10 +8,12 @@ import { Brands } from "./brands";
 import { BestProducts } from "./bestProducts";
 import { CollectionType } from "./collectionType";
 import "../../../css/home.css";
+import { NavbarHome } from "../../components/header";
 
 export function HomePage() {
   return (
     <div className="homepage">
+      <NavbarHome/>
       <Statistics />
       <CollectionType />
       <BestProducts />

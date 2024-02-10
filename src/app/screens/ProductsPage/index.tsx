@@ -30,6 +30,7 @@ import { Close, Home, Visibility } from "@mui/icons-material";
 import NativeSelect from "@mui/material/NativeSelect";
 import { Favorite } from "@mui/icons-material";
 import SwiperCore, { Autoplay, Navigation } from "swiper";
+import { NavbarShop } from "../../components/header/shop";
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
 const shop_list = Array.from(Array(12).keys());
@@ -39,6 +40,7 @@ export function ProductsPage() {
   const history = useHistory();
   return (
     <div className="products_page">
+      <NavbarShop/>
       <div className="product_page">
         <Container>
           <Stack flexDirection={"column"} alignItems={"center"}>

@@ -1,6 +1,12 @@
 import React from "react";
 import { Container } from "@mui/material";
+import { NavbarOthers } from "../../components/header/others";
 
 export function CommunityPage() {
-  return <Container>CommunityPage</Container>;
+  return (
+    <div>
+      <NavbarOthers />
+      <Container>CommunityPage</Container>
+    </div>
+  );
 }

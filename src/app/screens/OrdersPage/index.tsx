@@ -1,6 +1,12 @@
 import React from "react";
 import { Container } from "@mui/material";
+import { NavbarOthers } from "../../components/header/others";
 
 export function OrdersPage() {
-  return <Container>OrdersPage</Container>;
+  return (
+    <div>
+      <NavbarOthers />
+      <Container>OrdersPage</Container>
+    </div>
+  );
 }
