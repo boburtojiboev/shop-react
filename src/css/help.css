@@ -1,0 +1,152 @@
+.help_page {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  /* background: #0b0e11; */
+}
+.help_page .help_menu {
+  width: 1260px;
+  height: auto;
+
+  position: absolute;
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* justify-content: space-between; */
+}
+
+.help_page .help_main_content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.help_page .help_main_content .theRules_box {
+  width: 100%;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.help_page .accordian_menu {
+    width: 100%;
+    height: 700px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+}
+
+
+.help_page .admin_letter_box {
+  width: 100%;
+  height: 700px;
+  display: flex;
+
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.help_page .admin_letter_box .admin_letter_container {
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+  margin-left: 35px;
+}
+
+.help_page .admin_letter_box .admin_letter_container span {
+  color: #000;
+  font-family: "ABeeZee";
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 10px;
+}
+
+.help_page .admin_letter_box .admin_letter_container p {
+  color: var(--Text---Color, #4f547b);
+  font-family: Sedan;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px; /* 173.333% */
+}
+
+.help_page .admin_letter_box .admin_letter_frame {
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  margin-left: 30px;
+}
+
+.help_page .admin_letter_box .admin_letter_frame .admin_input_box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.help_page .admin_letter_box .admin_letter_frame .admin_input_box label {
+  color: var(--Head---Color, #140342);
+  font-family: Verdana;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.help_page .admin_letter_box .admin_btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  margin-right: 120px;
+}
+
+.help_page .admin_letter_box .message_admin_btn button {
+  border-radius: 8px;
+  background: #1976d2;
+}
+
+.help_page .admin_letter_frame .admin_input_box input {
+  margin-top: 10px;
+  padding: 20px;
+  width: 90%;
+  height: 60px;
+
+  display: flex;
+  background: white;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+
+  font-family: "Verdana";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 26px;
+  color-scheme: #4f547b;
+}
+.help_page .admin_letter_frame .admin_input_box textarea {
+  margin-top: 20px;
+  padding: 20px;
+  width: 90%;
+  height: 150px;
+  display: flex;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+
+  font-family: "Verdana";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 26px;
+  color-scheme: #4f547b;
+}
