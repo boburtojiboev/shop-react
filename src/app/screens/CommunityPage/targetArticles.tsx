@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Link, Stack } from "@mui/material";
 import { RemoveRedEye } from "@mui/icons-material";
 import { FavoriteBorder } from "@mui/icons-material";
+import moment from "moment";
 
 export function TargetArticles(props: any) {
   return (
@@ -28,7 +29,7 @@ export function TargetArticles(props: any) {
                 />
                 <span
                   className="all_article_auth_user"
-                  style={{ marginLeft: "10px",  }}
+                  style={{ marginLeft: "10px" }}
                 >
                   simon
                 </span>
@@ -39,9 +40,7 @@ export function TargetArticles(props: any) {
                 sx={{ mt: "15px" }}
               >
                 <span className="all_article_title">evaluation</span>
-                <p className="all_article_desc">
-                  Texas De Brazil zo'r restarant
-                </p>
+                <p className="all_article_desc">Adidas ajoyib magazin</p>
               </Box>
               <Box>
                 <Box
@@ -49,7 +48,7 @@ export function TargetArticles(props: any) {
                   style={{ width: "100%", height: "auto" }}
                 >
                   <Box className="article_share_main">
-                    <span >23-11-24 23-41</span>
+                    <span>{moment().format("YY-MM-DD HH:mm")}</span>
                   </Box>
 
                   <Box className="article_share_main">

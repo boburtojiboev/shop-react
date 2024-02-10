@@ -63,7 +63,7 @@ export function CommunityPage() {
                       >
                         <Tab label="Barcha Maqolalar" value="1"></Tab>
                         <Tab label="Mashhurlar" value="2"></Tab>
-                        <Tab label="Oshxonaga Baho" value="3"></Tab>
+                        <Tab label="SHopga baho" value="3"></Tab>
                         <Tab label="Hikoyalar" value="4"></Tab>
                       </TabList>
                     </Box>
