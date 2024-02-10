@@ -16,11 +16,14 @@ import TabList from "@mui/lab/TabList";
 import "../../../css/help.css";
 import Marginer from "../../components/marginer";
 import { NavbarOthers } from "../../components/header/others";
+import { Close, Home } from "@mui/icons-material";
+import { useHistory } from "react-router-dom";
 // import { sweetTopSmallSuccessAlert } from "../../app/lib/sweetAlert";
 
 export function HelpPage() {
   // Initializations//
   const [value, setValue] = React.useState("1");
+   const history = useHistory();
   const faq = [
     {
       question:
@@ -113,7 +116,21 @@ export function HelpPage() {
     <div>
       <NavbarOthers />
       <div className="help_page">
-        <Container maxWidth="lg" sx={{ mt: "50px", mb: "50px" }}>
+        <Container>
+          {" "}
+          <Box className="box_link">
+            <Box onClick={() => history.push("/")} className="home_link">
+              <Home />
+              Home
+            </Box>
+            <p className="">/</p>
+            <Box onClick={() => history.push("/")} className="home_link">
+              Help
+              <Close className="close" />
+            </Box>
+          </Box>
+        </Container>
+        <Container maxWidth="lg" sx={{ mt: "20px", mb: "50px" }}>
           <TabContext value={value}>
             <Box className={"help_menu"}>
               <Box>

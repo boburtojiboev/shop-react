@@ -1,18 +1,14 @@
 .help_page {
   width: 100%;
   height: auto;
-
   display: flex;
-  /* background: #0b0e11; */
+  flex-direction: column;
 }
 .help_page .help_menu {
   width: 1260px;
   height: auto;
 
   position: absolute;
-  /* display: flex; */
-  /* flex-direction: row; */
-  /* justify-content: space-between; */
 }
 
 .help_page .help_main_content {
