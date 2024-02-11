@@ -7,10 +7,11 @@ import { MemberPosts } from "./memberPosts";
 import { MemberFollowers } from "./memberFollowers";
 import { MemberFollowing } from "./memberFollowing";
 import { useHistory } from "react-router-dom";
+import TViewer from "../../components/tuiEditor/TViewer";
 
 export function VisitorOtherPage(props: any) {
   //****Initializations ****//
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState("4");
    const history = useHistory();
   // ****Handlers****//
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -158,7 +159,9 @@ export function VisitorOtherPage(props: any) {
 
                 <TabPanel value={"4"}>
                   <Box className="menu_name">Chosen article</Box>
-                  <Box className="menu_content"></Box>
+                  <Box className="menu_content">
+                    <TViewer text={`<h3>Hello to Otherpage</h3>`} />
+                  </Box>
                 </TabPanel>
               </Box>
             </Stack>

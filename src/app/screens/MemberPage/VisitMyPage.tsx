@@ -24,6 +24,8 @@ import { MemberPosts } from "./memberPosts";
 import { MemberFollowers } from "./memberFollowers";
 import { MemberFollowing } from "./memberFollowing";
 import { MySettings } from "./mySettings";
+import { TuiEditor } from "../../components/tuiEditor/TuiEditor";
+import TViewer from "../../components/tuiEditor/TViewer";
 import { useHistory } from "react-router-dom";
 
 export function VisitMyPage(props: any) {
@@ -250,12 +252,16 @@ export function VisitMyPage(props: any) {
 
                 <TabPanel value={"4"}>
                   <Box className="menu_name">Write Article</Box>
-                  <Box className="write_content"></Box>
+                  <Box className="write_content">
+                    <TuiEditor />
+                  </Box>
                 </TabPanel>
 
                 <TabPanel value={"5"}>
                   <Box className="menu_name">Chosen Article</Box>
-                  <Box className="menu_content"></Box>
+                  <Box className="menu_content">
+                    <TViewer text={`<h3>Hello</h3>`} />
+                  </Box>
                 </TabPanel>
 
                 <TabPanel value={"6"}>
