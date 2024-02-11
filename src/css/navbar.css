@@ -307,3 +307,133 @@
 /* end */
 
 
+/* START BASKET*/
+
+.basket_frame {
+  position: relative;
+  padding: 0px 6px 0 6px;
+  width: 450px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 16px;
+}
+
+.basket_frame .all_check_box {
+  padding: 0 10px;
+  width: 100%;
+  height: 30px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #d9d9d9;
+  border-top: 1px solid rgba(0, 0, 0, 0.25);
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.basket_frame .basket_info_box {
+  position: relative;
+  margin-top: 6px;
+  width: 100%;
+  height: auto;
+margin-left: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.basket_info_box .product_image {
+  width: 60px;
+  height: 60px;
+  filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.25));
+  border-radius: 50%;
+}
+
+.basket_info_box .product_name {
+  margin-left: 11px;
+  width: 205px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000;
+}
+
+.basket_info_box .product_price {
+  width: 80px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 22px;
+  color: #070404;
+  margin-right: 5px;
+}
+
+.basket_frame .cancel_btn {
+  position: absolute;
+  top: 33%;
+  right: 5%;
+  cursor: pointer;
+}
+.basket_frame .col-2 button {
+  cursor: pointer;
+  margin-right: 5px;
+}
+.basket_frame .to_order_box {
+  /* margin-top: 10px; */
+  width: 100%;
+  height: 64px;
+background-color: #acb8c4;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.25); */
+}
+
+.to_order_box .price_text {
+  margin-left: 27px;
+  margin-right: 10px;
+  width: 200px;
+  display: flex;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000;
+}
+
+.basket_frame .orders_wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.basket_frame .orders_main_wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 260px;
+  /* margin-top: 10px; */
+background-color: #d0deeb;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+/* END BASKET */
+
+

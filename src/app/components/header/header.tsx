@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { Chatting } from "./chatting";
+import { Basket } from "./basket";
 
 export function Header(props: any) {
   return (
@@ -65,7 +66,7 @@ export function Header(props: any) {
                 Help
               </NavLink>
             </Box>
-            <Box className="hover-line">
+            {/* <Box className="hover-line">
               <IconButton
                 aria-label="cart"
                 id="basic-button"
@@ -78,7 +79,8 @@ export function Header(props: any) {
                   <img src={"/icons/shopping_cart.svg"} alt="" />
                 </Badge>
               </IconButton>
-            </Box>
+            </Box> */}
+            <Basket/>
             <Box>
               <Button
                 variant="contained"
