@@ -66,20 +66,6 @@ export function Header(props: any) {
                 Help
               </NavLink>
             </Box>
-            {/* <Box className="hover-line">
-              <IconButton
-                aria-label="cart"
-                id="basic-button"
-                aria-controls={undefined}
-                aria-haspopup="true"
-                aria-expanded={undefined}
-                //onClick={handleClick}
-              >
-                <Badge badgeContent={3} color="secondary">
-                  <img src={"/icons/shopping_cart.svg"} alt="" />
-                </Badge>
-              </IconButton>
-            </Box> */}
             <Basket/>
             <Box>
               <Button
