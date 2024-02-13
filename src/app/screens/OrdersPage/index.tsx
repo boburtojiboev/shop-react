@@ -25,7 +25,9 @@ export function OrdersPage() {
   return (
     <div>
       <NavbarOthers />
-      <Container>
+     
+      <div className="order_page">
+         <Container>
         {" "}
         <Box className="box_link">
           <Box onClick={() => history.push("/")} className="home_link">
@@ -39,7 +41,6 @@ export function OrdersPage() {
           </Box>
         </Box>
       </Container>
-      <div className="order_page">
         <Container
           maxWidth="lg"
           style={{ display: "flex", flexDirection: "row" }}

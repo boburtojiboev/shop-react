@@ -264,10 +264,6 @@
     border: 1px solid rgb(0, 0, 0);
 }
 
-
-
-
-
 .brand_info {
   /* margin-top: 75px; */
   width: 100%;
@@ -279,7 +275,7 @@
  .brand_info_frame {
   position: relative;
   width: 579px;
-  height: 447px;
+  height: 497px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -287,8 +283,7 @@
   margin-bottom: 10px;
 }
 
-.review_for_restaurant {
-    /* margin-top: 60px; */
+.review_for_shop {
     width: 100%;
     height: 700px;
 
@@ -304,10 +299,10 @@
     line-height: 43px;
     color: #000000;
   }
-  .review_box_review {
+.review_box_review {
     margin-top: 10px;
     padding: 20px;
-    height: 480px;
+    height: 450px;
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -318,16 +313,17 @@
     inset 0px 4px 16px rgba(242, 189, 87, 0.04);
     border-radius: 16px;
   }
-  .review_img_review {
+ .homepage .review_img_review {
     width: 260px;
     height: 250px;
 
     filter: drop-shadow(0px 4px 4px  rgba(0, 0, 0, 0.25));
     border-radius: 16px;
+    transition: 1s ease;
   }
 
-  .review_name_review {
-    margin-top: 10px;
+  .homepage .review_name_review {
+    margin-top: 30px;
     font-family: "Commissioner";
     font-style: normal;
     font-weight: 600;
@@ -340,9 +336,10 @@
   }
     .review_box_review:hover .review_img_review  {
     border: 1px solid rgb(18, 17, 16);
+    transform: scale(1.1);
   }
 
- .review_prof_rev {
+ .homepage .review_prof_rev {
     font-family: "Commissioner";
     font-style: normal;
     font-weight: 400;
@@ -350,7 +347,7 @@
     line-height: 10px;
     color: #08090d;
   }
-  .review_desc_rev {
+ .homepage .review_desc_rev {
     margin-top: 10px;
     font-family: "DM Sans";
     font-style: normal;
@@ -358,4 +355,23 @@
     font-size: 16px;
     line-height: 20px;
     color: #616164;
+  }
+
+  .homepage .details_box{
+    width: 60%;
+    height: 40px;
+    background-color: #ffffff;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    color: transparent;
+  }
+
+  .homepage .review_box_review:hover .details_box{
+    background-color: #1c1b1b;
+    color: #ffffff;
   }

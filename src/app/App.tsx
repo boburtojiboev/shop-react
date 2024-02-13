@@ -16,6 +16,7 @@ import { NavbarShop } from "./components/header/shop";
 import { NavbarOthers } from "./components/header/others";
 import { Footer } from "./components/footer";
 import { Header } from "./components/header/header";
+import { EventPage } from "./screens/EventPage";
 
 function App() {
     const [path, setPath] = useState();
@@ -31,7 +32,7 @@ function App() {
       ) : (
         <NavbarOthers setPath={setPath} />
       )} */}
-      {<Header setPath={setPath}/>}
+      {<Header setPath={setPath} />}
 
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -41,6 +42,9 @@ function App() {
         </Route>
         <Route path="/store">
           <ShopPage />
+        </Route>
+        <Route path="/event">
+          <EventPage />
         </Route>
         <Route path="/orders">
           <OrdersPage />

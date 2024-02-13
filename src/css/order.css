@@ -1,6 +1,8 @@
 .order_page {
   width: 100%;
   height: auto;
+  position: relative;
+  flex-direction: column;
   /* background: #deded0; */
 
   display: flex;
@@ -330,4 +332,29 @@
   font-size: 14px;
   line-height: 36px;
   color: #000000;
+}
+
+.order_page .box_link {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.order_page .home_link {
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 2px 8px;
+  transition: all 0.3s;
+}
+.order_page .home_link:hover {
+  background-color: rgb(235, 233, 233);
+}
+
+.order_page .box_link p {
+  font-size: 24px;
 }

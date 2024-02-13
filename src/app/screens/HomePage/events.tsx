@@ -10,7 +10,7 @@ export function Events() {
     // <div className="">
     //   <Container>Events</Container>
     // </div>
-    <div className={"review_for_restaurant"}>
+    <div className={"review_for_shop"}>
       <Container
         sx={{ mt: "60px" }}
         style={{
@@ -41,7 +41,7 @@ export function Events() {
                 <span className="review_name_review">
                   Nike opening ceremony{" "}
                 </span>
-                <p className="review_desc_rev">
+                {/* <p className="review_desc_rev">
                   Menga bu oshxonaning taomi juda yoqadi. Hammaga tavsiya
                   qilaman!!!
                 </p>
@@ -55,7 +55,7 @@ export function Events() {
                     }}
                   />
                   2024.03.21
-                </span>
+                </span> */}
                 <span className="review_prof_rev">
                   <LocationOnIcon
                     style={{
@@ -67,6 +67,7 @@ export function Events() {
                   />
                   Busan South Korea
                 </span>
+                <Box className="details_box"><p>Details</p></Box>
               </Box>
             );
           })}

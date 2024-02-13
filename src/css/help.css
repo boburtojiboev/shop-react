@@ -146,3 +146,28 @@
   line-height: 26px;
   color-scheme: #4f547b;
 }
+
+.help_page .box_link {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.help_page .home_link {
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 2px 8px;
+  transition: all 0.3s;
+}
+.help_page .home_link:hover {
+  background-color: rgb(235, 233, 233);
+}
+
+.help_page .box_link p {
+  font-size: 24px;
+}

@@ -52,6 +52,11 @@ export function Header(props: any) {
               </NavLink>
             </Box>
             <Box className="hover-line" onClick={props.setPath}>
+              <NavLink to="/event" activeClassName="underline">
+                Event
+              </NavLink>
+            </Box>
+            <Box className="hover-line" onClick={props.setPath}>
               <NavLink to="/orders" activeClassName="underline">
                 Orders
               </NavLink>
@@ -61,12 +66,26 @@ export function Header(props: any) {
                 Community
               </NavLink>
             </Box>
-            <Box className="hover-line" onClick={props.setPath}>
+            <Box marginRight={"50px"} className="hover-line" onClick={props.setPath}>
               <NavLink to="/help" activeClassName="underline">
                 Help
               </NavLink>
             </Box>
-            <Basket/>
+       
+        
+            <Basket className="basket_box" />
+            <Box>
+              <Button
+                variant="contained"
+                style={{
+                  width: "80px",
+                  color: "#ffffff",
+                  background: "#0383a3",
+                }}
+              >
+                Login
+              </Button>
+            </Box>
             <Box>
               <Button
                 variant="contained"
@@ -76,9 +95,10 @@ export function Header(props: any) {
                   background: "#0383a3",
                 }}
               >
-                Login
+                Sign Up
               </Button>
             </Box>
+          
           </Stack>
         </Stack>
         <Box className="msg_box">
