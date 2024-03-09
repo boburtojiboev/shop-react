@@ -115,6 +115,9 @@ export function HelpPage() {
   return (
     <div>
       <NavbarOthers />
+      <div className="mobile_version">
+        <p> Mobile version is on developing process! Please use laptop</p>
+      </div>
       <div className="help_page">
         <Container>
           {" "}

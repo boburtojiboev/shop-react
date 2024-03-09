@@ -30,6 +30,7 @@ export function BestProducts() {
             sx={{ mt: "30px", gap: "40px" }}
             justifyContent={"space-between"}
             flexDirection={"row"}
+            className="bestpro_stack"
           >
             <CssVarsProvider>
               <Card

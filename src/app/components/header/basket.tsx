@@ -21,7 +21,7 @@ export function Basket(props: any) {
   const processOrderHandler = () => {};
 
   return (
-    <Box className="hover-line">
+    <Box className="hover-line basket">
       <IconButton
         aria-label="cart"
         id="basic-button"

@@ -37,6 +37,10 @@ export function VisitMyPage(props: any) {
     setValue(newValue);
   };
   return (
+    <div className="">
+      <div className="mobile_version">
+        <p> Mobile version is on developing process! Please use laptop</p>
+      </div>
     <div className="my_page">
       <Container>
         <Box className="box_link">
@@ -276,5 +280,6 @@ export function VisitMyPage(props: any) {
         </Stack>
       </Container>
     </div>
+   </div>
   );
 }

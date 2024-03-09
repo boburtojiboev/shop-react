@@ -3,9 +3,16 @@
   background: #f3efe9;
 }
 
+.homepage .statistic_inf{
+  display: flex;
+  flex-direction: row;
+}
+
 .homepage .free_ship {
   margin-right: 0px;
   position: relative;
+  align-self: center;
+  margin-right: 5px;
   width: 60px;
   height: 60px;
   background: url("/public/home/free.png");
@@ -13,8 +20,9 @@
 }
 
 .homepage .pay_meth {
-  margin-left: 20px;
   position: relative;
+  align-self: center;
+  margin-right: 5px;
   width: 62px;
   height: 60px;
   background: url("/public/home/payment.png");
@@ -22,8 +30,9 @@
 }
 
 .homepage .online_sup {
-  margin-left: 20px;
   position: relative;
+  align-self: center;
+  margin-right: 5px;
   width: 60px;
   height: 60px;
   background: url("/public/home/online.png");
@@ -31,8 +40,9 @@
 }
 
 .homepage .packaging {
-  margin-left: 20px;
   position: relative;
+  align-self: center;
+  margin-right: 5px;
   width: 60px;
   height: 60px;
   background: url("/public/home/package.png");
@@ -374,4 +384,101 @@
   .homepage .review_box_review:hover .details_box{
     background-color: #1c1b1b;
     color: #ffffff;
+  }
+
+  @media (max-width: 440px) {
+    .homepage .static_frame {
+  width: 100%;
+  background: #f3efe9;
+  height: auto;
+}
+
+.statis_stock{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: auto;
+  justify-content: center;
+}
+.statistic_inf{
+  margin-left: 20%;
+}
+
+.homepage .collection_frame{
+  height: auto;
+}
+.image_box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.collection_box{
+  margin-top: 10px;
+}
+.homepage .view_btn {
+  width: 180px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 20px;
+  color: #ffffff;
+  opacity: 1;
+  background-color: #170809a0;
+  border: 1px solid #1a0606cb;
+}
+
+.homepage .best_product_frame {
+  width: 100%;
+  height: auto;
+  display: flex;
+  margin-bottom: 50px;
+  height: auto;
+}
+
+.bestpro_stack{
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 30px;
+}
+
+.homepage .big_sale_frame {
+  width: 100%;
+  height: auto;
+  display: flex;
+  height: auto;
+}
+
+.big_sale_stack{
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 30px;
+}
+
+.homepage .review_for_shop {
+  width: 100%;
+  height: auto;
+  display: flex;
+  height: auto;
+}
+
+.event_stack{
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 30px;
+}
+
   }

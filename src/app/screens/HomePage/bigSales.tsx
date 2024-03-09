@@ -27,6 +27,7 @@ export function BigSales() {
             sx={{ mt: "30px", mb: "50px", gap: "40px" }}
             justifyContent={"space-between"}
             flexDirection={"row"}
+            className="big_sale_stack"
           >
             <CssVarsProvider>
               <Card

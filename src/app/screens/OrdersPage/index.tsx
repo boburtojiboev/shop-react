@@ -25,22 +25,24 @@ export function OrdersPage() {
   return (
     <div>
       <NavbarOthers />
-     
+      <div className="mobile_version">
+        <p> Mobile version is on developing process! Please use laptop</p>
+      </div>
       <div className="order_page">
-         <Container>
-        {" "}
-        <Box className="box_link">
-          <Box onClick={() => history.push("/")} className="home_link">
-            <Home />
-            Home
+        <Container>
+          {" "}
+          <Box className="box_link">
+            <Box onClick={() => history.push("/")} className="home_link">
+              <Home />
+              Home
+            </Box>
+            <p className="">/</p>
+            <Box onClick={() => history.push("/")} className="home_link">
+              Orders
+              <Close className="close" />
+            </Box>
           </Box>
-          <p className="">/</p>
-          <Box onClick={() => history.push("/")} className="home_link">
-            Orders
-            <Close className="close" />
-          </Box>
-        </Box>
-      </Container>
+        </Container>
         <Container
           maxWidth="lg"
           style={{ display: "flex", flexDirection: "row" }}

@@ -40,7 +40,7 @@ export function ProductsPage() {
   const history = useHistory();
   return (
     <div className="products_page">
-      <NavbarShop/>
+      <NavbarShop />
       <div className="product_page">
         <Container>
           <Stack flexDirection={"column"} alignItems={"center"}>
@@ -205,7 +205,12 @@ export function ProductsPage() {
                 </FormControl>
               </Stack>
 
-              <Stack display={"flex"} flexDirection={"column"} width={"76%"}>
+              <Stack
+                className="main_box"
+                display={"flex"}
+                flexDirection={"column"}
+                width={"76%"}
+              >
                 <Stack className={"single_shop_box"}>
                   <CssVarsProvider>
                     {product_list.map((ele) => {

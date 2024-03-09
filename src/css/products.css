@@ -1,8 +1,8 @@
-.products_page {
+/* .products_page {
   position: relative;
   width: 100%;
   height: auto;
-}
+} */
 .product_page {
   width: 100%;
   height: auto;
@@ -130,7 +130,7 @@
   flex-wrap: wrap;
   gap: 40px;
   margin-bottom: 20px;
-  padding-left: 20px;
+  /* padding-left: 20px; */
   width: 100%;
 }
 
@@ -172,4 +172,19 @@
     font-size: 20px;
     padding-left: 15px;
     display: flex;
+}
+
+@media (max-width: 440px) {
+  .products_page{
+    max-width: 440px;
+  }
+
+  .sorting_box{
+    visibility: hidden;
+    max-height: 0px;
+    max-width: 0px;
+    display: none;
+  }
+
+
 }

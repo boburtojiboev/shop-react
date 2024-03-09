@@ -5,7 +5,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   background-color: #333333bd;
   color: #fff;
   padding: 10px;
@@ -16,7 +15,7 @@
   width: 90px;
   height: 90px;
   position: fixed;
-  z-index: 999;
+  z-index: 998;
   top: 80%;
   left: 92%;
   display: flex;
@@ -58,6 +57,10 @@
   font-weight: bold;
   /* font-style: italic; */
   /* border-bottom: solid 1.5px #e3cb8e; */
+}
+
+.home_navbar .help{
+margin-right: 50px;
 }
 
 .home_navbar .hover-line:after {
@@ -442,3 +445,154 @@
 }
 
 /* END BASKET */
+
+
+/* starting responsive */
+
+@media (max-width: 440px) {
+  /* .head_information1 {
+    min-width: 100%;
+    height: 350px;
+  }
+  .head_information2 {
+    min-width: 100%;
+    height: 350px;
+  }
+  .head_information3 {
+    min-width: 100%;
+    height: 350px;
+  }
+  .head_information4 {
+    min-width: 100%;
+    height: 350px;
+  }
+  .head_information5 {
+    min-width: 100%;
+    height: 350px;
+  } */
+
+  /* .box_head {
+    width: 88%;
+    height: 240px;
+    margin-left: 25px;
+    margin-top: 94px;
+  }
+  .head_title {
+    width: 400px;
+    height: 50px;
+    font-size: 25px;
+    font-family: "Rubik", sans-serif;
+    color: #ffffff;
+    font-weight: 500;
+    margin-left: 10px;
+    margin-bottom: 0px;
+  } */
+  /* .head_text {
+    width: 350px;
+    margin-left: 10px;
+    margin-top: 0px;
+    height: 50px;
+    font-family: "Rubik", sans-serif Impact, Haettenschweiler,
+      "Arial Narrow Bold", sans-serif;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 400;
+  }
+  .info_store {
+    margin-top: 40px;
+    margin-left: 40px;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(128, 128, 128);
+    font-size: 20px;
+    color: #f1dede;
+    background-color: rgba(58, 57, 57, 0.593);
+  } */
+
+  .format.home_navbar {
+    max-width: 440px;
+    height: auto;
+  }
+  .format.home_navbar .navbar_config {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+  .home_navbar .shoekershop{
+    display: flex;
+    justify-content: center;
+  }
+
+  .home_navbar .navbar_links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    width: 100%;
+  }
+
+   .home_navbar .basket{
+    visibility: hidden;
+    max-height: 0;
+    max-width: 0;
+    display: none;
+  }
+
+  .home_navbar .help{
+   margin-right: 0px;
+  }
+
+   .home_navbar .login{
+    visibility: hidden;
+    max-height: 0;
+    max-width: 0;
+    display: none;
+  }
+
+  .box_head{
+    visibility: hidden;
+    max-height: 0;
+    max-width: 0;
+    display: none;
+  }
+ .shop_information {
+  height: 290px;
+ }
+
+ .others_information {
+  height: 290px;
+ }
+
+ .head_information1{
+  height: 290px;
+ }
+  .head_information2{
+  height: 290px;
+ }
+  .head_information3{
+  height: 290px;
+ }
+  .head_information4{
+  height: 290px;
+ }
+  .head_information5{
+  height: 290px;
+ }
+
+ .msg_box {
+  top: 80%;
+  left: 72%;
+  display: flex;
+  justify-content: center;
+  /* background-color: #d7b686; */
+}
+    
+}
+

@@ -206,7 +206,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
 }
 
 .shop_page .single_shop .member_reviews {
@@ -551,3 +551,56 @@
   line-height: 26px;
   color: #1d1f2f;
 }
+.single_div{
+  height: auto;
+}
+
+@media (max-width: 440px) {
+.shop_page .all_shop .all_shop_box {
+  position: relative;
+  width: 440px;
+  height: auto;
+  /* margin-top: 50px; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+  .mobile_version {
+    height: 400px;
+    margin: 20px;
+  visibility: visible;
+    height: auto;
+    max-width: 100%;
+    display: none;
+    color: #040404;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.shop_page .single_shop{
+  visibility: hidden;
+    max-height: 0px;
+    max-width: 0px;
+    display: none;
+}
+
+.shop_page .chosen_product_page {
+  visibility: hidden;
+    max-height: 0px;
+    max-width: 0px;
+    display: none;
+}
+
+}
+
+.mobile_version {
+  visibility: hidden;
+    max-height: 0;
+    max-width: 0;
+    display: none;
+}
+

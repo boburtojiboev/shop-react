@@ -605,3 +605,33 @@
   height: auto;
   width: 100%;
 }
+
+@media (max-width: 440px) {
+  .mobile_version {
+    margin: 20px;
+    height: 400px;
+  visibility: visible;
+    max-height: 500px;
+    max-width: 100%;
+    display: none;
+    color: #040404;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.my_page{
+  visibility: hidden;
+    max-height: 0;
+    max-width: 0;
+    display: none;
+}
+}
+
+.mobile_version {
+  visibility: hidden;
+    max-height: 0;
+    max-width: 0;
+    display: none;
+}

@@ -31,6 +31,7 @@ export function Events() {
           display={"flex"}
           justifyContent={"space-between"}
           width={"100%"}
+          className="event_stack"
         >
           {Array.from(Array(4).keys()).map((ele, index) => {
             return (

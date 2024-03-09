@@ -196,3 +196,46 @@
   color: #e3c08d;
   /* margin-top: 40px; */
 }
+
+/* starting responsive */
+
+@media(max-width: 440px){
+  .main_footer_container{
+    max-width: 100%;
+  }
+  .main_footer{
+    display: flex;
+    justify-content: center;
+  }
+.footer_config .parts {
+  visibility: hidden;
+max-height: 0;
+max-width: 0;
+display: none;
+}
+
+.footer_config .find_us {
+  visibility: hidden;
+max-height: 0;
+max-width: 0;
+display: none;
+}
+.info{
+  margin-left: 50px;
+}
+
+.liner{
+  max-width: 97%;
+  margin-top: 1px;
+  display: flex;
+  justify-content: center;
+}
+.footer_config .copyrights{
+  display: flex;
+  justify-content: start;
+  min-width: 80%;
+  margin-left: 30px;
+}
+
+
+}

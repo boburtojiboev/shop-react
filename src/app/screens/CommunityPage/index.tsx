@@ -29,6 +29,9 @@ export function CommunityPage() {
   return (
     <div>
       <NavbarOthers />
+      <div className="mobile_version">
+        <p> Mobile version is on developing process! Please use laptop</p>
+      </div>
       <div className="community_page">
         <Container>
           <Box className="box_link">
@@ -43,7 +46,7 @@ export function CommunityPage() {
             </Box>
           </Box>
         </Container>
-        
+
         <div className="community_frame">
           <Container sx={{ mb: "50px" }}>
             <Stack flexDirection={"row"} justifyContent={"space-between"}>

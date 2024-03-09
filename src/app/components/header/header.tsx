@@ -20,7 +20,7 @@ export function Header(props: any) {
           justifyContent={"space-between"}
         >
           <Box>
-            <h1
+            <h1 className="shoekershop"
               style={{
                 marginTop: "0px",
                 color: "#ffffff",
@@ -66,15 +66,14 @@ export function Header(props: any) {
                 Community
               </NavLink>
             </Box>
-            <Box marginRight={"50px"} className="hover-line" onClick={props.setPath}>
+            <Box className="hover-line help" onClick={props.setPath}>
               <NavLink to="/help" activeClassName="underline">
                 Help
               </NavLink>
             </Box>
-       
-        
+
             <Basket className="basket_box" />
-            <Box>
+            <Box className="login">
               <Button
                 variant="contained"
                 style={{
@@ -86,7 +85,7 @@ export function Header(props: any) {
                 Login
               </Button>
             </Box>
-            <Box>
+            <Box className="login">
               <Button
                 variant="contained"
                 style={{
@@ -98,7 +97,6 @@ export function Header(props: any) {
                 Sign Up
               </Button>
             </Box>
-          
           </Stack>
         </Stack>
         <Box className="msg_box">

@@ -57,7 +57,7 @@ export function Brands() {
      },
    ];
   return (
-    <div className="">
+    <div className="brant_wrap">
       <Container sx={{mt: "50px",  mb: "50px" }}>
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Box className="category_title">Top Brands</Box>
@@ -70,14 +70,14 @@ export function Brands() {
           <Stack
             width={"100%"}
             height={"500px"}
-            sx={{ mt: "20px", gap: "40px" }}
+            sx={{ mt: "20px", }}
             justifyContent={"space-between"}
             flexDirection={"row"}
           >
             <Swiper
               className={"brand_info swiper_wrapper"}
               spaceBetween={0}
-              slidesPerView={3}
+              slidesPerView={"auto"}
               loop={true}
               centeredSlides={true}
               autoplay={{
