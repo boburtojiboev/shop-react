@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container } from "@mui/material";
 import { Statistics } from "./statistics";
 import { BigSales } from "./bigSales";
@@ -11,6 +11,11 @@ import "../../../css/home.css";
 import { NavbarHome } from "../../components/header";
 
 export function HomePage() {
+   // selector: store => data
+  useEffect(() => {
+    // backend data request =>  data
+    // slice:  data => redux store
+  }, []);
   return (
     <div className="homepage">
       <NavbarHome/>

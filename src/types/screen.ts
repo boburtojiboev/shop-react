@@ -7,8 +7,8 @@ export interface AppRootState {
 }
 
 export interface HomePageState {
-  BestProducts: Product[];
-  SaleProducts: Product[];
+  bestProducts: Product[];
+  saleProducts: Product[];
   newsEvents: Event[];
   topShops: Shop[];
 }
