@@ -18,7 +18,7 @@ export interface Shop {
   mb_follow_cnt: number;
   mb_subscriber_cnt: number;
   createdAt: Date;
-  me_liked: []; // Meliked
+  me_liked: MeLiked[]; // Meliked
 }
 export interface Member {
   _id: string;

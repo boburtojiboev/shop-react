@@ -10,22 +10,54 @@ import { CollectionType } from "./collectionType";
 import "../../../css/home.css";
 import { NavbarHome } from "../../components/header";
 
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
+import { setBestProducts} from "../../screens/HomePage/slice";
+import {
+  retrieveBestProducts,
+} from "../../screens/HomePage/selector";
+import { Product } from "../../../types/product";
+
+
+// REDUX SLICE
+const actionDispatch = (dispatch: Dispatch) => ({
+  setBestProducts: (data: Product[]) => dispatch(setBestProducts(data)),
+});
+
+// REDUX SELECTOR
+const bestProductsRetriever = createSelector(
+  retrieveBestProducts,
+  (bestProducts) => ({
+    bestProducts,
+  })
+);
+
 export function HomePage() {
-   // selector: store => data
+  // Initialization
+  const { setBestProducts } = actionDispatch(useDispatch());
+  const { bestProducts } = useSelector(bestProductsRetriever);
+
+  console.log("bestProducts:::", bestProducts);
   useEffect(() => {
     // backend data request =>  data
-    // slice:  data => redux store
+    setBestProducts([]);
   }, []);
   return (
     <div className="homepage">
-      <NavbarHome/>
+      <NavbarHome />
       <Statistics />
       <CollectionType />
       <BestProducts />
-      <BigSales/>
+      <BigSales />
       <Advertisements />
       <Events />
       <Brands />
     </div>
   );
 }
+
+    // "redux-logger": "^3.0.12",
+      //  "@reduxjs/toolkit": "^1.8.5",
+        //  "@types/redux-logger": "^3.0.12",
