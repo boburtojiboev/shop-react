@@ -17,6 +17,7 @@ import { NavbarOthers } from "./components/header/others";
 import { Footer } from "./components/footer";
 import { Header } from "./components/header/header";
 import { EventPage } from "./screens/EventPage";
+import Car from "./screens/testCar";
 
 function App() {
     const [path, setPath] = useState();

@@ -24,7 +24,7 @@
   height: 188px;
 }
 .shoeker_footer {
-    margin-top: 11px;
+  margin-top: 11px;
   position: relative;
   color: #c5c8c9;
   font-family: Poppins;
@@ -91,7 +91,6 @@
   display: block;
   width: 117px;
   height: 129.63px;
-  
 
   font-family: Poppins;
   font-size: 16px;
@@ -199,43 +198,41 @@
 
 /* starting responsive */
 
-@media(max-width: 440px){
-  .main_footer_container{
+@media (max-width: 440px) {
+  .main_footer_container {
     max-width: 100%;
   }
-  .main_footer{
+  .main_footer {
     display: flex;
     justify-content: center;
   }
-.footer_config .parts {
-  visibility: hidden;
-max-height: 0;
-max-width: 0;
-display: none;
-}
+  .footer_config .parts {
+    visibility: hidden;
+    max-height: 0;
+    max-width: 0;
+    display: none;
+  }
 
-.footer_config .find_us {
-  visibility: hidden;
-max-height: 0;
-max-width: 0;
-display: none;
-}
-.info{
-  margin-left: 50px;
-}
+  .footer_config .find_us {
+    visibility: hidden;
+    max-height: 0;
+    max-width: 0;
+    display: none;
+  }
+  .info {
+    margin-left: 50px;
+  }
 
-.liner{
-  max-width: 97%;
-  margin-top: 1px;
-  display: flex;
-  justify-content: center;
-}
-.footer_config .copyrights{
-  display: flex;
-  justify-content: start;
-  min-width: 80%;
-  margin-left: 30px;
-}
-
-
+  .liner {
+    max-width: 97%;
+    margin-top: 1px;
+    display: flex;
+    justify-content: center;
+  }
+  .footer_config .copyrights {
+    display: flex;
+    justify-content: start;
+    min-width: 80%;
+    margin-left: 30px;
+  }
 }

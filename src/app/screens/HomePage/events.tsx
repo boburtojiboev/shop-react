@@ -1,15 +1,49 @@
 import { Box, Container,  Stack, } from "@mui/material";
-import React from "react";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import React, { useEffect } from "react";
+
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import { setNewsEvents } from "../../screens/HomePage/slice";
+import EventApiService from "../../apiServices/eventApiService";
+import { retrieveNewsEvents } from "./selector";
+import { createSelector } from "reselect";
+import { serverApi } from "../../../lib/config";
+import { Event } from "../../../types/event";
+
+// REDUX SLICE
+const actionDispatch = (dispatch: Dispatch) => ({
+  setNewsEvents: (data: Event[]) => dispatch(setNewsEvents(data)),
+});
+
+// REDUX SELECTOR
+const newsEventsRetriever = createSelector(
+  retrieveNewsEvents,
+  (newsEvents) => ({
+    newsEvents,
+  })
+);
 
 
 export function Events() {
+  // Initialization
+  const { setNewsEvents } = actionDispatch(useDispatch());
+  const { newsEvents } = useSelector(newsEventsRetriever);
+
+  console.log("newsEvents:::", newsEvents);
+  useEffect(() => {
+    const productService = new EventApiService();
+    productService
+      .getEvents({ order: "createdAt", page: 1, limit: 4 })
+      .then((data) => {
+        setNewsEvents(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
-    // <div className="">
-    //   <Container>Events</Container>
-    // </div>
     <div className={"review_for_shop"}>
       <Container
         sx={{ mt: "60px" }}
@@ -33,30 +67,19 @@ export function Events() {
           width={"100%"}
           className="event_stack"
         >
-          {Array.from(Array(4).keys()).map((ele, index) => {
+          {newsEvents.map((ele, index) => {
+            // const image_path = `${serverApi}/${ele.event_images[0]}`;
+            const image_path = ele?.event_images
+              ? `${serverApi}/${ele.event_images[0]}`
+              : "/shops/open.jpeg";
             return (
               <Box className="review_box_review" key={`${index}`}>
                 <Box display={"flex"} justifyContent={"center"}>
-                  <img src="/shops/open.jpeg" className="review_img_review" />
+                  <img src={image_path} className="review_img_review" />
                 </Box>
                 <span className="review_name_review">
-                  Nike opening ceremony{" "}
+                  {ele.event_name}
                 </span>
-                {/* <p className="review_desc_rev">
-                  Menga bu oshxonaning taomi juda yoqadi. Hammaga tavsiya
-                  qilaman!!!
-                </p>
-                <span className="review_prof_rev">
-                  <AccessTimeIcon
-                    style={{
-                      marginRight: "10px",
-                      paddingTop: "10px",
-                      width: "35pxpx",
-                      height: "35px",
-                    }}
-                  />
-                  2024.03.21
-                </span> */}
                 <span className="review_prof_rev">
                   <LocationOnIcon
                     style={{
@@ -66,9 +89,11 @@ export function Events() {
                       height: "35px",
                     }}
                   />
-                  Busan South Korea
+                  {ele.event_address}
                 </span>
-                <Box className="details_box"><p>Details</p></Box>
+                <Box className="details_box">
+                  <p>Details</p>
+                </Box>
               </Box>
             );
           })}

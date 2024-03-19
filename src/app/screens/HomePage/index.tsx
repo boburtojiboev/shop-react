@@ -14,35 +14,34 @@ import { NavbarHome } from "../../components/header";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
-import { setBestProducts} from "../../screens/HomePage/slice";
-import {
-  retrieveBestProducts,
-} from "../../screens/HomePage/selector";
-import { Product } from "../../../types/product";
+import { setTopShops } from "../../screens/HomePage/slice";
+import { retrieveTopShops } from "../../screens/HomePage/selector";
+import { Shop } from "../../../types/user";
+import ShopApiService from "../../apiServices/shopApiService";
 
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
-  setBestProducts: (data: Product[]) => dispatch(setBestProducts(data)),
+  setTopShops: (data: Shop[]) => dispatch(setTopShops(data)),
 });
 
 // REDUX SELECTOR
-const bestProductsRetriever = createSelector(
-  retrieveBestProducts,
-  (bestProducts) => ({
-    bestProducts,
-  })
-);
+const topShopsRetriever = createSelector(retrieveTopShops, (topShops) => ({
+  topShops,
+}));
 
 export function HomePage() {
   // Initialization
-  const { setBestProducts } = actionDispatch(useDispatch());
-  const { bestProducts } = useSelector(bestProductsRetriever);
+  const { setTopShops } = actionDispatch(useDispatch());
 
-  console.log("bestProducts:::", bestProducts);
   useEffect(() => {
-    // backend data request =>  data
-    setBestProducts([]);
+    const shopService = new ShopApiService();
+    shopService
+      .getTopShops()
+      .then((data) => {
+        setTopShops(data);
+      })
+      .catch((err) => console.log(err));
   }, []);
   return (
     <div className="homepage">
@@ -61,3 +60,6 @@ export function HomePage() {
     // "redux-logger": "^3.0.12",
       //  "@reduxjs/toolkit": "^1.8.5",
         //  "@types/redux-logger": "^3.0.12",
+
+        // "swiper": "^8.4.3",
+        // "typescript": "^4.8.3",

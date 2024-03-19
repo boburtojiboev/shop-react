@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Favorite, Visibility } from "@mui/icons-material";
 import { CardOverflow, IconButton } from "@mui/joy";
 import Card from "@mui/joy/Card";
@@ -12,53 +12,31 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 
-export function Brands() {
-   const events_list = [
-     {
-       name: "Adidas",
-       Phone: "012232885",
-       address: "Seoul S.Korea",
-       like: "22",
-       view: "57",
-       img: "/shops/1.png",
-     },
-     {
-       name: "Nike",
-       Phone: "012232885",
-       address: "Deagu S.Korea",
-       like: "26",
-       view: "30",
-       img: "/shops/6.webp",
-     },
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
+import { setTopShops } from "../../screens/HomePage/slice";
+import { retrieveTopShops } from "../../screens/HomePage/selector";
+import { Shop } from "../../../types/user";
+import ShopApiService from "../../apiServices/shopApiService";
+import { serverApi } from "../../../lib/config";
 
-     {
-       name: "Puma",
-       Phone: "012232885",
-       address: "Busan S.Korea",
-       like: "30",
-       view: "53",
-       img: "/shops/3.webp",
-     },
-     {
-       name: "Rebook",
-       Phone: "012232885",
-       address: "Seoul S.Korea",
-       like: "21",
-       view: "50",
-       img: "/shops/4.png",
-     },
-     {
-       name: "Supreme",
-       Phone: "012232885",
-       address: "Incheon S.Korea",
-       like: "21",
-       view: "56",
-       img: "/shops/2.png",
-     },
-   ];
+
+// REDUX SELECTOR
+const topShopsRetriever = createSelector(retrieveTopShops, (topShops) => ({
+  topShops,
+}));
+
+
+export function Brands() {
+  // Initialization
+  const { topShops } = useSelector(topShopsRetriever);
+
+  console.log("topShops:::", topShops);
   return (
     <div className="brant_wrap">
-      <Container sx={{mt: "50px",  mb: "50px" }}>
+      <Container sx={{ mt: "50px", mb: "50px" }}>
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Box className="category_title">Top Brands</Box>
           <Box className="category_title_box">
@@ -70,7 +48,7 @@ export function Brands() {
           <Stack
             width={"100%"}
             height={"500px"}
-            sx={{ mt: "20px", }}
+            sx={{ mt: "20px" }}
             justifyContent={"space-between"}
             flexDirection={"row"}
           >
@@ -84,12 +62,13 @@ export function Brands() {
                 delay: 3000,
                 disableOnInteraction: false,
               }}
-              // modules={[Autoplay]}
+              modules={[Autoplay]}
             >
-              {events_list.map((value, number) => {
+              {topShops.map((ele: Shop) => {
+                const image_path = `${serverApi}/${ele.mb_image}`;
                 return (
                   <SwiperSlide className={"brand_info_frame"}>
-                    <CssVarsProvider>
+                    <CssVarsProvider key={ele._id}>
                       <Card
                         className="img_carts_brands"
                         variant="outlined"
@@ -101,7 +80,7 @@ export function Brands() {
                       >
                         <CardOverflow>
                           <AspectRatio ratio="1">
-                            <img src={value.img} alt="" />
+                            <img src={image_path} alt="" />
                           </AspectRatio>
                           <IconButton
                             aria-label="Like minimal phtography"
@@ -129,7 +108,7 @@ export function Brands() {
                             mt: "10px",
                           }}
                         >
-                          {value.name}
+                          {ele.mb_nick}
                         </Typography>
                         <Typography level="body-md" sx={{ lineHeight: "10px" }}>
                           <Link
@@ -137,7 +116,7 @@ export function Brands() {
                             startDecorator={<LocationOnIcon />}
                             textColor="neutral.700"
                           >
-                            {value.address}
+                            {ele.mb_address}
                           </Link>
                         </Typography>
                         <Typography level="body-md" sx={{ lineHeight: "10px" }}>
@@ -146,7 +125,7 @@ export function Brands() {
                             startDecorator={<LocalPhoneIcon />}
                             textColor="neutral.700"
                           >
-                            {value.Phone}
+                            {ele.mb_phone}
                           </Link>
                         </Typography>
                         <CardOverflow
@@ -169,7 +148,7 @@ export function Brands() {
                               alignItems: "center",
                             }}
                           >
-                            {value.view}
+                            {ele.mb_views}
                             <Visibility
                               sx={{ fontSize: 20, marginLeft: "5px" }}
                             />
@@ -184,7 +163,7 @@ export function Brands() {
                               alignItems: "center",
                             }}
                           >
-                            <div>{value.like}</div>
+                            <div>{ele.mb_likes}</div>
                             <Favorite
                               sx={{ fontSize: 20, marginLeft: "5px" }}
                             />
