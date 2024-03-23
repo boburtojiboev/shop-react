@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useRef } from "react";
 import { Favorite, Visibility } from "@mui/icons-material";
 import { CardOverflow, IconButton } from "@mui/joy";
 import Card from "@mui/joy/Card";
@@ -21,6 +21,11 @@ import { retrieveTopShops } from "../../screens/HomePage/selector";
 import { Shop } from "../../../types/user";
 import ShopApiService from "../../apiServices/shopApiService";
 import { serverApi } from "../../../lib/config";
+import { useHistory } from "react-router-dom";
+import assert from "assert";
+import MemberApiService from "../../apiServices/memberApiService";
+import { Definer } from "../../../lib/Definer";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
 
 
 // REDUX SELECTOR
@@ -31,16 +36,50 @@ const topShopsRetriever = createSelector(retrieveTopShops, (topShops) => ({
 
 export function Brands() {
   // Initialization
+  const history = useHistory();
   const { topShops } = useSelector(topShopsRetriever);
 
   console.log("topShops:::", topShops);
+    const refs: any = useRef([]);
+
+    // HANDLERS//
+    const chosenShopHandler = (id: string) => {
+      history.push(`/store/${id}`);
+    };
+     const moreShopsHandler = () => {
+       history.push(`/store`);
+     };
+
+    const targetLikeTop = async (e: any, id: string) => {
+      try {
+        assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+
+        const memberService = new MemberApiService(),
+          like_result: any = await memberService.memberLikeTarget({
+            like_ref_id: id,
+            group_type: "member",
+          });
+        assert.ok(like_result, Definer.general_err1);
+
+        if (like_result.like_status > 0) {
+          e.target.style.fill = "red";
+          refs.current[like_result.like_ref_id].innerHTML++;
+        } else {
+          e.target.style.fill = "white";
+          refs.current[like_result.like_ref_id].innerHTML--;
+        }
+      } catch (err: any) {
+        console.log("targetLikeTop, ERROR:", err);
+        sweetErrorHandling(err).then();
+      }
+    };
   return (
     <div className="brant_wrap">
       <Container sx={{ mt: "50px", mb: "50px" }}>
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Box className="category_title">Top Brands</Box>
           <Box className="category_title_box">
-            <Box className="more_than">
+            <Box onClick={() => moreShopsHandler()} className="more_than">
               <ListAltIcon style={{ height: "40px" }} />
               more than
             </Box>
@@ -70,6 +109,7 @@ export function Brands() {
                   <SwiperSlide className={"brand_info_frame"}>
                     <CssVarsProvider key={ele._id}>
                       <Card
+                        onClick={() => chosenShopHandler(ele._id)}
                         className="img_carts_brands"
                         variant="outlined"
                         sx={{
@@ -96,8 +136,12 @@ export function Brands() {
                               transform: "translateY(50%)",
                               color: "rgba(0,0,0,.2)",
                             }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                            }}
                           >
                             <Favorite
+                              onClick={(e) => targetLikeTop(e, ele._id)}
                               style={{
                                 fill:
                                   ele?.me_liked && ele?.me_liked[0]?.my_favorite
@@ -170,7 +214,13 @@ export function Brands() {
                               alignItems: "center",
                             }}
                           >
-                            <div>{ele.mb_likes}</div>
+                            <div
+                              ref={(element) =>
+                                (refs.current[ele._id] = element)
+                              }
+                            >
+                              {ele.mb_likes}
+                            </div>
                             <Favorite
                               sx={{ fontSize: 20, marginLeft: "5px" }}
                             />

@@ -13,6 +13,7 @@ import { retrieveNewsEvents } from "./selector";
 import { createSelector } from "reselect";
 import { serverApi } from "../../../lib/config";
 import { Event } from "../../../types/event";
+import { useHistory } from "react-router-dom";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -30,6 +31,7 @@ const newsEventsRetriever = createSelector(
 
 export function Events() {
   // Initialization
+   const history = useHistory();
   const { setNewsEvents } = actionDispatch(useDispatch());
   const { newsEvents } = useSelector(newsEventsRetriever);
 
@@ -43,6 +45,14 @@ export function Events() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  // HANDLERS//
+  const chosenEventHandler = (id: string) => {
+    history.push(`/event/${id}`);
+  };
+  const moreEventsHandler = () => {
+    history.push(`/event`);
+  };
   return (
     <div className={"review_for_shop"}>
       <Container
@@ -55,7 +65,7 @@ export function Events() {
       >
         <Box className="category_title_review">Events and Ceremony</Box>
         <Box className="category_title_box">
-          <Box className="more_than">
+          <Box onClick={() => moreEventsHandler()} className="more_than">
             <ListAltIcon style={{ height: "40px" }} />
             more than
           </Box>
@@ -73,13 +83,11 @@ export function Events() {
               ? `${serverApi}/${ele.event_images[0]}`
               : "/shops/open.jpeg";
             return (
-              <Box className="review_box_review" key={`${index}`}>
+              <Box className="review_box_review" key={ele._id}>
                 <Box display={"flex"} justifyContent={"center"}>
                   <img src={image_path} className="review_img_review" />
                 </Box>
-                <span className="review_name_review">
-                  {ele.event_name}
-                </span>
+                <span className="review_name_review">{ele.event_name}</span>
                 <span className="review_prof_rev">
                   <LocationOnIcon
                     style={{
@@ -91,7 +99,10 @@ export function Events() {
                   />
                   {ele.event_address}
                 </span>
-                <Box className="details_box">
+                <Box
+                  onClick={() => chosenEventHandler(ele._id)}
+                  className="details_box"
+                >
                   <p>Details</p>
                 </Box>
               </Box>

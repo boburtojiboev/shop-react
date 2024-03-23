@@ -1,9 +1,9 @@
-import Cookie from "universal-cookie";
+import Cookies from "universal-cookie";
 
-const cookie = new Cookie();
+const cookies = new Cookies();
 let member_data: any = null;
 
-if (cookie.get("access_token")) {
+if (cookies.get("access_token")) {
   const memberDataJson: any = localStorage.getItem("member_data")
     ? localStorage.getItem("member_data")
     : null;
@@ -15,4 +15,4 @@ if (cookie.get("access_token")) {
 console.log("== verify == ");
 console.log(member_data);
 
-export const verifyMemberData = member_data ? member_data : null;
+export const verifiedMemberData = member_data ? member_data : null;

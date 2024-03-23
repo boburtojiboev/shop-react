@@ -5,15 +5,11 @@ import Typography from "@mui/joy/Typography";
 import { CssVarsProvider } from "@mui/joy/styles";
 import { Box, Container, Stack } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import {
-  AspectRatio,
-  Link,
-} from "@mui/joy";
-
-import React, { useEffect } from "react";
+import { AspectRatio, Link } from "@mui/joy";
+import React, { useEffect, useRef } from "react";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +20,11 @@ import ProductApiService from "../../apiServices/productApiService";
 import { retrieveBestProducts } from "./selector";
 import { createSelector } from "reselect";
 import { serverApi } from "../../../lib/config";
+import { useHistory } from "react-router-dom";
+import assert from "assert";
+import MemberApiService from "../../apiServices/memberApiService";
+import { Definer } from "../../../lib/Definer";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -40,6 +41,7 @@ const bestProductsRetriever = createSelector(
 
 export function BestProducts() {
   // Initialization
+  const history = useHistory();
   const { setBestProducts } = actionDispatch(useDispatch());
   const { bestProducts } = useSelector(bestProductsRetriever);
 
@@ -53,13 +55,47 @@ export function BestProducts() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const refs: any = useRef([]);
+
+  // HANDLERS//
+  const chosenProductHandler = (id: string) => {
+    history.push(`/store/product/${id}`);
+  };
+  const moreProductsHandler = () => {
+    history.push(`/products`);
+  };
+
+  const targetLikeTop = async (e: any, id: string) => {
+    try {
+      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+
+      const memberService = new MemberApiService(),
+        like_result: any = await memberService.memberLikeTarget({
+          like_ref_id: id,
+          group_type: "product",
+        });
+      assert.ok(like_result, Definer.general_err1);
+
+      if (like_result.like_status > 0) {
+        e.target.style.fill = "red";
+        refs.current[like_result.like_ref_id].innerHTML++;
+      } else {
+        e.target.style.fill = "white";
+        refs.current[like_result.like_ref_id].innerHTML--;
+      }
+    } catch (err: any) {
+      console.log("targetLikeTop, ERROR:", err);
+      sweetErrorHandling(err).then();
+    }
+  };
   return (
     <div className="best_product_frame">
       <Container sx={{ mt: "60px" }}>
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Box className="category_title">Best Products</Box>
           <Box className="category_title_box">
-            <Box className="more_than">
+            <Box onClick={() => moreProductsHandler()} className="more_than">
               <ListAltIcon style={{ height: "40px" }} />
               more than
             </Box>
@@ -75,6 +111,7 @@ export function BestProducts() {
               return (
                 <CssVarsProvider key={product._id}>
                   <Card
+                    onClick={() => chosenProductHandler(product._id)}
                     className="img_cart"
                     variant="outlined"
                     sx={{ minHeight: 320, minWidth: 280 }}
@@ -110,8 +147,12 @@ export function BestProducts() {
                           transform: "translateY(50%)",
                           color: "rgba(0,0,0,.2)",
                         }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
                       >
                         <Favorite
+                          onClick={(e) => targetLikeTop(e, product._id)}
                           style={{
                             fill:
                               product?.me_liked &&
@@ -197,7 +238,13 @@ export function BestProducts() {
                           alignItems: "center",
                         }}
                       >
-                        <div>{product.product_likes}</div>
+                        <div
+                          ref={(element) =>
+                            (refs.current[product._id] = element)
+                          }
+                        >
+                          {product.product_likes}
+                        </div>
                         <Favorite sx={{ fontSize: 20, marginLeft: "5px" }} />
                       </Typography>
                     </CardOverflow>
