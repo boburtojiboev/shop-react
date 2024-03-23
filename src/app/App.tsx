@@ -31,8 +31,8 @@ function App() {
   const [verifiedMemberData, setVerifiedMemberData] = useState<Member | null>(
     null
   );
-  const [path, setPath] = useState();
-  const main_path = window.location.pathname;
+  const [ setPath] = useState();
+  // const main_path = window.location.pathname;
   const [signupOpen, setSignupOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
 

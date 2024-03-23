@@ -22,12 +22,33 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useHistory } from "react-router-dom";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveTargetShops } from "../../screens/ShopPage/selector";
+import { Shop } from "../../../types/user";
+import { Dispatch } from "@reduxjs/toolkit";
+import { setTargetShops } from "../../screens/ShopPage/slice";
 
 const order_list = Array.from(Array(8).keys());
-console.log(order_list);
+// REDUX SLICE
+const actionDispatch = (dispatch: Dispatch) => ({
+  setTargetShops: (data: Shop[]) =>
+    dispatch(setTargetShops(data)),
+});
+// REDUX SELECTOR
+const targetShopsRetriever = createSelector(
+  retrieveTargetShops,
+  (targetShops) => ({
+    targetShops,
+  })
+);
 
 export function AllShops() {
+  // INITIALIZATIONS
   const history = useHistory();
+  const { setTargetShops } = actionDispatch(useDispatch());
+  const { targetShops } = useSelector(targetShopsRetriever);
   return (
     <div className="all_shop">
       <Container>
