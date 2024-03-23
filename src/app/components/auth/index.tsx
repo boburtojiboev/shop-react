@@ -51,9 +51,30 @@ export default function AuthentificationModal(props: any) {
   const handlePassword = (e: any) => {
     mb_password = e.target.value;
   };
+  const handleSignupRequest = async () => {
+    try {
+      const is_fullfilled = mb_nick !== "" && mb_password !== "" && mb_phone !== 0;
+      assert.ok(is_fullfilled, Definer.input_err1);
+
+      const sign_data = {
+        mb_nick: mb_nick,
+        mb_phone: mb_phone,
+        mb_password: mb_password,
+      };
+
+      const memberApiService = new MemberApiService();
+      await memberApiService.signupRequest(sign_data);
+
+      props.handleSignupClose();
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
   const handleLoginRequest = async () => {
     try {
-      const is_fullfilled = mb_nick != "" && mb_password != "";
+      const is_fullfilled = mb_nick !== "" && mb_password !== "";
       assert.ok(is_fullfilled, Definer.input_err1);
 
       const login_data = {
@@ -97,21 +118,21 @@ export default function AuthentificationModal(props: any) {
             <Stack sx={{ marginLeft: "69px", alignItems: "center" }}>
               <h2>Signup Form</h2>
               <TextField
-                //onchange
+                onChange={handleUsername}
                 sx={{ marginTop: "7px" }}
                 id="outlined-basic"
                 label="username"
                 variant="outlined"
               />
               <TextField
-                //onchange
+                onChange={handlePhone}
                 sx={{ marginTop: "7px" }}
                 id="outlined-basic"
                 label="phone number"
                 variant="outlined"
               />
               <TextField
-                //onchange
+                onChange={handlePassword}
                 sx={{ marginTop: "7px" }}
                 id="outlined-basic"
                 label="password"
@@ -119,7 +140,7 @@ export default function AuthentificationModal(props: any) {
               />
 
               <Fab
-                //onclick
+                onClick={handleSignupRequest}
                 sx={{ mt: "30px", width: "120px" }}
                 variant="extended"
                 color="primary"
