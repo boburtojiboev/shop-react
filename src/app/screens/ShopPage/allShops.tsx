@@ -15,7 +15,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Call, Favorite, LocationOnRounded, Search } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Close, Home } from "@mui/icons-material";
-import * as React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -29,6 +29,13 @@ import { retrieveTargetShops } from "../../screens/ShopPage/selector";
 import { Shop } from "../../../types/user";
 import { Dispatch } from "@reduxjs/toolkit";
 import { setTargetShops } from "../../screens/ShopPage/slice";
+import { SearchObj } from "../../../types/others";
+import ShopApiService from "../../apiServices/shopApiService";
+import assert from "assert";
+import { Definer } from "../../../lib/Definer";
+import MemberApiService from "../../apiServices/memberApiService";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import { serverApi } from "../../../lib/config";
 
 const order_list = Array.from(Array(8).keys());
 // REDUX SLICE
@@ -49,6 +56,58 @@ export function AllShops() {
   const history = useHistory();
   const { setTargetShops } = actionDispatch(useDispatch());
   const { targetShops } = useSelector(targetShopsRetriever);
+    const [targetSearchObject, setTargetSearchObject] = useState<SearchObj>({
+      page: 1,
+      limit: 8,
+      order: "mb_point",
+    });
+    const refs: any = useRef([]);
+    // const history = useHistory();
+
+    useEffect(() => {
+      const shopService = new ShopApiService();
+      shopService
+        .getShops(targetSearchObject)
+        .then((data) => setTargetShops(data))
+        .catch((err) => console.log(err));
+    }, [targetSearchObject]);
+
+    /** HANDLERS */
+    const searchHandler = (category: string) => {
+      targetSearchObject.page = 1;
+      targetSearchObject.order = category;
+      setTargetSearchObject({ ...targetSearchObject });
+    };
+
+    const handlePaginationChange = (event: any, value: number) => {
+      targetSearchObject.page = value;
+      setTargetSearchObject({ ...targetSearchObject });
+    };
+    const targetLikeHandler = async (e: any, id: string) => {
+      try {
+        assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+
+        const memberService = new MemberApiService(),
+          like_result: any = await memberService.memberLikeTarget({
+            like_ref_id: id,
+            group_type: "member",
+          });
+        assert.ok(like_result, Definer.general_err1);
+
+        if (like_result.like_status > 0) {
+          e.target.style.fill = "red";
+          refs.current[like_result.like_ref_id].innerHTML++;
+        } else {
+          e.target.style.fill = "white";
+          refs.current[like_result.like_ref_id].innerHTML--;
+        }
+
+        await sweetTopSmallSuccessAlert("success", 700, false);
+      } catch (err: any) {
+        console.log("targetLikeTop, ERROR:", err);
+        sweetErrorHandling(err).then();
+      }
+    };
   return (
     <div className="all_shop">
       <Container>
@@ -65,7 +124,7 @@ export function AllShops() {
             </Box>
           </Box>
           <Box className={"fit_search_box"}>
-            <Box className={"fit_box"}>
+            <Box className={"fit_box"} style={{ cursor: "pointer" }}>
               <FormControl>
                 <p color="black">Sorting</p>
                 <RadioGroup
@@ -78,21 +137,25 @@ export function AllShops() {
                     value="best"
                     control={<Radio />}
                     label="best"
+                    onClick={() => searchHandler("mb_point")}
                   />
                   <FormControlLabel
                     value="famous"
                     control={<Radio />}
                     label="famous"
+                    onClick={() => searchHandler("mb_views")}
                   />
                   <FormControlLabel
                     value="tranding"
                     control={<Radio />}
                     label="tranding"
+                    onClick={() => searchHandler("mb_likes")}
                   />
                   <FormControlLabel
                     value="new"
                     control={<Radio />}
                     label="new"
+                    onClick={() => searchHandler("createdAt")}
                   />
                 </RadioGroup>
               </FormControl>
@@ -100,7 +163,8 @@ export function AllShops() {
           </Box>
           <Stack className={"all_shop_box"}>
             <CssVarsProvider>
-              {order_list.map((ele) => {
+              {targetShops.map((ele: Shop) => {
+                const image_path = `${serverApi}/${ele.mb_image}`;
                 return (
                   <Card
                     className="shop_cart"
@@ -116,7 +180,7 @@ export function AllShops() {
                   >
                     <CardOverflow>
                       <AspectRatio ratio={"1"}>
-                        <img src="/shops/justdoit.jpeg" loading="lazy" alt="" />
+                        <img src={image_path} loading="lazy" alt="" />
                       </AspectRatio>
 
                       <IconButton
@@ -135,14 +199,22 @@ export function AllShops() {
                           color: "rgba(0,0,0,.2)",
                         }}
                       >
-                        <Favorite style={{ color: "white" }} />
+                        <Favorite
+                          onClick={(e) => targetLikeHandler(e, ele._id)}
+                          style={{
+                            fill:
+                              ele?.me_liked && ele?.me_liked[0]?.my_favorite
+                                ? "red"
+                                : "white",
+                          }}
+                        />
                       </IconButton>
                     </CardOverflow>
                     <Typography
                       level="h2"
                       sx={{ fontSize: "md", lineHeight: "18px", mt: "10px" }}
                     >
-                      Shop Name
+                      {ele.mb_nick} Store
                     </Typography>
                     <Typography level="body-md" sx={{ lineHeight: "10px" }}>
                       <Link
@@ -150,7 +222,7 @@ export function AllShops() {
                         startDecorator={<LocationOnRounded />}
                         textColor="neutral.700"
                       >
-                        Shop address
+                        {ele.mb_address}
                       </Link>
                     </Typography>
                     <Typography textColor="neutral.700">
@@ -159,7 +231,7 @@ export function AllShops() {
                         startDecorator={<Call />}
                         textColor="neutral.700"
                       >
-                        Shop phone
+                        {ele.mb_phone}
                       </Link>
                     </Typography>
                     <CardOverflow
@@ -181,7 +253,7 @@ export function AllShops() {
                           alignItems: "center",
                         }}
                       >
-                        10{" "}
+                        {ele.mb_views}
                         <VisibilityIcon
                           sx={{ fontSize: 20, marginLeft: "5px" }}
                         />
@@ -196,7 +268,11 @@ export function AllShops() {
                           alignItems: "center",
                         }}
                       >
-                        <div>50</div>
+                        <div
+                          ref={(element) => (refs.current[ele._id] = element)}
+                        >
+                          {ele.mb_likes}
+                        </div>
                         <Favorite sx={{ fontSize: 20, marginLeft: "5px" }} />
                       </Typography>
                     </CardOverflow>
@@ -208,8 +284,10 @@ export function AllShops() {
 
           <Stack className="bottom_box">
             <Pagination
-              count={3}
-              page={1}
+              count={
+                targetSearchObject.page >= 3 ? targetSearchObject.page + 1 : 3
+              }
+              page={targetSearchObject.page}
               renderItem={(item) => (
                 <PaginationItem
                   components={{
@@ -220,6 +298,7 @@ export function AllShops() {
                   color="secondary"
                 />
               )}
+              onChange={handlePaginationChange}
             />
           </Stack>
         </Stack>

@@ -3,6 +3,7 @@ import assert from "assert";
 import { serverApi } from "../../lib/config";
 import { Definer } from "../../lib/Definer";
 import { Shop } from "../../types/user";
+import { SearchObj } from "../../types/others";
 
 class ShopApiService {
   private readonly path: string;
@@ -22,6 +23,23 @@ class ShopApiService {
       return top_shops;
     } catch (err: any) {
       console.log(`ERROR ::: getTopShops ${err.message}`);
+      throw err;
+    }
+  }
+
+  async getShops(data: SearchObj) {
+    try {
+      const url = `/shops?order=${data.order}&page=${data.page}&limit=${data.limit}`,
+        result = await axios.get(this.path + url, { withCredentials: true });
+
+      assert.ok(result?.data, Definer.general_err1);
+      assert.ok(result?.data?.state != "fail", result?.data?.message);
+      console.log("state:", result.data.state);
+
+      const shops: Shop[] = result.data.data;
+      return shops;
+    } catch (err: any) {
+      console.log(`ERROR ::: getShops ${err.message}`);
       throw err;
     }
   }
