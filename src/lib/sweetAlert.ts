@@ -36,6 +36,29 @@ export const sweetTopSuccessAlert = async (
   window.location.reload();
 };
 
+export const sweetTopSmallSuccessAlert = async (
+  msg: string,
+  duration: number = 2000,
+  enable_forward: boolean = false
+) => {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: duration,
+    timerProgressBar: true,
+  });
+
+  Toast.fire({
+    icon: "success",
+    title: msg,
+  }).then((data) => {
+    if (enable_forward) {
+      window.location.reload();
+    }
+  });
+};
+
 export const sweetFailureProvider = async (
   msg: string,
   show_button: boolean = false,
