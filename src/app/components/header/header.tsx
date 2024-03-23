@@ -20,7 +20,8 @@ export function Header(props: any) {
           justifyContent={"space-between"}
         >
           <Box>
-            <h1 className="shoekershop"
+            <h1
+              className="shoekershop"
               style={{
                 marginTop: "0px",
                 color: "#ffffff",
@@ -81,6 +82,7 @@ export function Header(props: any) {
                   color: "#ffffff",
                   background: "#0383a3",
                 }}
+                onClick={props.handleLoginOpen}
               >
                 Login
               </Button>
@@ -93,6 +95,7 @@ export function Header(props: any) {
                   color: "#ffffff",
                   background: "#0383a3",
                 }}
+                onClick={props.handleSignupOpen}
               >
                 Sign Up
               </Button>

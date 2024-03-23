@@ -21,8 +21,20 @@ import Car from "./screens/testCar";
 import AuthentificationModal from "./components/auth";
 
 function App() {
-    const [path, setPath] = useState();
-    const main_path = window.location.pathname;
+  // INITIALIZATIONS
+  const [path, setPath] = useState();
+  const main_path = window.location.pathname;
+  const [signupOpen, setSignupOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+
+  /** HANDLERS */
+
+  const handleSignupOpen = () => setSignupOpen(true);
+  const handleSignupClose = () => setSignupOpen(false);
+
+  const handleLoginOpen = () => setLoginOpen(true);
+
+  const handleLoginClose = () => setLoginOpen(false);
   return (
     <Router>
       {/* {main_path == "/" ? (
@@ -34,7 +46,13 @@ function App() {
       ) : (
         <NavbarOthers setPath={setPath} />
       )} */}
-      {<Header setPath={setPath} />}
+      {
+        <Header
+          setPath={setPath}
+          handleSignupOpen={handleSignupOpen}
+          handleLoginOpen={handleLoginOpen}
+        />
+      }
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
       <Switch>
@@ -66,8 +84,17 @@ function App() {
           <HomePage />
         </Route>
       </Switch>
+
       <Footer />
-      <AuthentificationModal/>
+      
+      <AuthentificationModal
+        loginOpen={loginOpen}
+        handleLoginOpen={handleLoginOpen}
+        handleLoginClose={handleLoginClose}
+        signupOpen={signupOpen}
+        handleSignupOpen={handleSignupOpen}
+        handleSignupClose={handleSignupClose}
+      />
     </Router>
   );
 }
