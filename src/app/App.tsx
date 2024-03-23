@@ -18,6 +18,7 @@ import { Footer } from "./components/footer";
 import { Header } from "./components/header/header";
 import { EventPage } from "./screens/EventPage";
 import Car from "./screens/testCar";
+import AuthentificationModal from "./components/auth";
 
 function App() {
     const [path, setPath] = useState();
@@ -34,7 +35,6 @@ function App() {
         <NavbarOthers setPath={setPath} />
       )} */}
       {<Header setPath={setPath} />}
-
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
       <Switch>
@@ -67,6 +67,7 @@ function App() {
         </Route>
       </Switch>
       <Footer />
+      <AuthentificationModal/>
     </Router>
   );
 }
