@@ -107,7 +107,15 @@ export function BigSales() {
                           color: "rgba(0,0,0,.2)",
                         }}
                       >
-                        <Favorite style={{ color: "white" }} />
+                        <Favorite
+                          style={{
+                            fill:
+                              product?.me_liked &&
+                              product?.me_liked[0]?.my_favorite
+                                ? "red"
+                                : "white",
+                          }}
+                        />
                       </IconButton>
                       <IconButton
                         aria-label="Like minimal phtography"
@@ -172,7 +180,7 @@ export function BigSales() {
                           alignItems: "center",
                         }}
                       >
-                        {product.product_likes}{" "}
+                        {product.product_views}{" "}
                         <Visibility sx={{ fontSize: 20, marginLeft: "5px" }} />
                       </Typography>
                       <Box sx={{ width: 2, bgcolor: "divider" }}></Box>
@@ -185,7 +193,7 @@ export function BigSales() {
                           alignItems: "center",
                         }}
                       >
-                        <div>{product.product_views}</div>
+                        <div>{product.product_likes}</div>
                         <Favorite sx={{ fontSize: 20, marginLeft: "5px" }} />
                       </Typography>
                     </CardOverflow>
