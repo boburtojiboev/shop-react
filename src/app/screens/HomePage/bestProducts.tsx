@@ -24,7 +24,7 @@ import { useHistory } from "react-router-dom";
 import assert from "assert";
 import MemberApiService from "../../apiServices/memberApiService";
 import { Definer } from "../../../lib/Definer";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -54,6 +54,7 @@ export function BestProducts() {
         setBestProducts(data);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const refs: any = useRef([]);
@@ -84,6 +85,7 @@ export function BestProducts() {
         e.target.style.fill = "white";
         refs.current[like_result.like_ref_id].innerHTML--;
       }
+      await sweetTopSmallSuccessAlert("success", 700, false);
     } catch (err: any) {
       console.log("targetLikeTop, ERROR:", err);
       sweetErrorHandling(err).then();

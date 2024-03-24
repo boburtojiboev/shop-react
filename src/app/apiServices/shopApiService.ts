@@ -33,13 +33,30 @@ class ShopApiService {
         result = await axios.get(this.path + url, { withCredentials: true });
 
       assert.ok(result?.data, Definer.general_err1);
-      assert.ok(result?.data?.state != "fail", result?.data?.message);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
       console.log("state:", result.data.state);
 
       const shops: Shop[] = result.data.data;
       return shops;
     } catch (err: any) {
       console.log(`ERROR ::: getShops ${err.message}`);
+      throw err;
+    }
+  }
+
+  async getChosenShop(id: string) {
+    try {
+      const url = `/shops/${id}`,
+        result = await axios.get(this.path + url, { withCredentials: true });
+
+      assert.ok(result?.data, Definer.general_err1);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
+      console.log("state:", result.data.state);
+
+      const Shop: Shop = result.data.data;
+      return Shop;
+    } catch (err: any) {
+      console.log(`ERROR ::: getChosenShop ${err.message}`);
       throw err;
     }
   }

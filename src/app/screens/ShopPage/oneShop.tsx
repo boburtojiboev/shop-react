@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Button, Container, Stack } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -28,14 +28,147 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Close, Home, Visibility } from "@mui/icons-material";
 import NativeSelect from "@mui/material/NativeSelect";
 import { Favorite } from "@mui/icons-material";
-import SwiperCore, { Autoplay, Navigation } from "swiper";
-// SwiperCore.use([Autoplay, Navigation, Pagination]);
+import { useParams } from "react-router-dom";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import {
+  retrieveChosenShop,
+  retrieveRandomShops,
+  retrieveTargetProducts,
+} from "../../screens/ShopPage/selector";
+import { Shop } from "../../../types/user";
+import {
+  setRandomShops,
+  setChosenShop,
+  setTargetProducts,
+} from "../../screens/ShopPage/slice";
+import { Dispatch } from "@reduxjs/toolkit";
+import { ProductSearchObj } from "../../../types/others";
+import ProductApiService from "../../apiServices/productApiService";
+import { Product } from "../../../types/product";
+import { serverApi } from "../../../lib/config";
+import assert from "assert";
+import MemberApiService from "../../apiServices/memberApiService";
+import { Definer } from "../../../lib/Definer";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import ShopApiService from "../../apiServices/shopApiService";
 
-const shop_list = Array.from(Array(12).keys());
-const product_list = Array.from(Array(8).keys());
+// REDUX SLICE
+const actionDispatch = (dispatch: Dispatch) => ({
+  setRandomShops: (data: Shop[]) => dispatch(setRandomShops(data)),
+  setChosenShop: (data: Shop) => dispatch(setChosenShop(data)),
+  setTargetProducts: (data: Product[]) => dispatch(setTargetProducts(data)),
+});
+
+// REDUX SELECTOR
+const randomShopsRetriever = createSelector(
+  retrieveRandomShops,
+  (randomShops) => ({
+    randomShops,
+  })
+);
+const chosenShopRetriever = createSelector(
+  retrieveChosenShop,
+  (chosenShop) => ({
+    chosenShop,
+  })
+);
+const targetProductsRetriever = createSelector(
+  retrieveTargetProducts,
+  (targetProducts) => ({
+    targetProducts,
+  })
+);
 
 export function OneShop() {
+  // INITIALIZATIONS
   const history = useHistory();
+  const refs: any = useRef([]);
+  let { shop_id } = useParams<{ shop_id: string }>();
+  const { setRandomShops, setChosenShop, setTargetProducts } = actionDispatch(
+    useDispatch()
+  );
+  const { randomShops } = useSelector(randomShopsRetriever);
+  const { chosenShop } = useSelector(chosenShopRetriever);
+  const { targetProducts } = useSelector(targetProductsRetriever);
+  const [chosenShopId, setChosenShopId] = useState<string>(shop_id);
+  const [targetProductSearchObj, setTargetProductSearchObj] =
+    useState<ProductSearchObj>({
+      page: 1,
+      limit: 8,
+      order: "product_price",
+      shop_mb_id: shop_id,
+      product_collection: "MEN"
+    });
+
+  const [productRebuild, setProductRebuild] = useState<Date>(new Date());
+
+  useEffect(() => {
+    const shopService = new ShopApiService();
+    shopService
+      .getShops({ page: 1, limit: 10, order: "random" })
+      .then((data) => setRandomShops(data))
+      .catch((err) => console.log(err));
+
+    shopService
+      .getChosenShop(chosenShopId)
+      .then((data) => setChosenShop(data))
+      .catch((err) => console.log(err));
+
+    const productService = new ProductApiService();
+    productService
+      .getProducts(targetProductSearchObj)
+      .then((data) => setTargetProducts(data))
+      .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chosenShopId, targetProductSearchObj, productRebuild]);
+
+  /** HANDLERS */
+  const chosenShopHandler = (id: string) => {
+    setChosenShopId(id);
+    targetProductSearchObj.shop_mb_id = id;
+    setTargetProductSearchObj({ ...targetProductSearchObj });
+    history.push(`/store/${id}`);
+  };
+   const searchCollectionHandler = (product_collection: string) => {
+     targetProductSearchObj.page = 1;
+     targetProductSearchObj.product_collection =  product_collection;
+     setTargetProductSearchObj({ ...targetProductSearchObj });
+   };
+
+   const searchOrderHandler = (order: string) => {
+     targetProductSearchObj.page = 1;
+     targetProductSearchObj.order = order;
+     setTargetProductSearchObj({ ...targetProductSearchObj });
+   };
+
+  const targetLikeTop = async (e: any, id: string) => {
+    try {
+      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+
+      const memberService = new MemberApiService(),
+        like_result: any = await memberService.memberLikeTarget({
+          like_ref_id: id,
+          group_type: "product",
+        });
+      assert.ok(like_result, Definer.general_err1);
+
+      if (like_result.like_status > 0) {
+        e.target.style.fill = "red";
+        refs.current[like_result.like_ref_id].innerHTML++;
+      } else {
+        e.target.style.fill = "white";
+        refs.current[like_result.like_ref_id].innerHTML--;
+      }
+      await sweetTopSmallSuccessAlert("success", 700, false);
+      setProductRebuild(new Date());
+    } catch (err: any) {
+      console.log("targetLikeTop, ERROR:", err);
+      sweetErrorHandling(err).then();
+    }
+  };
+
   return (
     <div className="single_div">
       <div className="mobile_version">
@@ -84,15 +217,17 @@ export function OneShop() {
                   prevEl: ".shop-prev",
                 }}
               >
-                {shop_list.map((ele, index) => {
+                {randomShops.map((ele: Shop) => {
+                  const image_path = `${serverApi}/${ele.mb_image}`;
                   return (
                     <SwiperSlide
+                      onClick={() => chosenShopHandler(ele._id)}
                       style={{ cursor: "pointer" }}
-                      key={index}
+                      key={ele._id}
                       className={"shop_avatars"}
                     >
-                      <img src="/shops/justdoit.jpeg" alt="" />
-                      <span>Shop name</span>
+                      <img src={image_path} alt="" />
+                      <span>{ele.mb_nick}</span>
                     </SwiperSlide>
                   );
                 })}
@@ -103,7 +238,7 @@ export function OneShop() {
             </Stack>
             <Stack className={"avatar_big_box"}>
               <Box className={"top_text"}>
-                <p>Shop Name</p>
+                <p>{chosenShop?.mb_nick} Store</p>
                 <Box className={"Single_search_big_box"}>
                   <form
                     className={"Single_search_form"}
@@ -147,21 +282,25 @@ export function OneShop() {
                     value="Price"
                     control={<Radio />}
                     label="Price"
+                    onClick={() => searchOrderHandler("product_price")}
                   />
                   <FormControlLabel
                     value="Sale"
                     control={<Radio />}
                     label="Sale"
+                    onClick={() => searchOrderHandler("product_discount")}
                   />
                   <FormControlLabel
                     value="tranding"
                     control={<Radio />}
-                    label="tranding"
+                    label="Tranding"
+                    onClick={() => searchOrderHandler("product_likes")}
                   />
                   <FormControlLabel
                     value="new"
                     control={<Radio />}
-                    label="new"
+                    label="New"
+                    onClick={() => searchOrderHandler("createdAt")}
                   />
                 </RadioGroup>
               </FormControl>
@@ -175,26 +314,48 @@ export function OneShop() {
                     id: "uncontrolled-native",
                   }}
                 >
-                  <option value={"All"}>All</option>
-                  <option value={"Men"}>Men</option>
-                  <option value={"Women"}>Women</option>
-                  <option value={"Kids"}>Kids</option>
+                  <option
+                    value={"All"}
+                    onClick={() => searchCollectionHandler("All")}
+                  >
+                    All
+                  </option>
+                  <option
+                    value={"MEN"}
+                    onClick={() => searchCollectionHandler("MEN")}
+                  >
+                    Men
+                  </option>
+                  <option
+                    value={"WOMEN"}
+                    onClick={() => searchCollectionHandler("WOMEN")}
+                  >
+                    Women
+                  </option>
+                  <option
+                    value={"KIDS"}
+                    onClick={() => searchCollectionHandler("KIDS")}
+                  >
+                    Kids
+                  </option>
                 </NativeSelect>
               </FormControl>
             </Stack>
 
             <Stack className={"single_shop_box"}>
               <CssVarsProvider>
-                {product_list.map((ele) => {
+                {targetProducts.map((product: Product) => {
+                  const image_path = `${serverApi}/${product.product_images[0]}`;
                   return (
                     <Card
+                      key={product._id}
                       className="img_carts"
                       variant="outlined"
                       sx={{ minHeight: 320, minWidth: 280, mb: "50px" }}
                     >
                       <CardOverflow>
                         <AspectRatio ratio="1">
-                          <img src={"/shops/sneakers.jpg"} alt="" />
+                          <img src={image_path} alt="" />
                         </AspectRatio>
                         <Box
                           sx={{
@@ -207,7 +368,7 @@ export function OneShop() {
                             borderRadius: "0",
                           }}
                         >
-                          -100%
+                          {product.product_discount} %
                         </Box>
                         <IconButton
                           aria-label="Like minimal phtography"
@@ -223,8 +384,20 @@ export function OneShop() {
                             transform: "translateY(50%)",
                             color: "rgba(0,0,0,.2)",
                           }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                          }}
                         >
-                          <Favorite style={{ color: "white" }} />
+                          <Favorite
+                            onClick={(e) => targetLikeTop(e, product._id)}
+                            style={{
+                              fill:
+                                product?.me_liked &&
+                                product?.me_liked[0]?.my_favorite
+                                  ? "red"
+                                  : "white",
+                            }}
+                          />
                         </IconButton>
                         <IconButton
                           aria-label="Like minimal phtography"
@@ -249,7 +422,7 @@ export function OneShop() {
                         level="h3"
                         sx={{ fontSize: "md", lineHeight: "10px", mt: "1" }}
                       >
-                        ProductName
+                        {product.product_name}
                       </Typography>
                       <Typography level="body-md" sx={{ lineHeight: "10px" }}>
                         <Link
@@ -257,7 +430,7 @@ export function OneShop() {
                           startDecorator={<AttachMoneyIcon />}
                           textColor="neutral.700"
                         >
-                          Price
+                          {product.product_price}
                         </Link>
                       </Typography>
                       <Typography level="body-md" sx={{ lineHeight: "10px" }}>
@@ -266,7 +439,7 @@ export function OneShop() {
                           startDecorator={<ColorLensIcon />}
                           textColor="neutral.700"
                         >
-                          color
+                          {product.product_colors}
                         </Link>
                       </Typography>
                       <CardOverflow
@@ -289,7 +462,7 @@ export function OneShop() {
                             alignItems: "center",
                           }}
                         >
-                          100{" "}
+                          {product.product_views}
                           <Visibility
                             sx={{ fontSize: 20, marginLeft: "5px" }}
                           />
@@ -304,7 +477,13 @@ export function OneShop() {
                             alignItems: "center",
                           }}
                         >
-                          <div>500</div>
+                          <div
+                            ref={(element) =>
+                              (refs.current[product._id] = element)
+                            }
+                          >
+                            {product.product_likes}
+                          </div>
                           <Favorite sx={{ fontSize: 20, marginLeft: "5px" }} />
                         </Typography>
                       </CardOverflow>

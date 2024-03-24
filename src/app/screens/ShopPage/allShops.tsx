@@ -7,12 +7,12 @@ import {
   Link,
   CssVarsProvider,
 } from "@mui/joy";
-import { Box, Button, Container, Stack } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Call, Favorite, LocationOnRounded, Search } from "@mui/icons-material";
+import { Call, Favorite, LocationOnRounded, } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Close, Home } from "@mui/icons-material";
 import React, { useEffect, useRef, useState } from "react";
@@ -20,7 +20,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import { useHistory } from "react-router-dom";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
@@ -37,7 +36,6 @@ import MemberApiService from "../../apiServices/memberApiService";
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 import { serverApi } from "../../../lib/config";
 
-const order_list = Array.from(Array(8).keys());
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
   setTargetShops: (data: Shop[]) =>
@@ -70,9 +68,14 @@ export function AllShops() {
         .getShops(targetSearchObject)
         .then((data) => setTargetShops(data))
         .catch((err) => console.log(err));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [targetSearchObject]);
 
     /** HANDLERS */
+    const chosenShopHandler = (id: string) => {
+      history.push(`/store/${id}`);
+    };
+
     const searchHandler = (category: string) => {
       targetSearchObject.page = 1;
       targetSearchObject.order = category;
@@ -167,6 +170,7 @@ export function AllShops() {
                 const image_path = `${serverApi}/${ele.mb_image}`;
                 return (
                   <Card
+                    onClick={() => chosenShopHandler(ele._id)}
                     className="shop_cart"
                     variant="outlined"
                     sx={{
@@ -197,6 +201,9 @@ export function AllShops() {
                           top: 1,
                           transform: "translateY(50%)",
                           color: "rgba(0,0,0,.2)",
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
                         }}
                       >
                         <Favorite

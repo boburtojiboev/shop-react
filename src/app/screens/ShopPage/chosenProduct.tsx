@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, useEffect, useState } from "react";
 import { Box, Button, Checkbox, Container, Stack } from "@mui/material";
 import { Close, Home, RemoveRedEye } from "@mui/icons-material";
 import Marginer from "../../components/marginer";
@@ -11,10 +11,6 @@ import ReactImageMagnify from "react-image-magnify";
 import { useHistory } from "react-router-dom";
 
 const chosen_list = Array.from(Array(4).keys());
-//  const [imgChange, setImgChange] = useState(0);
-//  const wide_img = `${serverApi}/${chosenProduct?.product_images.filter(
-//    (ele) => chosenProduct?.product_images.indexOf(ele) === imgChange
-//  )}`;
 
 export function ChosenProduct() {
   const history = useHistory();

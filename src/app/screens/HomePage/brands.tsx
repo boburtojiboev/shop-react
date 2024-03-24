@@ -13,19 +13,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 
 // Redux
-import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "@reduxjs/toolkit";
+import {  useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { setTopShops } from "../../screens/HomePage/slice";
 import { retrieveTopShops } from "../../screens/HomePage/selector";
 import { Shop } from "../../../types/user";
-import ShopApiService from "../../apiServices/shopApiService";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";
 import assert from "assert";
 import MemberApiService from "../../apiServices/memberApiService";
 import { Definer } from "../../../lib/Definer";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 
 
 // REDUX SELECTOR
@@ -68,6 +65,7 @@ export function Brands() {
           e.target.style.fill = "white";
           refs.current[like_result.like_ref_id].innerHTML--;
         }
+        await sweetTopSmallSuccessAlert("success", 700, false);
       } catch (err: any) {
         console.log("targetLikeTop, ERROR:", err);
         sweetErrorHandling(err).then();
