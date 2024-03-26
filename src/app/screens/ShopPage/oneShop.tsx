@@ -143,6 +143,10 @@ export function OneShop() {
      setTargetProductSearchObj({ ...targetProductSearchObj });
    };
 
+   const chosenProductHandler = (id: string) => {
+     history.push(`/store/product/${id}`);
+   };
+
   const targetLikeTop = async (e: any, id: string) => {
     try {
       assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
@@ -348,6 +352,7 @@ export function OneShop() {
                   const image_path = `${serverApi}/${product.product_images[0]}`;
                   return (
                     <Card
+                      onClick={() => chosenProductHandler(product?._id)}
                       key={product._id}
                       className="img_carts"
                       variant="outlined"

@@ -60,7 +60,6 @@ export function AllShops() {
       order: "mb_point",
     });
     const refs: any = useRef([]);
-    // const history = useHistory();
 
     useEffect(() => {
       const shopService = new ShopApiService();

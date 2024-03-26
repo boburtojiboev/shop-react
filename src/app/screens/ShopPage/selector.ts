@@ -5,21 +5,21 @@ const selectShopPage = (state: AppRootState) => state.shopPage;
 
 export const retrieveTargetShops = createSelector(
   selectShopPage,
-  (RestaurantPage) => RestaurantPage.targetShops
+  (ShopPage) => ShopPage.targetShops
 );
 export const retrieveRandomShops = createSelector(
   selectShopPage,
-  (RestaurantPage) => RestaurantPage.randomShops
+  (ShopPage) => ShopPage.randomShops
 );
 export const retrieveChosenShop = createSelector(
   selectShopPage,
-  (RestaurantPage) => RestaurantPage.chosenShop
+  (ShopPage) => ShopPage.chosenShop
 );
 export const retrieveTargetProducts = createSelector(
   selectShopPage,
-  (RestaurantPage) => RestaurantPage.targetProducts
+  (ShopPage) => ShopPage.targetProducts
 );
-export const retrieveChosenDish = createSelector(
+export const retrieveChosenProduct = createSelector(
   selectShopPage,
-  (RestaurantPage) => RestaurantPage.chosenProduct
+  (ShopPage) => ShopPage.chosenProduct
 );
