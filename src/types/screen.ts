@@ -1,6 +1,7 @@
 import { Event } from "./event";
 import { Product } from "./product";
 import { Shop } from "./user";
+import {Comment} from "./comment"
 
 // REACT APP STATE//
 export interface AppRootState {
@@ -23,4 +24,5 @@ export interface ShopPageState {
   chosenShop: Shop | null;
   targetProducts: Product[];
   chosenProduct: Product | null;
+  productComment: Comment[];
 }

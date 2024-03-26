@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Button, Checkbox, Container, Stack } from "@mui/material";
 import { Close, Home, RemoveRedEye } from "@mui/icons-material";
 import Marginer from "../../components/marginer";
@@ -23,17 +23,20 @@ import {
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 // REDUX
-// import { useDispatch,  } from "react-redux";
 import { createSelector } from "reselect";
-import { setChosenProduct, setChosenShop } from "./slice";
+import { setChosenProduct, setChosenShop, setProductComment } from "./slice";
 import { serverApi } from "../../../lib/config";
-import { retrieveChosenProduct, retrieveChosenShop } from "./selector";
+import { retrieveChosenProduct, retrieveChosenShop, retrieveProductComment } from "./selector";
+import { Comment } from "../../../types/comment";
+import CommentApiService from "../../apiServices/commentApiService";
+import { CommentPage } from "./comment";
 
 const chosen_list = Array.from(Array(4).keys());
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
   setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
   setChosenShop: (data: Shop) => dispatch(setChosenShop(data)),
+  setProductComment: (data: Comment[]) => dispatch(setProductComment(data)),
 });
 
 // REDUX SELECTOR
@@ -51,14 +54,24 @@ const chosenShopRetriever = createSelector(
   })
 );
 
+const productCommentRetriever = createSelector(
+  retrieveProductComment,
+  (productComment) => ({
+    productComment,
+  })
+);
+
 export function ChosenProduct() {
   // INITIALIZATIONS
   const history = useHistory();
   let { product_id } = useParams<{ product_id: string }>();
   const { setChosenProduct, setChosenShop } = actionDispatch(useDispatch());
   const { chosenProduct } = useSelector(chosenProductRetriever);
-
   const { chosenShop } = useSelector(chosenShopRetriever);
+   const { productComment } = useSelector(productCommentRetriever);
+    const [value, setValue] = useState<any>(0.5);
+    const [textValue, setTextValue] = useState("");
+    const comment_text = useRef<any>();
 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -79,6 +92,17 @@ export function ChosenProduct() {
       console.log(`productRelatedProcess ERROR:`, err);
     }
   };
+  useEffect(() => {
+    const commentService = new CommentApiService();
+    commentService
+      .getTargetComment({
+        page: 1,
+        limit: 10,
+        comment_ref_id: product_id,
+      })
+      .then((data) => setProductComment(data))
+      .catch((err) => console.log(err));
+  }, [product_id, productRebuild]);
   const [imgChange, setImgChange] = useState(0);
   const wide_img = `${serverApi}/${chosenProduct?.product_images.filter(
     (ele: string) => chosenProduct?.product_images.indexOf(ele) === imgChange
@@ -151,27 +175,6 @@ export function ChosenProduct() {
                     />
                   );
                 })}
-
-                {/* <img
-                src="/shops/sneakers.jpg"
-                className="img_selected"
-                alt="product"
-              />
-              <img
-                src="/shops/sneakers.jpg"
-                className="img_selected"
-                alt="product"
-              />
-              <img
-                src="/shops/sneakers.jpg"
-                className="img_selected"
-                alt="product"
-              />
-              <img
-                src="/shops/sneakers.jpg"
-                className="img_selected"
-                alt="product"
-              /> */}
               </Box>
               <Box className="main_img_box">
                 <ReactImageMagnify
@@ -270,7 +273,7 @@ export function ChosenProduct() {
             </Stack>
           </Stack>
 
-          <Stack className="commet_box">
+          {/* <Stack className="commet_box">
             <h1 className="comment">Comment Part</h1>
             <Marginer
               direction="horizontal"
@@ -278,27 +281,32 @@ export function ChosenProduct() {
               width="100%"
               bg="#000"
             />
-            {Array.from(Array(5).keys()).map((ele, index) => {
+            {productComment.map((comment) => {
+              const auth = comment?.member_data;
+              const image_path = auth?.mb_image
+                ? `${serverApi}/${auth?.mb_image}`
+                : "/icons/user_avatar.jpg";
               return (
-                <Box className="comment_wrap">
+                <Box key={comment._id} className="comment_wrap">
                   <Box className="comment_txt">
                     <img
-                      src={"/shops/sneakers.jpg"}
+                      src={image_path}
                       alt="product_image"
                       className="img_comment"
                     />
-                    <span className="commenter">Commenter name</span>
-                    <p className="comment_time">2days ago</p>
+                    <span className="commenter">{auth?.mb_nick}</span>
+                    <p className="comment_time">2day</p>
                   </Box>
                   <Box className="comm_desc_box">
-                    <span className="comment_des_txt">Comment discription</span>
+                    <span className="comment_des_txt">{comment.content}</span>
                   </Box>
                 </Box>
               );
             })}
-          </Stack>
+          </Stack> */}
+          <CommentPage chosenProduct={chosenProduct} />
 
-          <Box className="input_frame">
+          {/* <Box className="input_frame">
             <div className="long_input">
               <label className="spec_label">Add comment</label>
               <textarea
@@ -314,18 +322,9 @@ export function ChosenProduct() {
             sx={{ mt: "25px", mb: "20px" }}
           >
             <Button variant="contained">Post</Button>
-          </Box>
+          </Box> */}
         </Container>
-        ;{/* })} */}
       </div>
     </div>
   );
 }
-
-//   {product_images.map((ele: string) => {
-//           const image_path = `${serverApi}/${ele}`;
-//           return (
-// );
-// }
-// );
-// }
