@@ -96,10 +96,10 @@ export function OneShop() {
   const [targetProductSearchObj, setTargetProductSearchObj] =
     useState<ProductSearchObj>({
       page: 1,
-      limit: 8,
+      limit: 9,
       order: "product_price",
       shop_mb_id: shop_id,
-      product_collection: "MEN"
+      product_collection: "all"
     });
 
   const [productRebuild, setProductRebuild] = useState<Date>(new Date());
@@ -275,252 +275,285 @@ export function OneShop() {
               flexDirection={"row"}
               justifyContent={"flex-start"}
               width={"100%"}
-              sx={{ mt: "65px", color: "black" }}
+              mt={"50px"}
+              gap={"40px"}
             >
-              <FormControl>
-                <p color="black">Sorting</p>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  defaultValue={"Price"}
-                >
-                  <FormControlLabel
-                    value="Price"
-                    control={<Radio />}
-                    label="Price"
-                    onClick={() => searchOrderHandler("product_price")}
-                  />
-                  <FormControlLabel
-                    value="Sale"
-                    control={<Radio />}
-                    label="Sale"
-                    onClick={() => searchOrderHandler("product_discount")}
-                  />
-                  <FormControlLabel
-                    value="tranding"
-                    control={<Radio />}
-                    label="Tranding"
-                    onClick={() => searchOrderHandler("product_likes")}
-                  />
-                  <FormControlLabel
-                    value="new"
-                    control={<Radio />}
-                    label="New"
-                    onClick={() => searchOrderHandler("createdAt")}
-                  />
-                </RadioGroup>
-              </FormControl>
-              <FormControl style={{ width: "180px", marginLeft: "30px" }}>
-                {" "}
-                <p>Filter</p>
-                <NativeSelect
-                  defaultValue={"all"}
-                  inputProps={{
-                    name: "Filter",
-                    id: "uncontrolled-native",
-                  }}
-                >
-                  <option
-                    value={"all"}
-                    onClick={() => searchCollectionHandler("all")}
+              <Stack
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"flex-start"}
+                alignItems={"center"}
+                width={"19%%"}
+                height={"400px"}
+                sx={{ color: "black",  }}
+                className="sorting_box"
+              >
+                <Box color="black" className="sortin_top">
+                  Default Sorting
+                </Box>
+                <FormControl className="filter_box">
+                  {/* <FormLabel id="demo-radio-buttons-group-label">
+                  Sorting
+                </FormLabel> */}
+                  <RadioGroup
+                    // row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                    defaultValue={"Price"}
                   >
-                    All
-                  </option>
-                  <option
-                    value={"MEN"}
-                    onClick={() => searchCollectionHandler("MEN")}
+                    <FormControlLabel
+                      value="Price"
+                      control={<Radio />}
+                      label="Price"
+                      onClick={() => searchOrderHandler("product_price")}
+                    />
+                    <FormControlLabel
+                      value="Sale"
+                      control={<Radio />}
+                      label="Sale"
+                      onClick={() => searchOrderHandler("product_discount")}
+                    />
+                    <FormControlLabel
+                      value="tranding"
+                      control={<Radio />}
+                      label="Trand"
+                      onClick={() => searchOrderHandler("product_likes")}
+                    />
+                    <FormControlLabel
+                      value="new"
+                      control={<Radio />}
+                      label="New"
+                      onClick={() => searchOrderHandler("createdAt")}
+                    />
+                  </RadioGroup>
+                </FormControl>
+                <Box color="black" className="sortin_top">
+                  Product Gender
+                </Box>
+                <FormControl className="filter_box">
+                  <RadioGroup
+                    // row
+                    aria-labelledby=""
+                    name="row-radio-buttons-group"
+                    defaultValue={"all"}
                   >
-                    Men
-                  </option>
-                  <option
-                    value={"WOMEN"}
-                    onClick={() => searchCollectionHandler("WOMEN")}
-                  >
-                    Women
-                  </option>
-                  <option
-                    value={"KIDS"}
-                    onClick={() => searchCollectionHandler("KIDS")}
-                  >
-                    Kids
-                  </option>
-                </NativeSelect>
-              </FormControl>
-            </Stack>
-
-            <Stack className={"single_shop_box"}>
-              <CssVarsProvider>
-                {targetProducts.map((product: Product) => {
-                  const image_path = `${serverApi}/${product.product_images[0]}`;
-                  return (
-                    <Card
-                      onClick={() => chosenProductHandler(product?._id)}
-                      key={product._id}
-                      className="img_carts"
-                      variant="outlined"
-                      sx={{ minHeight: 320, minWidth: 280, mb: "50px" }}
-                    >
-                      <CardOverflow>
-                        <AspectRatio ratio="1">
-                          <img src={image_path} alt="" />
-                        </AspectRatio>
-                        <Box
-                          sx={{
-                            position: "absolute",
-                            zIndex: 5,
-                            left: "0rem",
-                            transform: "translateY(50%)",
-                            color: "#ffffff",
-                            backgroundColor: "red",
-                            borderRadius: "0",
-                          }}
+                    <FormControlLabel
+                      value="all"
+                      control={<Radio />}
+                      label="All"
+                      onClick={() => searchCollectionHandler("all")}
+                    />
+                    <FormControlLabel
+                      value="MAN"
+                      control={<Radio />}
+                      label="Men"
+                      onClick={() => searchCollectionHandler("MEN")}
+                    />
+                    <FormControlLabel
+                      value="WOMEN"
+                      control={<Radio />}
+                      label="Women"
+                      onClick={() => searchCollectionHandler("WOMEN")}
+                    />
+                    <FormControlLabel
+                      value="KIDS"
+                      control={<Radio />}
+                      label="Kids"
+                      onClick={() => searchCollectionHandler("KIDS")}
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Stack>
+              <Stack
+                className="main_box"
+                display={"flex"}
+                flexDirection={"column"}
+                width={"72%"}
+                minHeight={"1000px"}
+                height={"auto"}
+              >
+                <Stack className={"single_shop_box"}>
+                  <CssVarsProvider>
+                    {targetProducts.map((product: Product) => {
+                      const image_path = `${serverApi}/${product.product_images[0]}`;
+                      return (
+                        <Card
+                          onClick={() => chosenProductHandler(product?._id)}
+                          key={product._id}
+                          className="img_carts"
+                          variant="outlined"
+                          sx={{ minHeight: 320, minWidth: 280, mb: "40px" }}
                         >
-                          {product.product_discount} %
-                        </Box>
-                        <IconButton
-                          aria-label="Like minimal phtography"
-                          size="md"
-                          variant="solid"
-                          color="neutral"
-                          className="like_hover"
-                          sx={{
-                            position: "absolute",
-                            zIndex: 2,
-                            borderRadius: "50%",
-                            right: "1rem",
-                            transform: "translateY(50%)",
-                            color: "rgba(0,0,0,.2)",
-                          }}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                          }}
-                        >
-                          <Favorite
-                            onClick={(e) => targetLikeTop(e, product._id)}
-                            style={{
-                              fill:
-                                product?.me_liked &&
-                                product?.me_liked[0]?.my_favorite
-                                  ? "red"
-                                  : "white",
-                            }}
-                          />
-                        </IconButton>
-                        <IconButton
-                          aria-label="Like minimal phtography"
-                          size="md"
-                          variant="solid"
-                          color="neutral"
-                          className="like_hover"
-                          sx={{
-                            position: "absolute",
-                            zIndex: 2,
-                            top: 45,
-                            borderRadius: "50%",
-                            right: "1rem",
-                            transform: "translateY(50%)",
-                            color: "rgba(0,0,0,.2)",
-                          }}
-                        >
-                          <LocalMallIcon style={{ color: "white" }} />
-                        </IconButton>
-                      </CardOverflow>
-                      <Typography
-                        level="h3"
-                        sx={{ fontSize: "md", lineHeight: "10px", mt: "1" }}
-                      >
-                        {product.product_name}
-                      </Typography>
-                      <Typography level="body-md" sx={{ lineHeight: "10px" }}>
-                        <Link
-                          href=""
-                          startDecorator={<AttachMoneyIcon />}
-                          textColor="neutral.700"
-                        >
-                          {product.product_price}
-                        </Link>
-                      </Typography>
-                      <Typography level="body-md" sx={{ lineHeight: "10px" }}>
-                        <Link
-                          href=""
-                          startDecorator={<ColorLensIcon />}
-                          textColor="neutral.700"
-                        >
-                          {product.product_colors}
-                        </Link>
-                      </Typography>
-                      <CardOverflow
-                        variant="soft"
-                        sx={{
-                          display: "flex",
-                          flexDirection: "row",
-                          gap: 1.5,
-                          py: 0.8,
-                          borderTop: ".4px solid",
-                          // bgcolor: "Background.level1",
-                          justifyContent: "flex-end",
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            fontWeight: "md",
-                            color: "neutral.400",
-                            display: "flex",
-                            alignItems: "center",
-                          }}
-                        >
-                          {product.product_views}
-                          <Visibility
-                            sx={{ fontSize: 20, marginLeft: "5px" }}
-                          />
-                        </Typography>
-                        <Box sx={{ width: 2, bgcolor: "divider" }}></Box>
-                        <Typography
-                          level="body-sm"
-                          sx={{
-                            fontSize: "md",
-                            color: "neutral.400",
-                            display: "flex",
-                            alignItems: "center",
-                          }}
-                        >
-                          <div
-                            ref={(element) =>
-                              (refs.current[product._id] = element)
-                            }
+                          <CardOverflow>
+                            <AspectRatio ratio="1">
+                              <img src={image_path} alt="" />
+                            </AspectRatio>
+                            <Box
+                              sx={{
+                                position: "absolute",
+                                zIndex: 5,
+                                left: "0rem",
+                                transform: "translateY(50%)",
+                                color: "#ffffff",
+                                backgroundColor: "red",
+                                borderRadius: "0",
+                              }}
+                            >
+                              {product.product_discount} %
+                            </Box>
+                            <IconButton
+                              aria-label="Like minimal phtography"
+                              size="md"
+                              variant="solid"
+                              color="neutral"
+                              className="like_hover"
+                              sx={{
+                                position: "absolute",
+                                zIndex: 2,
+                                borderRadius: "50%",
+                                right: "1rem",
+                                transform: "translateY(50%)",
+                                color: "rgba(0,0,0,.2)",
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                              }}
+                            >
+                              <Favorite
+                                onClick={(e) => targetLikeTop(e, product._id)}
+                                style={{
+                                  fill:
+                                    product?.me_liked &&
+                                    product?.me_liked[0]?.my_favorite
+                                      ? "red"
+                                      : "white",
+                                }}
+                              />
+                            </IconButton>
+                            <IconButton
+                              aria-label="Like minimal phtography"
+                              size="md"
+                              variant="solid"
+                              color="neutral"
+                              className="like_hover"
+                              sx={{
+                                position: "absolute",
+                                zIndex: 2,
+                                top: 45,
+                                borderRadius: "50%",
+                                right: "1rem",
+                                transform: "translateY(50%)",
+                                color: "rgba(0,0,0,.2)",
+                              }}
+                            >
+                              <LocalMallIcon style={{ color: "white" }} />
+                            </IconButton>
+                          </CardOverflow>
+                          <Typography
+                            level="h3"
+                            sx={{ fontSize: "md", lineHeight: "10px", mt: "1" }}
                           >
-                            {product.product_likes}
-                          </div>
-                          <Favorite sx={{ fontSize: 20, marginLeft: "5px" }} />
-                        </Typography>
-                      </CardOverflow>
-                    </Card>
-                  );
-                })}
-              </CssVarsProvider>
-            </Stack>
+                            {product.product_name}
+                          </Typography>
+                          <Typography
+                            level="body-md"
+                            sx={{ lineHeight: "10px" }}
+                          >
+                            <Link
+                              href=""
+                              startDecorator={<AttachMoneyIcon />}
+                              textColor="neutral.700"
+                            >
+                              {product.product_price}
+                            </Link>
+                          </Typography>
+                          <Typography
+                            level="body-md"
+                            sx={{ lineHeight: "10px" }}
+                          >
+                            <Link
+                              href=""
+                              startDecorator={<ColorLensIcon />}
+                              textColor="neutral.700"
+                            >
+                              {product.product_colors}
+                            </Link>
+                          </Typography>
+                          <CardOverflow
+                            variant="soft"
+                            sx={{
+                              display: "flex",
+                              flexDirection: "row",
+                              gap: 1.5,
+                              py: 0.8,
+                              borderTop: ".4px solid",
+                              // bgcolor: "Background.level1",
+                              justifyContent: "flex-end",
+                            }}
+                          >
+                            <Typography
+                              sx={{
+                                fontWeight: "md",
+                                color: "neutral.400",
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              {product.product_views}
+                              <Visibility
+                                sx={{ fontSize: 20, marginLeft: "5px" }}
+                              />
+                            </Typography>
+                            <Box sx={{ width: 2, bgcolor: "divider" }}></Box>
+                            <Typography
+                              level="body-sm"
+                              sx={{
+                                fontSize: "md",
+                                color: "neutral.400",
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <div
+                                ref={(element) =>
+                                  (refs.current[product._id] = element)
+                                }
+                              >
+                                {product.product_likes}
+                              </div>
+                              <Favorite
+                                sx={{ fontSize: 20, marginLeft: "5px" }}
+                              />
+                            </Typography>
+                          </CardOverflow>
+                        </Card>
+                      );
+                    })}
+                  </CssVarsProvider>
+                </Stack>
 
-            <Stack className="bottom_box">
-              <Pagination
-                count={
-                  targetProductSearchObj.page >= 3
-                    ? targetProductSearchObj.page + 1
-                    : 3
-                }
-                page={targetProductSearchObj.page}
-                renderItem={(item) => (
-                  <PaginationItem
-                    components={{
-                      previous: ArrowBackIcon,
-                      next: ArrowForwardIcon,
-                    }}
-                    {...item}
-                    color="secondary"
+                <Stack className="bottom_box">
+                  <Pagination
+                    count={
+                      targetProductSearchObj.page >= 3
+                        ? targetProductSearchObj.page + 1
+                        : 3
+                    }
+                    page={targetProductSearchObj.page}
+                    renderItem={(item) => (
+                      <PaginationItem
+                        components={{
+                          previous: ArrowBackIcon,
+                          next: ArrowForwardIcon,
+                        }}
+                        {...item}
+                        color="secondary"
+                      />
+                    )}
+                    onChange={handlePaginationChange}
                   />
-                )}
-                onChange={handlePaginationChange}
-              />
+                </Stack>
+              </Stack>
             </Stack>
           </Stack>
         </Container>

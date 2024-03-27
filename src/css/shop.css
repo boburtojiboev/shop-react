@@ -188,9 +188,9 @@
 }
 .shop_page .single_shop .single_shop_box {
   position: relative;
-  width: 1240px;
+  /* width: 1240px; */
   height: auto;
-  margin-top: 50px;
+  /* margin-top: 50px; */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

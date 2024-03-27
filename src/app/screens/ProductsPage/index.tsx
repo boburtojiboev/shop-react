@@ -41,7 +41,6 @@ import { Definer } from "../../../lib/Definer";
 import MemberApiService from "../../apiServices/memberApiService";
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 import { serverApi } from "../../../lib/config";
-import { CategoryCont } from "../../MaterialTheme/Category";
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -201,7 +200,6 @@ export function ProductsPage() {
                 </Box>
                 <FormControl className="filter_box">
                   <RadioGroup
-                    // onChange={handleSortingChange}
                     aria-labelledby=""
                     name="row-radio-buttons-group"
                     defaultValue={"product_price"}
@@ -243,7 +241,6 @@ export function ProductsPage() {
                 </Box>
                 <FormControl className="filter_box">
                   <RadioGroup
-                    // onChange={handleCollectionChange}
                     aria-labelledby=""
                     name="row-radio-buttons-group"
                     defaultValue={"all"}
@@ -279,7 +276,6 @@ export function ProductsPage() {
                 </Box>
                 <FormControl className="filter_box">
                   <RadioGroup
-                    // onChange={handleSizeChange}
                     aria-labelledby=""
                     name="row-radio-buttons-group"
                     defaultValue={"all"}
