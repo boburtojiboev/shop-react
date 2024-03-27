@@ -7,9 +7,10 @@ import { Order } from "./order";
 // REACT APP STATE//
 export interface AppRootState {
   homePage: HomePageState;
+  productPage: ProductPageState;
   shopPage: ShopPageState;
   eventPage: EventPageState;
-  productPage: ProductPageState;
+  ordersPage: OrdersPageState;
 }
 
 // HOME PAGE//

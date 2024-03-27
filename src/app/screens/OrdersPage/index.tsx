@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Container, Stack } from "@mui/material";
 import "../../../css/order.css";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -12,11 +12,31 @@ import Marginer from "../../components/marginer";
 import { NavbarOthers } from "../../components/header/others";
 import { Close, Home } from "@mui/icons-material";
 import { useHistory } from "react-router-dom";
+import { Order } from "../../../types/order";
+// REDUX
+import { useDispatch } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import {
+  setPausedOrders,
+  setProcessOrders,
+  setFinishedOrders,
+} from "../../screens/OrdersPage/slice";
+
+// REDUX SLICE
+const actionDispatch = (dispatch: Dispatch) => ({
+  setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
+  setProcessOrders: (data: Order[]) => dispatch(setProcessOrders(data)),
+  setFinishedOrders: (data: Order[]) => dispatch(setFinishedOrders(data)),
+});
 
 export function OrdersPage() {
   /** INITIALIZATION **/
+  const { setPausedOrders, setProcessOrders, setFinishedOrders } =
+    actionDispatch(useDispatch());
   const [value, setValue] = useState("1");
   const history = useHistory();
+
+  useEffect(() => {}, []);
 
   /** HANDLERS *****/
   const handleChange = (event: any, newValue: string) => {
