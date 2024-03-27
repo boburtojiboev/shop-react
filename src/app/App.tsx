@@ -109,8 +109,33 @@ function App() {
      }
    };
     console.log("onAdd:::", onAdd);
-    const onRemove = () => {};
-    const onDelete = () => {};
+    const onRemove = (item: CartItem) => {
+      const item_data: any = cartItems.find(
+        (ele: CartItem) => ele._id === item._id
+      );
+      if (item_data.quantity === 1) {
+        const cart_updated = cartItems.filter(
+          (ele: CartItem) => ele._id !== item._id
+        );
+        setCartItems(cart_updated);
+        localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+      } else {
+        const cart_updated = cartItems.map((ele: CartItem) =>
+          ele._id === item._id
+            ? { ...item_data, quantity: item_data.quantity - 1 }
+            : ele
+        );
+        setCartItems(cart_updated);
+        localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+      }
+    };
+    const onDelete = (item: CartItem) => {
+      const cart_updated = cartItems.filter(
+        (ele: CartItem) => ele._id !== item._id
+      );
+      setCartItems(cart_updated);
+      localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+    };
     const onDeleteAll = () => {};
   return (
     <Router>
@@ -127,6 +152,8 @@ function App() {
           verifiedMemberData={verifiedMemberData}
           cartItems={cartItems}
           onAdd={onAdd}
+          onRemove={onRemove}
+          onDelete={onDelete}
         />
       }
       {/* A <Switch> looks through its children <Route>s and

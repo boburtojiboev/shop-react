@@ -88,6 +88,8 @@ export function Header(props: any) {
               className="basket_box"
               cartItems={props.cartItems}
               onAdd={props.onAdd}
+              onRemove={props.onRemove}
+              onDelete={props.onDelete}
             />
 
             {!props.verifiedMemberData ? (
