@@ -20,7 +20,7 @@ import { Definer } from "../../../lib/Definer";
 import { sweetFailureProvider, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
-  setProductReviews: (data: Comment[]) => dispatch(setProductComment(data)),
+  setProductComment: (data: Comment[]) => dispatch(setProductComment(data)),
 });
 // REDUX SELECTOR
 const productCommentRetriever = createSelector(
@@ -32,7 +32,7 @@ const productCommentRetriever = createSelector(
 
 export function CommentPage({ chosenProduct }: any) {
   /*INITIALIZATIONS*/
-  const { setProductReviews } = actionDispatch(useDispatch());
+  const { setProductComment } = actionDispatch(useDispatch());
   const { productComment } = useSelector(productCommentRetriever);
   const product_id = chosenProduct?._id;
   const [value, setValue] = useState<any>(0.5);
@@ -47,7 +47,7 @@ export function CommentPage({ chosenProduct }: any) {
         limit: 10,
         comment_ref_id: product_id,
       })
-      .then((data) => setProductReviews(data))
+      .then((data) => setProductComment(data))
       .catch((err) => console.log(err));
   }, [product_id, productRebuild]);
   /*HANDLERS*/
@@ -91,7 +91,6 @@ export function CommentPage({ chosenProduct }: any) {
                   />
                   <span className="commenter">{auth?.mb_nick}</span>
                   <p className="comment_time">
-                    {" "}
                     <Moment fromNow>{comment.createdAt}</Moment>
                   </p>
                 </Box>

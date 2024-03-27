@@ -28,6 +28,23 @@ class EventApiService {
       throw err;
     }
   }
+
+  async getChosenEvent(event_id: string) {
+    try {
+      const url = `/Events/${event_id}`,
+        result = await axios.get(this.path + url, {
+          withCredentials: true,
+        });
+      assert.ok(result, Definer.general_err1);
+
+      console.log("state:", result.data.satate);
+      const event: Event = result.data.data;
+      return event;
+    } catch (err: any) {
+      console.log(`ERROR ::: getChosenEvent ${err.message}`);
+      throw err;
+    }
+  }
 }
 
 export default EventApiService;

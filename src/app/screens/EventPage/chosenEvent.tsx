@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Checkbox, Container, Stack } from "@mui/material";
 import { Close, Home, RemoveRedEye } from "@mui/icons-material";
 import Marginer from "../../components/marginer";
@@ -7,11 +7,89 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import ReactImageMagnify from "react-image-magnify";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+
+// REDUX
+import { createSelector } from "reselect";
+import { setChosenEvent, setChosenShop,} from "./slice";
+import { serverApi } from "../../../lib/config";
+import { retrieveChosenEvent, retrieveChosenShop, } from "./selector";
+import { Dispatch } from "@reduxjs/toolkit";
+import { Shop } from "../../../types/user";
+import { useDispatch, useSelector } from "react-redux";
+import EventApiService from "../../apiServices/eventApiService";
+import { Event } from "../../../types/event";
+import ShopApiService from "../../apiServices/shopApiService";
+import assert from "assert";
+import { Definer } from "../../../lib/Definer";
+import MemberApiService from "../../apiServices/memberApiService";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import { EventCommentPage } from "./commentEvent";
+// REDUX SLICE
+const actionDispatch = (dispatch: Dispatch) => ({
+  setChosenEvent: (data: Event) => dispatch(setChosenEvent(data)),
+  setChosenShop: (data: Shop) => dispatch(setChosenShop(data)),
+});
+// REDUX SELECTOR
+const chosenEventRetriever = createSelector(
+  retrieveChosenEvent,
+  (chosenEvent) => ({
+    chosenEvent,
+  })
+);
+const chosenShopRetriever = createSelector(
+  retrieveChosenShop,
+  (chosenShop) => ({
+    chosenShop,
+  })
+);
 
 export function ChosenEvent() {
+  // INITIALIZATIONS
   const history = useHistory();
+  let { event_id } = useParams<{ event_id: string }>();
+  const { setChosenEvent, setChosenShop } = actionDispatch(useDispatch());
+  const { chosenEvent } = useSelector(chosenEventRetriever);
+  const { chosenShop } = useSelector(chosenShopRetriever);
+
+  const [eventRebuild, setEventRebuild] = useState<Date>(new Date());
+
+  const eventRelatedProcess = async () => {
+    try {
+      const eventService = new EventApiService();
+      const event: Event = await eventService.getChosenEvent(event_id);
+      setChosenEvent(event);
+
+      const shopService = new ShopApiService();
+      const shop = await shopService.getChosenShop(event.shop_mb_id);
+      setChosenShop(shop);
+    } catch (err) {
+      console.log(`eventRelatedProcess ERROR:`, err);
+    }
+  };
+  /** HANDLERS */
+  const targetLikeEvent = async (e: any) => {
+    try {
+      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+
+      const memberService = new MemberApiService(),
+        like_result: any = await memberService.memberLikeTarget({
+          like_ref_id: e.target.id,
+          group_type: "event",
+        });
+      assert.ok(like_result, Definer.general_err1);
+
+      await sweetTopSmallSuccessAlert("success", 700, false);
+      setEventRebuild(new Date());
+    } catch (err: any) {
+      console.log("targetLikeEvent, ERROR:", err);
+      sweetErrorHandling(err).then();
+    }
+  };
+
+  useEffect(() => {
+    eventRelatedProcess().then();
+  }, [eventRebuild]);
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   return (
     <div>
@@ -35,20 +113,25 @@ export function ChosenEvent() {
         <Container>
           <Stack className="event_container">
             <Stack className="chosen_event_wrap">
-              <img
-                src="/shops/sneakers.jpg"
-                className="img_selec"
-                alt="product"
-              />
+              {chosenEvent?.event_images.map((ele: string) => {
+                const image_path = `${serverApi}/${ele}`;
+                return (
+                  <img src={image_path} className="img_selec" alt="product" />
+                );
+              })}
             </Stack>
 
             <Stack className="event_info_container">
-              <strong className="event_inf">Event Name</strong>
-              <span className="event_desc">Event holder</span>
-              <span className="event_desc">Event location</span>
-              <span className="event_desc">Event time</span>
+              <strong className="event_inf"> {chosenEvent?.event_name}</strong>
+              <span className="event_desc"> Holder: {chosenShop?.mb_nick}</span>
+              <span className="event_desc">
+                Address: {chosenEvent?.event_address}
+              </span>
+              <span className="event_desc">
+                Time: {chosenEvent?.event_time}
+              </span>
               <p className="pro_desc_info">
-                Description: wow that would be great open caremony
+                Description: {chosenEvent?.event_description}
               </p>
               <Box className="rating_box">
                 <div
@@ -62,18 +145,24 @@ export function ChosenEvent() {
                     {...label}
                     icon={<FavoriteBorder />}
                     checkedIcon={<Favorite style={{ color: "red" }} />}
-                    checked={true}
+                    id={chosenEvent?._id}
+                    onClick={targetLikeEvent}
+                    checked={
+                      chosenEvent?.me_liked &&
+                      chosenEvent?.me_liked[0]?.my_favorite
+                    }
                   />
-                  <span>98</span>
+                  <span>{chosenEvent?.event_likes}</span>
                 </div>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <RemoveRedEye sx={{ mr: "10px" }} />
-                  <span>1000</span>
+                  <span>{chosenEvent?.event_views}</span>
                 </div>
               </Box>
             </Stack>
           </Stack>
-          <Stack className="commet_box">
+          <EventCommentPage chosenEvent={chosenEvent} />
+          {/* <Stack className="commet_box">
             <h1 className="comment">Comment Part</h1>
             <Marginer
               direction="horizontal"
@@ -117,7 +206,7 @@ export function ChosenEvent() {
             sx={{ mt: "25px", mb: "20px" }}
           >
             <Button variant="contained">Post</Button>
-          </Box>
+          </Box> */}
         </Container>
       </div>
     </div>

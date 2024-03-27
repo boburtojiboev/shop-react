@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Checkbox, Container, Stack } from "@mui/material";
 import { Close, Home, RemoveRedEye } from "@mui/icons-material";
 import Marginer from "../../components/marginer";
@@ -24,21 +24,15 @@ import {
 } from "../../../lib/sweetAlert";
 // REDUX
 import { createSelector } from "reselect";
-import { setChosenProduct, setChosenShop, setProductComment } from "./slice";
+import { setChosenProduct, setChosenShop,} from "./slice";
 import { serverApi } from "../../../lib/config";
-import { retrieveChosenProduct, retrieveChosenShop, retrieveProductComment } from "./selector";
-import { Comment } from "../../../types/comment";
-import CommentApiService from "../../apiServices/commentApiService";
+import { retrieveChosenProduct, retrieveChosenShop, } from "./selector";
 import { CommentPage } from "./comment";
-
-const chosen_list = Array.from(Array(4).keys());
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
   setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
   setChosenShop: (data: Shop) => dispatch(setChosenShop(data)),
-  setProductComment: (data: Comment[]) => dispatch(setProductComment(data)),
 });
-
 // REDUX SELECTOR
 const chosenProductRetriever = createSelector(
   retrieveChosenProduct,
@@ -46,18 +40,10 @@ const chosenProductRetriever = createSelector(
     chosenProduct,
   })
 );
-
 const chosenShopRetriever = createSelector(
   retrieveChosenShop,
   (chosenShop) => ({
     chosenShop,
-  })
-);
-
-const productCommentRetriever = createSelector(
-  retrieveProductComment,
-  (productComment) => ({
-    productComment,
   })
 );
 
@@ -68,10 +54,6 @@ export function ChosenProduct() {
   const { setChosenProduct, setChosenShop } = actionDispatch(useDispatch());
   const { chosenProduct } = useSelector(chosenProductRetriever);
   const { chosenShop } = useSelector(chosenShopRetriever);
-   const { productComment } = useSelector(productCommentRetriever);
-    const [value, setValue] = useState<any>(0.5);
-    const [textValue, setTextValue] = useState("");
-    const comment_text = useRef<any>();
 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -92,17 +74,6 @@ export function ChosenProduct() {
       console.log(`productRelatedProcess ERROR:`, err);
     }
   };
-  useEffect(() => {
-    const commentService = new CommentApiService();
-    commentService
-      .getTargetComment({
-        page: 1,
-        limit: 10,
-        comment_ref_id: product_id,
-      })
-      .then((data) => setProductComment(data))
-      .catch((err) => console.log(err));
-  }, [product_id, productRebuild]);
   const [imgChange, setImgChange] = useState(0);
   const wide_img = `${serverApi}/${chosenProduct?.product_images.filter(
     (ele: string) => chosenProduct?.product_images.indexOf(ele) === imgChange
@@ -273,56 +244,8 @@ export function ChosenProduct() {
             </Stack>
           </Stack>
 
-          {/* <Stack className="commet_box">
-            <h1 className="comment">Comment Part</h1>
-            <Marginer
-              direction="horizontal"
-              height="1"
-              width="100%"
-              bg="#000"
-            />
-            {productComment.map((comment) => {
-              const auth = comment?.member_data;
-              const image_path = auth?.mb_image
-                ? `${serverApi}/${auth?.mb_image}`
-                : "/icons/user_avatar.jpg";
-              return (
-                <Box key={comment._id} className="comment_wrap">
-                  <Box className="comment_txt">
-                    <img
-                      src={image_path}
-                      alt="product_image"
-                      className="img_comment"
-                    />
-                    <span className="commenter">{auth?.mb_nick}</span>
-                    <p className="comment_time">2day</p>
-                  </Box>
-                  <Box className="comm_desc_box">
-                    <span className="comment_des_txt">{comment.content}</span>
-                  </Box>
-                </Box>
-              );
-            })}
-          </Stack> */}
           <CommentPage chosenProduct={chosenProduct} />
 
-          {/* <Box className="input_frame">
-            <div className="long_input">
-              <label className="spec_label">Add comment</label>
-              <textarea
-                placeholder={"comment"}
-                name={"description"}
-                className={"spec_textarea mb_description"}
-              />
-            </div>
-          </Box>
-          <Box
-            display="flex"
-            justifyContent={"flex-end"}
-            sx={{ mt: "25px", mb: "20px" }}
-          >
-            <Button variant="contained">Post</Button>
-          </Box> */}
         </Container>
       </div>
     </div>

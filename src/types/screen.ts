@@ -7,6 +7,7 @@ import {Comment} from "./comment"
 export interface AppRootState {
   homePage: HomePageState;
   shopPage: ShopPageState;
+  eventPage: EventPageState;
 }
 
 // HOME PAGE//
@@ -25,4 +26,12 @@ export interface ShopPageState {
   targetProducts: Product[];
   chosenProduct: Product | null;
   productComment: Comment[];
+}
+
+// Event PAGE//
+export interface EventPageState {
+  targetEvents: Event[];
+  chosenEvent: Event | null;
+  eventComment: Comment[];
+  chosenShop: Shop | null;
 }

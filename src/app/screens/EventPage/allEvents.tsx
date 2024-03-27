@@ -2,9 +2,56 @@ import { Box, Container, Stack } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Close, Home } from "@mui/icons-material";
 import { useHistory } from "react-router-dom";
+import { Event } from "../../../types/event";
+
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { Dispatch } from "@reduxjs/toolkit";
+import { SearchObj } from "../../../types/others";
+import { serverApi } from "../../../lib/config";
+import { retrieveTargetEvents } from "./selector";
+import { setTargetEvents } from "./slice";
+import { useEffect, useState } from "react";
+import EventApiService from "../../apiServices/eventApiService";
+
+// REDUX SLICE
+const actionDispatch = (dispatch: Dispatch) => ({
+  setTargetEvents: (data: Event[]) =>
+    dispatch(setTargetEvents(data)),
+});
+// REDUX SELECTOR
+const targetEventsRetriever = createSelector(
+  retrieveTargetEvents,
+  (targetEvents) => ({
+    targetEvents,
+  })
+);
 
 export function AllEvents() {
+  // INITIALIZATIONS
   const history = useHistory();
+  const { setTargetEvents } = actionDispatch(useDispatch());
+  const { targetEvents } = useSelector(targetEventsRetriever);
+  const [targetSearchObject,] = useState<SearchObj>({
+    page: 1,
+    limit: 20,
+    order: "createdAt",
+  });
+
+  useEffect(() => {
+    const shopService = new EventApiService();
+    shopService
+      .getEvents(targetSearchObject)
+      .then((data) => setTargetEvents(data))
+      .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [targetSearchObject]);
+
+  /** HANDLERS */
+  const chosenEventHandler = (id: string) => {
+    history.push(`/event/${id}`);
+  };
   return (
     <div className="all_event">
       <Container>
@@ -29,15 +76,14 @@ export function AllEvents() {
             width={"100%"}
             marginBottom={"60px"}
           >
-            {Array.from(Array(20).keys()).map((ele, index) => {
+            {targetEvents.map((ele: Event) => {
+              const image_path = `${serverApi}/${ele.event_images[0]}`;
               return (
-                <Box className="review_box_review" key={`${index}`}>
+                <Box className="review_box_review" key={ele._id}>
                   <Box display={"flex"} justifyContent={"center"}>
-                    <img src="/shops/open.jpeg" className="review_img_review" />
+                    <img src={image_path} className="review_img_review" alt=""/>
                   </Box>
-                  <span className="review_name_review">
-                    Nike opening ceremony{" "}
-                  </span>
+                  <span className="review_name_review">{ele.event_name}</span>
                   <span className="review_prof_rev">
                     <LocationOnIcon
                       style={{
@@ -47,9 +93,12 @@ export function AllEvents() {
                         height: "35px",
                       }}
                     />
-                    Busan South Korea
+                    {ele.event_address}
                   </span>
-                  <Box className="details_box">
+                  <Box
+                    onClick={() => chosenEventHandler(ele._id)}
+                    className="details_box"
+                  >
                     <p>Details</p>
                   </Box>
                 </Box>
