@@ -39,7 +39,7 @@ const saleProductsRetriever = createSelector(
   })
 );
 
-export function BigSales() {
+export function BigSales(props: any) {
   // Initialization
   const history = useHistory();
   const { setSaleProducts } = actionDispatch(useDispatch());
@@ -187,6 +187,10 @@ export function BigSales() {
                           right: "1rem",
                           transform: "translateY(50%)",
                           color: "rgba(0,0,0,.2)",
+                        }}
+                        onClick={(e) => {
+                          props.onAdd(product);
+                          e.stopPropagation();
                         }}
                       >
                         <LocalMallIcon style={{ color: "white" }} />

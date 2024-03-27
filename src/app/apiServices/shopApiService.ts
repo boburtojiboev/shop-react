@@ -16,9 +16,8 @@ class ShopApiService {
     try {
       const url = `/shops?order=mb_likes&page=1&limit=8`,
         result = await axios.get(this.path + url, { withCredentials: true });
-      assert.ok(result, Definer.general_err1);
-
-      console.log("state:", result.data.state);
+      assert.ok(result?.data, Definer.general_err1);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
       const top_shops: Shop[] = result.data.data;
       return top_shops;
     } catch (err: any) {

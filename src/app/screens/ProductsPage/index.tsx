@@ -55,7 +55,7 @@ const allProductsRetriever = createSelector(
 );
 
 
-export function ProductsPage() {
+export function ProductsPage(props: any) {
   // INITIALIZATIONS
   const history = useHistory();
   const refs: any = useRef([]);
@@ -441,6 +441,10 @@ export function ProductsPage() {
                                 right: "1rem",
                                 transform: "translateY(50%)",
                                 color: "rgba(0,0,0,.2)",
+                              }}
+                              onClick={(e) => {
+                                props.onAdd(product);
+                                e.stopPropagation();
                               }}
                             >
                               <LocalMallIcon style={{ color: "white" }} />

@@ -136,7 +136,10 @@ function App() {
       setCartItems(cart_updated);
       localStorage.setItem("cart_data", JSON.stringify(cart_updated));
     };
-    const onDeleteAll = () => {};
+    const onDeleteAll = () => {
+      setCartItems([]);
+      localStorage.removeItem("cart_data");
+    };
   return (
     <Router>
       {
@@ -154,13 +157,14 @@ function App() {
           onAdd={onAdd}
           onRemove={onRemove}
           onDelete={onDelete}
+          onDeleteAll={onDeleteAll}
         />
       }
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
       <Switch>
         <Route path="/products">
-          <ProductsPage />
+          <ProductsPage onAdd={onAdd} />
         </Route>
         <Route path="/store">
           <ShopPage onAdd={onAdd} />
@@ -184,7 +188,7 @@ function App() {
           <LoginPage />
         </Route>
         <Route path="/">
-          <HomePage />
+          <HomePage onAdd={onAdd} />
         </Route>
       </Switch>
 

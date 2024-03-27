@@ -39,7 +39,7 @@ const bestProductsRetriever = createSelector(
   })
 );
 
-export function BestProducts() {
+export function BestProducts(props: any) {
   // Initialization
   const history = useHistory();
   const { setBestProducts } = actionDispatch(useDispatch());
@@ -184,6 +184,10 @@ export function BestProducts() {
                           right: "1rem",
                           transform: "translateY(50%)",
                           color: "rgba(0,0,0,.2)",
+                        }}
+                        onClick={(e) => {
+                          props.onAdd(product);
+                          e.stopPropagation();
                         }}
                       >
                         <LocalMallIcon style={{ color: "white" }} />
