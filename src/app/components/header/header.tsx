@@ -59,11 +59,13 @@ export function Header(props: any) {
                 Event
               </NavLink>
             </Box>
+            {/* {props.verifiedMemberData ? ( */}
             <Box className="hover-line" onClick={props.setPath}>
               <NavLink to="/orders" activeClassName="underline">
                 Orders
               </NavLink>
             </Box>
+            {/* ) : null} */}
             <Box className="hover-line" onClick={props.setPath}>
               <NavLink to="/community" activeClassName="underline">
                 Community
@@ -82,7 +84,11 @@ export function Header(props: any) {
               </NavLink>
             </Box>
 
-            <Basket className="basket_box" />
+            <Basket
+              className="basket_box"
+              cartItems={props.cartItems}
+              onAdd={props.onAdd}
+            />
 
             {!props.verifiedMemberData ? (
               <Box className="login">

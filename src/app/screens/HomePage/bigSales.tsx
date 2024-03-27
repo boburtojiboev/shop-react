@@ -49,7 +49,13 @@ export function BigSales() {
   useEffect(() => {
     const productService = new ProductApiService();
     productService
-      .getProducts({ order: "product_discount", page: 1, limit: 4 })
+      .getAllProducts({
+        order: "product_discount",
+        page: 1,
+        limit: 4,
+        product_size: "all",
+        product_collection: "all",
+      })
       .then((data) => {
         setSaleProducts(data);
       })

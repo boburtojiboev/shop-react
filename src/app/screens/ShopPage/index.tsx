@@ -6,17 +6,17 @@ import { AllShops } from "./allShops";
 import "../../../css/shop.css";
 import { NavbarShop } from "../../components/header/shop";
 
-export function ShopPage() {
+export function ShopPage(props: any) {
   let shop = useRouteMatch();
   return (
     <div className="shop_page">
-      <NavbarShop/>
+      <NavbarShop />
       <Switch>
         <Route path={`${shop.path}/product/:product_id`}>
-          <ChosenProduct />
+          <ChosenProduct onAdd={props.onAdd} />
         </Route>
         <Route path={`${shop.path}/:shop_id`}>
-          <OneShop />
+          <OneShop onAdd={props.onAdd} />
         </Route>
         <Route path={`${shop.path}`}>
           <AllShops />

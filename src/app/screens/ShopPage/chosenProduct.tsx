@@ -47,7 +47,7 @@ const chosenShopRetriever = createSelector(
   })
 );
 
-export function ChosenProduct() {
+export function ChosenProduct(props: any) {
   // INITIALIZATIONS
   const history = useHistory();
   let { product_id } = useParams<{ product_id: string }>();
@@ -234,6 +234,9 @@ export function ChosenProduct() {
                       <Button
                         style={{ backgroundColor: "#f0b512;" }}
                         variant="contained"
+                        onClick={() => {
+                          props.onAdd(chosenProduct);
+                        }}
                       >
                         Add to box
                       </Button>
@@ -245,7 +248,6 @@ export function ChosenProduct() {
           </Stack>
 
           <CommentPage chosenProduct={chosenProduct} />
-
         </Container>
       </div>
     </div>

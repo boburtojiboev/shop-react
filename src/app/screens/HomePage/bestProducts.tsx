@@ -49,7 +49,13 @@ export function BestProducts() {
   useEffect(() => {
     const productService = new ProductApiService();
     productService
-      .getProducts({ order: "product_likes", page: 1, limit: 4 })
+      .getAllProducts({
+        order: "product_likes",
+        page: 1,
+        limit: 4,
+        product_size: "all",
+        product_collection: "all",
+      })
       .then((data) => {
         setBestProducts(data);
       })

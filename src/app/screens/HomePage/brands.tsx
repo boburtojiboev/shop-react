@@ -91,12 +91,12 @@ export function Brands() {
           >
             <Swiper
               className={"brand_info swiper_wrapper"}
-              spaceBetween={0}
+              spaceBetween={20}
               slidesPerView={"auto"}
               loop={true}
               centeredSlides={true}
               autoplay={{
-                delay: 3000,
+                delay: 1000,
                 disableOnInteraction: false,
               }}
               modules={[Autoplay]}

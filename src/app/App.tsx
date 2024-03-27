@@ -24,7 +24,9 @@ import {
 } from "../lib/sweetAlert";
 import { Definer } from "../lib/Definer";
 import MemberApiService from "./apiServices/memberApiService";
-// import "../app/apiServices/verify";
+import "../app/apiServices/verify";
+import { CartItem } from "../types/others";
+import { Product } from "../types/product";
 
 function App() {
   // INITIALIZATIONS
@@ -38,6 +40,10 @@ function App() {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+
+     const cartJson: any = localStorage.getItem("cart_data");
+     const current_cart: CartItem[] = JSON.parse(cartJson) ?? [];
+     const [cartItems, setCartItems] = useState<CartItem[]>(current_cart);
 
     useEffect(() => {
       console.log("=== useEffect: App ===");
@@ -77,6 +83,35 @@ function App() {
       sweetFailureProvider(Definer.general_err1);
     }
   };
+   const onAdd = (product: Product) => {
+     console.log("product:", product);
+     const exist = cartItems.find((item: CartItem) => item._id === product._id);
+     if (exist) {
+       const cart_updated = cartItems.map((item: CartItem) =>
+         item._id === product._id
+           ? { ...exist, quantity: exist.quantity + 1 }
+           : item
+       );
+       setCartItems(cart_updated);
+       localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+     } else {
+       const new_item: CartItem = {
+         _id: product._id,
+         quantity: 1,
+         sale: product.product_discount,
+         name: product.product_name,
+         price: product.product_price,
+         image: product.product_images[0],
+       };
+       const cart_updated = [...cartItems, { ...new_item }];
+       setCartItems(cart_updated);
+       localStorage.setItem("cart_data", JSON.stringify(cart_updated));
+     }
+   };
+    console.log("onAdd:::", onAdd);
+    const onRemove = () => {};
+    const onDelete = () => {};
+    const onDeleteAll = () => {};
   return (
     <Router>
       {
@@ -90,6 +125,8 @@ function App() {
           handleCloseLogOut={handleCloseLogOut}
           handleLogOutRequest={handleLogOutRequest}
           verifiedMemberData={verifiedMemberData}
+          cartItems={cartItems}
+          onAdd={onAdd}
         />
       }
       {/* A <Switch> looks through its children <Route>s and
@@ -99,7 +136,7 @@ function App() {
           <ProductsPage />
         </Route>
         <Route path="/store">
-          <ShopPage />
+          <ShopPage onAdd={onAdd} />
         </Route>
         <Route path="/event">
           <EventPage />

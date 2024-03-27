@@ -81,7 +81,7 @@ const targetProductsRetriever = createSelector(
   })
 );
 
-export function OneShop() {
+export function OneShop(props: any) {
   // INITIALIZATIONS
   const history = useHistory();
   const refs: any = useRef([]);
@@ -444,6 +444,10 @@ export function OneShop() {
                                 right: "1rem",
                                 transform: "translateY(50%)",
                                 color: "rgba(0,0,0,.2)",
+                              }}
+                              onClick={(e) => {
+                                props.onAdd(product);
+                                e.stopPropagation();
                               }}
                             >
                               <LocalMallIcon style={{ color: "white" }} />
