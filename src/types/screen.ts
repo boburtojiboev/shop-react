@@ -2,6 +2,7 @@ import { Event } from "./event";
 import { Product } from "./product";
 import { Shop } from "./user";
 import {Comment} from "./comment"
+import { Order } from "./order";
 
 // REACT APP STATE//
 export interface AppRootState {
@@ -40,4 +41,11 @@ export interface EventPageState {
   chosenEvent: Event | null;
   eventComment: Comment[];
   chosenShop: Shop | null;
+}
+
+// ORDERS PAGE//
+export interface OrdersPageState {
+  pausedOrders: Order[];
+  processOrders: Order[];
+  finishedOrders: Order[];
 }
