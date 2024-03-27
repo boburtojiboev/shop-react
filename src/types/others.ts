@@ -12,6 +12,14 @@ export interface ProductSearchObj {
   product_collection?: string;
 }
 
+export interface AllProductsSearchObj {
+  page: number;
+  limit: number;
+  order: string;
+  product_size: any;
+  product_collection?: string;
+}
+
 export interface CommentSearchObj {
   page: number;
   limit: number;

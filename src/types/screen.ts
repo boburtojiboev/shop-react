@@ -8,6 +8,7 @@ export interface AppRootState {
   homePage: HomePageState;
   shopPage: ShopPageState;
   eventPage: EventPageState;
+  productPage: ProductPageState;
 }
 
 // HOME PAGE//
@@ -16,6 +17,11 @@ export interface HomePageState {
   saleProducts: Product[];
   newsEvents: Event[];
   topShops: Shop[];
+}
+
+// Product PAGE//
+export interface ProductPageState {
+  allProducts: Product[];
 }
 
 // SHOP PAGE//

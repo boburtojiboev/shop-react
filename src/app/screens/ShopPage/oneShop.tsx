@@ -172,7 +172,10 @@ export function OneShop() {
       sweetErrorHandling(err).then();
     }
   };
-
+ const handlePaginationChange = (event: any, value: number) => {
+   targetProductSearchObj.page = value;
+   setTargetProductSearchObj({ ...targetProductSearchObj });
+ };
   return (
     <div className="single_div">
       <div className="mobile_version">
@@ -312,15 +315,15 @@ export function OneShop() {
                 {" "}
                 <p>Filter</p>
                 <NativeSelect
-                  defaultValue={"All"}
+                  defaultValue={"all"}
                   inputProps={{
                     name: "Filter",
                     id: "uncontrolled-native",
                   }}
                 >
                   <option
-                    value={"All"}
-                    onClick={() => searchCollectionHandler("All")}
+                    value={"all"}
+                    onClick={() => searchCollectionHandler("all")}
                   >
                     All
                   </option>
@@ -500,8 +503,12 @@ export function OneShop() {
 
             <Stack className="bottom_box">
               <Pagination
-                count={3}
-                page={1}
+                count={
+                  targetProductSearchObj.page >= 3
+                    ? targetProductSearchObj.page + 1
+                    : 3
+                }
+                page={targetProductSearchObj.page}
                 renderItem={(item) => (
                   <PaginationItem
                     components={{
@@ -512,6 +519,7 @@ export function OneShop() {
                     color="secondary"
                   />
                 )}
+                onChange={handlePaginationChange}
               />
             </Stack>
           </Stack>

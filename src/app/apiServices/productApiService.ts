@@ -2,7 +2,7 @@ import axios from "axios";
 import assert from "assert";
 import { serverApi } from "../../lib/config";
 import { Definer } from "../../lib/Definer";
-import { ProductSearchObj } from "../../types/others";
+import { AllProductsSearchObj, ProductSearchObj } from "../../types/others";
 import { Product } from "../../types/product";
 
 class ProductApiService {
@@ -42,6 +42,22 @@ class ProductApiService {
       return product;
     } catch (err: any) {
       console.log(`ERROR ::: getChosenProduct ${err.message}`);
+      throw err;
+    }
+  }
+  async getAllProducts(data: AllProductsSearchObj) {
+    try {
+      const url = "/productsall",
+        result = await axios.post(this.path + url, data, {
+          withCredentials: true,
+        });
+      assert.ok(result, Definer.general_err1);
+
+      console.log("state:", result.data.satate);
+      const products: Product[] = result.data.data;
+      return products;
+    } catch (err: any) {
+      console.log(`ERROR ::: getBestProducts ${err.message}`);
       throw err;
     }
   }
