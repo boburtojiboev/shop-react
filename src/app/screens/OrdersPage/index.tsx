@@ -21,6 +21,7 @@ import {
   setProcessOrders,
   setFinishedOrders,
 } from "../../screens/OrdersPage/slice";
+import OrderApiService from "../../apiServices/orderApiService";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -29,14 +30,28 @@ const actionDispatch = (dispatch: Dispatch) => ({
   setFinishedOrders: (data: Order[]) => dispatch(setFinishedOrders(data)),
 });
 
-export function OrdersPage() {
+export function OrdersPage(props: any) {
   /** INITIALIZATION **/
   const { setPausedOrders, setProcessOrders, setFinishedOrders } =
     actionDispatch(useDispatch());
   const [value, setValue] = useState("1");
   const history = useHistory();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const orderService = new OrderApiService();
+    orderService
+      .getMyOrders("paused")
+      .then((data) => setPausedOrders(data))
+      .catch((err) => console.log(err));
+    orderService
+      .getMyOrders("process")
+      .then((data) => setProcessOrders(data))
+      .catch((err) => console.log(err));
+    orderService
+      .getMyOrders("finished")
+      .then((data) => setFinishedOrders(data))
+      .catch((err) => console.log(err));
+  }, [props.orderRebuild, setFinishedOrders,setPausedOrders,setProcessOrders]);
 
   /** HANDLERS *****/
   const handleChange = (event: any, newValue: string) => {
@@ -81,11 +96,13 @@ export function OrdersPage() {
                   <img
                     src="/auth/default_user.svg"
                     className="order_user_avatar"
+                    alt=""
                   />
                   <Box className="order_user_icon_box">
                     <img
                       src="/icons/user_icon.svg"
                       className="order_user_prof_img"
+                      alt=""
                     />
                   </Box>
                 </Box>
@@ -141,10 +158,10 @@ export function OrdersPage() {
                 className="card_input"
               />
               <Stack className="cards_box">
-                <img src="/icons/western_card.svg" />
-                <img src="/icons/master_card.svg" />
-                <img src="/icons/paypal_card.svg" />
-                <img src="/icons/visa_card.svg" />
+                <img src="/icons/western_card.svg" alt="" />
+                <img src="/icons/master_card.svg" alt="" />
+                <img src="/icons/paypal_card.svg" alt="" />
+                <img src="/icons/visa_card.svg" alt="" />
               </Stack>
             </form>
           </Stack>
@@ -164,9 +181,9 @@ export function OrdersPage() {
                 </Box>
               </Box>
               <Stack className="order_main_content">
-                <PausedOrders />
-                <ProcessOrders />
-                <FinishedOrders />
+                <PausedOrders setOrderRebuild={props.setOrderRebuild} />
+                <ProcessOrders setOrderRebuild={props.setOrderRebuild} />
+                <FinishedOrders setOrderRebuild={props.setOrderRebuild} />
               </Stack>
             </TabContext>
           </Stack>
