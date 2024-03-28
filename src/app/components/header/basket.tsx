@@ -21,7 +21,7 @@ export function Basket(props: any) {
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
   const itemsPrice = cartItems.reduce(
     (a: any, c: CartItem) =>
-      a + Math.round((c.price * (100 - c.sale)) / 100) * c.quantity,
+      a + ((c.price * (100 - c.sale)) / 100) * c.quantity,
     0
   );
   console.log("itemsPrice", itemsPrice);
@@ -121,7 +121,7 @@ export function Basket(props: any) {
                   />
                   <span className="product_name">{item.name}</span>
                   <p className="product_price">
-                    ${itemsPrice} * {item.quantity}
+                    ${(item.price * (100 - item.sale)) / 100} * {item.quantity}
                   </p>
                   <Box sx={{ minWidth: 120 }}>
                     <div className="col-2">
@@ -140,7 +140,8 @@ export function Basket(props: any) {
           {cartItems.length > 0 ? (
             <Box className="to_order_box">
               <span className="price_text">
-                Jami: ${totalPrice} ({itemsPrice} + {shippingPrice})
+                Overall: ${totalPrice.toFixed(3)} (Shipping fee: $
+                {shippingPrice})
               </span>
               <Button
                 onClick={processOrderHandler}

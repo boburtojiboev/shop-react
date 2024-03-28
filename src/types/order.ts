@@ -8,6 +8,7 @@ export interface OrderItems {
   product_id: string;
   createdAt: Date;
   updatedAt: Date;
+  item_sale: number;
 }
 
 export interface Order {
