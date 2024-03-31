@@ -81,7 +81,7 @@ const chosenSingleBoArticleRetriever = createSelector(
 );
 export function VisitMyPage(props: any) {
   //** INITIALIZATIONS **//
-    const { verifiedMemberData } = props;
+  const { verifiedMemberData } = props;
   const {
     setChosenMember,
     setChosenMemberBoArticles,
@@ -94,32 +94,32 @@ export function VisitMyPage(props: any) {
   const { chosenSingleBoArticle } = useSelector(chosenSingleBoArticleRetriever);
   const [value, setValue] = React.useState("1");
   const history = useHistory();
-   const [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date());
-   const [followRebuild, setFollowRebuild] = useState<boolean>(false);
-   const [memberAticleSearchObj, setMemberAticleSearchObj] =
-     useState<SearchMemberArticleObj>({
-       mb_id: "none",
-       page: 1,
-       limit: 3,
-     });
+  const [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date());
+  const [followRebuild, setFollowRebuild] = useState<boolean>(false);
+  const [memberAticleSearchObj, setMemberAticleSearchObj] =
+    useState<SearchMemberArticleObj>({
+      mb_id: "none",
+      page: 1,
+      limit: 3,
+    });
 
-   useEffect(() => {
-     if (!localStorage.getItem("member_data")) {
-       sweetFailureProvider("Please login first!!!", true, true);
-     }
+  useEffect(() => {
+    if (!localStorage.getItem("member_data")) {
+      sweetFailureProvider("Please login first!!!", true, true);
+    }
 
-     const communityService = new CommunityApiService();
-     communityService
-       .getMemberCommunityArticles(memberAticleSearchObj)
-       .then((data) => setChosenMemberBoArticles(data))
-       .catch((err) => console.log(err));
+    const communityService = new CommunityApiService();
+    communityService
+      .getMemberCommunityArticles(memberAticleSearchObj)
+      .then((data) => setChosenMemberBoArticles(data))
+      .catch((err) => console.log(err));
 
-     const memberService = new MemberApiService();
-     memberService
-       .getChosenMember(verifiedMemberData?._id)
-       .then((data) => setChosenMember(data))
-       .catch((err) => console.log(err));
-   }, [memberAticleSearchObj, articlesRebuild, followRebuild]);
+    const memberService = new MemberApiService();
+    memberService
+      .getChosenMember(verifiedMemberData?._id)
+      .then((data) => setChosenMember(data))
+      .catch((err) => console.log(err));
+  }, [memberAticleSearchObj, articlesRebuild, followRebuild]);
   //** HANDLERS **//
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -220,8 +220,7 @@ export function VisitMyPage(props: any) {
                     </p>
                   </Box>
                   <p className="user_desc">
-                    {chosenMember?.mb_description ??
-                      "No information"}
+                    {chosenMember?.mb_description ?? "No information"}
                   </p>
                   <Box
                     display={"flex"}
@@ -247,15 +246,18 @@ export function VisitMyPage(props: any) {
 
                 <Box className="my_page_menu">
                   <TabList
+                    orientation={"vertical"}
+                    variant={"scrollable"}
                     onChange={handleChange}
-                    aria-label="tabs API tabs example"
+                    aria-label="Vertical tabs example"
+                    sx={{ width: "100%" }}
                   >
                     <Tab
                       value={"1"}
                       style={{ flexDirection: "column" }}
                       component={() => (
                         <div
-                          className={`menu_box ${value}`}
+                          className={`menu_box`}
                           onClick={() => setValue("1")}
                         >
                           <img src="/icons/post.svg" />
@@ -268,7 +270,7 @@ export function VisitMyPage(props: any) {
                       value={"2"}
                       component={() => (
                         <div
-                          className={`menu_box ${value}`}
+                          className={`menu_box`}
                           onClick={() => setValue("2")}
                         >
                           <img src="/icons/followers.svg" />
@@ -281,7 +283,7 @@ export function VisitMyPage(props: any) {
                       value={"3"}
                       component={() => (
                         <div
-                          className={`menu_box ${value}`}
+                          className={`menu_box`}
                           onClick={() => setValue("3")}
                         >
                           <img src="/icons/following.svg" />

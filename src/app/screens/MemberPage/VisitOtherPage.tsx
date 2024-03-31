@@ -140,56 +140,56 @@ export function VisitorOtherPage(props: any) {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-   const handlePaginationChange = (event: any, value: number) => {
-     memberAticleSearchObj.page = value;
-     setMemberAticleSearchObj({ ...memberAticleSearchObj });
-   };
+  const handlePaginationChange = (event: any, value: number) => {
+    memberAticleSearchObj.page = value;
+    setMemberAticleSearchObj({ ...memberAticleSearchObj });
+  };
 
-   const renderChosenArticleHandeler = async (art_id: string) => {
-     try {
-       const communityService = new CommunityApiService();
-       communityService
-         .getChosenArticle(art_id)
-         .then((data) => {
-           setChosenSingleBoArticle(data);
-           setValue("4");
-         })
-         .catch((err) => console.log(err));
-     } catch (err: any) {
-       console.log(err);
-       sweetErrorHandling(err).then();
-     }
-   };
+  const renderChosenArticleHandeler = async (art_id: string) => {
+    try {
+      const communityService = new CommunityApiService();
+      communityService
+        .getChosenArticle(art_id)
+        .then((data) => {
+          setChosenSingleBoArticle(data);
+          setValue("4");
+        })
+        .catch((err) => console.log(err));
+    } catch (err: any) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
 
-   const subscribeHandler = async (e: any) => {
-     try {
-       assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+  const subscribeHandler = async (e: any) => {
+    try {
+      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
 
-       const followService = new FollowApiService();
-       await followService.subscribe(e.target.value);
+      const followService = new FollowApiService();
+      await followService.subscribe(e.target.value);
 
-       await sweetTopSmallSuccessAlert("subscribed successfully", 700, false);
-       setFollowRebuild(!followRebuild);
-     } catch (err: any) {
-       console.log(err);
-       sweetErrorHandling(err).then();
-     }
-   };
+      await sweetTopSmallSuccessAlert("subscribed successfully", 700, false);
+      setFollowRebuild(!followRebuild);
+    } catch (err: any) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
 
-   const unsubscribeHandler = async (e: any) => {
-     try {
-       assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+  const unsubscribeHandler = async (e: any) => {
+    try {
+      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
 
-       const followService = new FollowApiService();
-       await followService.unsubscribe(e.target.value);
+      const followService = new FollowApiService();
+      await followService.unsubscribe(e.target.value);
 
-       await sweetTopSmallSuccessAlert("unsubscribed successfully", 700, false);
-       setFollowRebuild(!followRebuild);
-     } catch (err: any) {
-       console.log(err);
-       sweetErrorHandling(err).then();
-     }
-   };
+      await sweetTopSmallSuccessAlert("unsubscribed successfully", 700, false);
+      setFollowRebuild(!followRebuild);
+    } catch (err: any) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
 
   return (
     <div className="">
@@ -312,15 +312,18 @@ export function VisitorOtherPage(props: any) {
 
                 <Box className="my_page_menu">
                   <TabList
+                    orientation={"vertical"}
+                    variant={"scrollable"}
                     onChange={handleChange}
-                    aria-label="tabs API tabs example"
+                    aria-label="Vertical tabs example"
+                    sx={{ width: "100%" }}
                   >
                     <Tab
                       value={"1"}
                       style={{ flexDirection: "column" }}
                       component={() => (
                         <div
-                          className={`menu_box ${value}`}
+                          className={`menu_box`}
                           onClick={() => setValue("1")}
                         >
                           <img src="/icons/post.svg" />
@@ -333,7 +336,7 @@ export function VisitorOtherPage(props: any) {
                       value={"2"}
                       component={() => (
                         <div
-                          className={`menu_box ${value}`}
+                          className={`menu_box`}
                           onClick={() => setValue("2")}
                         >
                           <img src="/icons/followers.svg" />
@@ -346,7 +349,7 @@ export function VisitorOtherPage(props: any) {
                       value={"3"}
                       component={() => (
                         <div
-                          className={`menu_box ${value}`}
+                          className={`menu_box`}
                           onClick={() => setValue("3")}
                         >
                           <img src="/icons/following.svg" />
