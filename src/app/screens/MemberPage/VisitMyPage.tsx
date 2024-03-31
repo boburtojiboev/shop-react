@@ -180,8 +180,10 @@ export function VisitMyPage(props: any) {
                   >
                     <div className="order_user_img">
                       <img
+                        alt=""
                         style={{ objectFit: "cover" }}
                         src={
+                          // verifiedMemberData?.mb_image ??
                           chosenMember?.mb_image
                             ? `${serverApi}/${chosenMember?.mb_image}`
                             : "/auth/default_user.svg"
@@ -190,6 +192,7 @@ export function VisitMyPage(props: any) {
                       />
                       <div className="order_user_icon_box">
                         <img
+                          alt=""
                           src={
                             chosenMember?.mb_type === "SHOP"
                               ? "/icons/shop.svg"
@@ -260,7 +263,7 @@ export function VisitMyPage(props: any) {
                           className={`menu_box`}
                           onClick={() => setValue("1")}
                         >
-                          <img src="/icons/post.svg" />
+                          <img alt="" src="/icons/post.svg" />
                           <span>My Articles</span>
                         </div>
                       )}
@@ -273,7 +276,7 @@ export function VisitMyPage(props: any) {
                           className={`menu_box`}
                           onClick={() => setValue("2")}
                         >
-                          <img src="/icons/followers.svg" />
+                          <img alt="" src="/icons/followers.svg" />
                           <span>Followers</span>
                         </div>
                       )}
@@ -286,7 +289,7 @@ export function VisitMyPage(props: any) {
                           className={`menu_box`}
                           onClick={() => setValue("3")}
                         >
-                          <img src="/icons/following.svg" />
+                          <img alt="" src="/icons/following.svg" />
                           <span>Following</span>
                         </div>
                       )}

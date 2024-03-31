@@ -2,7 +2,7 @@ import { serverApi } from "../../lib/config";
 import axios from "axios";
 import assert from "assert";
 import { Definer } from "../../lib/Definer";
-import { Member } from "../../types/user";
+import { Member, MemberUpdateData } from "../../types/user";
 import { MemberLiken } from "../../types/others";
 class MemberApiService {
   private readonly path: string;
@@ -87,13 +87,43 @@ class MemberApiService {
         });
 
       assert.ok(result?.data, Definer.general_err1);
-      assert.ok(result?.data?.state != "fail", result?.data?.message);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
       console.log("state:", result.data.data);
 
       const member: Member = result.data.data;
       return member;
     } catch (err: any) {
       console.log(`ERROR::: getChosenMember ${err.message}`);
+      throw err;
+    }
+  }
+
+  public async updateMemberData(data: MemberUpdateData) {
+    try {
+      let form_data = new FormData();
+      form_data.append("mb_nick", data.mb_nick || "");
+      form_data.append("mb_phone", data.mb_phone || "");
+      form_data.append("mb_address", data.mb_address || "");
+      form_data.append("mb_description", data.mb_description || "");
+      form_data.append("mb_image", data.mb_image || "");
+
+      const result = await axios(`${this.path}/member/update`, {
+        method: "POST",
+        data: form_data,
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      assert.ok(result?.data, Definer.general_err1);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
+      console.log("state:", result.data.data);
+
+      const member: Member = result.data.data;
+      localStorage.setItem("member_data", JSON.stringify(member));
+      return member;
+    } catch (err: any) {
+      console.log(`error:: memberLikeTarget ${err.message}`);
       throw err;
     }
   }
