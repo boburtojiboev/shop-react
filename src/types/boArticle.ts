@@ -22,6 +22,14 @@ export interface SearchArticlesObj {
   bo_id: string;
   order?: number | null;
 }
+
+export interface BoArticleInput {
+  art_subject: string;
+  art_content: string;
+  art_image: string;
+  bo_id: string;
+}
+
 export interface SearchMemberArticleObj {
   page: number;
   limit: number;

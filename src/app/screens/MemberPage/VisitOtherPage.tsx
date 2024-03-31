@@ -98,7 +98,7 @@ export function VisitorOtherPage(props: any) {
     useState<SearchMemberArticleObj>({
       mb_id: chosen_mb_id,
       page: 1,
-      limit: 3,
+      limit: 4,
     });
   const [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date());
   const [followRebuild, setFollowRebuild] = useState<boolean>(false);

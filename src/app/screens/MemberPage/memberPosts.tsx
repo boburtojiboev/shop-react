@@ -53,7 +53,7 @@ export function MemberPosts(props: any) {
           >
             <Box
               className="all_article_img"
-              sx={{ backgroundImage: `url(${image_path})` }}
+              sx={{ backgroundImage: `url(${image_path})`, mt:"5px", ml:"10px"}}
             ></Box>
             <Box className="all_article_container">
               <Box alignItems={"center"} display={"flex"}>
