@@ -46,12 +46,15 @@ export function TargetArticles(props: any) {
           <Link
             className="all_article_box"
             sx={{ textDecoration: "none" }}
-            href={``}
+            href={`member-page/other?mb_id=${article.mb_id}&art_id=${article._id}`}
           >
             <Box
               className="all_article_img"
-              sx={{ backgroundImage: `url(${art_image_url})`, ml:"10px", mt:"8px"
-             }}
+              sx={{
+                backgroundImage: `url(${art_image_url})`,
+                ml: "10px",
+                mt: "8px",
+              }}
             ></Box>
             <Box className="all_article_container">
               <Box alignItems={"center"} display={"flex"}>
