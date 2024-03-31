@@ -14,7 +14,7 @@ import { HomePage } from "./screens/HomePage";
 import { Footer } from "./components/footer";
 import { Header } from "./components/header/header";
 import { EventPage } from "./screens/EventPage";
-// import Car from "./screens/testCar";
+import Car from "./screens/testCar";
 import AuthentificationModal from "./components/auth";
 import { Member } from "../types/user";
 import { serverApi } from "../lib/config";
@@ -34,7 +34,7 @@ function App() {
     null
   );
   const [ setPath] = useState();
-  // const main_path = window.location.pathname;
+  const main_path = window.location.pathname;
   const [signupOpen, setSignupOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [orderRebuild, setOrderRebuild] = useState<Date>(new Date());
@@ -78,7 +78,7 @@ function App() {
       const memberApiService = new MemberApiService();
       await memberApiService.logOutRequest();
       await sweetTopSmallSuccessAlert("success", 700, true);
-      localStorage.removeItem("member_data");
+      // localStorage.removeItem("member_data");
     } catch (err: any) {
       console.log(err);
       sweetFailureProvider(Definer.general_err1);
@@ -162,8 +162,6 @@ function App() {
           setOrderRebuild={setOrderRebuild}
         />
       }
-      {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
       <Switch>
         <Route path="/products">
           <ProductsPage onAdd={onAdd} />

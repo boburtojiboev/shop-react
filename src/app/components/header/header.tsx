@@ -59,13 +59,13 @@ export function Header(props: any) {
                 Event
               </NavLink>
             </Box>
-            {/* {props.verifiedMemberData ? ( */}
+            {props.verifiedMemberData ? (
             <Box className="hover-line" onClick={props.setPath}>
               <NavLink to="/orders" activeClassName="underline">
                 Orders
               </NavLink>
             </Box>
-            {/* ) : null} */}
+            ) : null}
             <Box className="hover-line" onClick={props.setPath}>
               <NavLink to="/community" activeClassName="underline">
                 Community

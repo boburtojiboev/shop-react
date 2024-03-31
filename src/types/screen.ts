@@ -3,6 +3,7 @@ import { Product } from "./product";
 import { Shop } from "./user";
 import {Comment} from "./comment"
 import { Order } from "./order";
+import { BoArticle } from "./boArticle";
 
 // REACT APP STATE//
 export interface AppRootState {
@@ -11,6 +12,7 @@ export interface AppRootState {
   shopPage: ShopPageState;
   eventPage: EventPageState;
   ordersPage: OrdersPageState;
+  communityPage: CommunityPageState;
 }
 
 // HOME PAGE//
@@ -49,4 +51,9 @@ export interface OrdersPageState {
   pausedOrders: Order[];
   processOrders: Order[];
   finishedOrders: Order[];
+}
+
+// COMMUNITY PAGE//
+export interface CommunityPageState {
+ targetBoArticles: BoArticle[]
 }
