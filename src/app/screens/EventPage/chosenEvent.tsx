@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Checkbox, Container, Stack } from "@mui/material";
+import { Box, Checkbox, Container, Stack } from "@mui/material";
 import { Close, Home, RemoveRedEye } from "@mui/icons-material";
-import Marginer from "../../components/marginer";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
@@ -151,6 +150,8 @@ export function ChosenEvent() {
                     checked={
                       chosenEvent?.me_liked &&
                       chosenEvent?.me_liked[0]?.my_favorite
+                        ? true
+                        : false
                     }
                   />
                   <span>{chosenEvent?.event_likes}</span>

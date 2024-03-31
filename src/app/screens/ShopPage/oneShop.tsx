@@ -26,7 +26,6 @@ import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Close, Home, Visibility } from "@mui/icons-material";
-import NativeSelect from "@mui/material/NativeSelect";
 import { Favorite } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 // REDUX

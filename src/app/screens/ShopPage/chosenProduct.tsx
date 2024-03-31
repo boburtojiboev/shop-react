@@ -209,6 +209,8 @@ export function ChosenProduct(props: any) {
                         checked={
                           chosenProduct?.me_liked &&
                           chosenProduct?.me_liked[0]?.my_favorite
+                            ? true
+                            : false
                         }
                       />
                       <span>{chosenProduct?.product_likes}</span>

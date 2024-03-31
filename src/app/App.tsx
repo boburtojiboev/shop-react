@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../css/App.css";
 import "../css/navbar.css";
 import "../css/footer.css";
@@ -14,10 +14,8 @@ import { HomePage } from "./screens/HomePage";
 import { Footer } from "./components/footer";
 import { Header } from "./components/header/header";
 import { EventPage } from "./screens/EventPage";
-import Car from "./screens/testCar";
+// import Car from "./screens/testCar";
 import AuthentificationModal from "./components/auth";
-import { Member } from "../types/user";
-import { serverApi } from "../lib/config";
 import {
   sweetFailureProvider,
   sweetTopSmallSuccessAlert,

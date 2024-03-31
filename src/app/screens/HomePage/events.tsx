@@ -1,6 +1,5 @@
 import { Box, Container,  Stack, } from "@mui/material";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import React, { useEffect } from "react";
 
@@ -85,7 +84,7 @@ export function Events() {
             return (
               <Box className="review_box_review" key={ele._id}>
                 <Box display={"flex"} justifyContent={"center"}>
-                  <img src={image_path} className="review_img_review" />
+                  <img src={image_path} alt="" className="review_img_review" />
                 </Box>
                 <span className="review_name_review">{ele.event_name}</span>
                 <span className="review_prof_rev">

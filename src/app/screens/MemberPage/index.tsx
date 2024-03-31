@@ -1,11 +1,9 @@
 import React from "react";
-import { Container } from "@mui/material";
 import { NavbarOthers } from "../../components/header/others";
 import { Route, Switch, useLocation, useRouteMatch } from "react-router-dom";
 import { VisitorOtherPage } from "./VisitOtherPage";
 import { VisitMyPage } from "./VisitMyPage";
 import "../../../css/my_page.css";
-import { verifiedMemberData } from "../../apiServices/verify";
 
 function useQuery() {
   const { search } = useLocation();

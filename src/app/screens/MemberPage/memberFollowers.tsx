@@ -34,12 +34,6 @@ const memberFollowersRetriever = createSelector(
   })
 );
 
-const followers = [
-  { mb_nick: "Lucas", following: true },
-  { mb_nick: "Ben", following: false },
-  { mb_nick: "Devid", following: true },
-];
-
 export function MemberFollowers(props: any) {
   /** INITIALIZATIONS **/
   const history = useHistory();

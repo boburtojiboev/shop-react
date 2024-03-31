@@ -23,7 +23,6 @@ import {
   setFinishedOrders,
 } from "../../screens/OrdersPage/slice";
 import OrderApiService from "../../apiServices/orderApiService";
-import { Member } from "../../../types/user";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({

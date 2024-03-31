@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Button, Checkbox, Container, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import Marginer from "../../components/marginer";
 
 // REDUX
@@ -83,7 +83,7 @@ export function EventCommentPage({ chosenEvent }: any) {
             <Box key={comment._id} className="comment_wrap">
               <Box className="comment_txt">
                 <img
-                  src={"/shops/sneakers.jpg"}
+                  src={image_path}
                   alt="product_image"
                   className="img_comment"
                 />

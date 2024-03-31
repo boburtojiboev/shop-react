@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useRouteMatch } from "react-router-dom";
 import { Box, Button, Container, Stack } from "@mui/material";
 import Marginer from "../../components/marginer";
 import { serverApi } from "../../../lib/config";
@@ -35,7 +34,6 @@ export function CommentPage({ chosenProduct }: any) {
   const { setProductComment } = actionDispatch(useDispatch());
   const { productComment } = useSelector(productCommentRetriever);
   const product_id = chosenProduct?._id;
-  const [value, setValue] = useState<any>(0.5);
   const [textValue, setTextValue] = useState("");
   const [productRebuild, setProductRebuild] = useState<Date>(new Date());
   const comment_text = useRef<any>();
