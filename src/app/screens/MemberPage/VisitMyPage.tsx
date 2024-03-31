@@ -98,7 +98,7 @@ export function VisitMyPage(props: any) {
    const [followRebuild, setFollowRebuild] = useState<boolean>(false);
    const [memberAticleSearchObj, setMemberAticleSearchObj] =
      useState<SearchMemberArticleObj>({
-       mb_id: "none" || verifiedMemberData?.mb_id,
+       mb_id: "none",
        page: 1,
        limit: 3,
      });
@@ -221,7 +221,7 @@ export function VisitMyPage(props: any) {
                   </Box>
                   <p className="user_desc">
                     {chosenMember?.mb_description ??
-                      "qo'shimcha malumot kiritilmagan"}
+                      "No information"}
                   </p>
                   <Box
                     display={"flex"}

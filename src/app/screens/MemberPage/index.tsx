@@ -34,8 +34,8 @@ export function MemberPage(props: any) {
           <Route path={`${member.path}`}>
             <VisitMyPage
               verifiedMemberData={verifiedMemberData}
-              chosen_mb_id={chosen_mb_id}
-              chosen_art_id={chosen_art_id}
+              // chosen_mb_id={chosen_mb_id}
+              // chosen_art_id={chosen_art_id}
             />
           </Route>
         </Switch>
