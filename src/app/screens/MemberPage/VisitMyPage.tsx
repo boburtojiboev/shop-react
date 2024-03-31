@@ -49,6 +49,7 @@ import {
   setChosenMemberBoArticles,
   setChosenSingleBoArticle,
 } from "../../screens/MemberPage/slice";
+import { serverApi } from "../../../lib/config";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -80,7 +81,7 @@ const chosenSingleBoArticleRetriever = createSelector(
 );
 export function VisitMyPage(props: any) {
   //** INITIALIZATIONS **//
-    const { verifiedMemberdata } = props;
+    const { verifiedMemberData } = props;
   const {
     setChosenMember,
     setChosenMemberBoArticles,
@@ -94,8 +95,13 @@ export function VisitMyPage(props: any) {
   const [value, setValue] = React.useState("1");
   const history = useHistory();
    const [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date());
+   const [followRebuild, setFollowRebuild] = useState<boolean>(false);
    const [memberAticleSearchObj, setMemberAticleSearchObj] =
-     useState<SearchMemberArticleObj>({ mb_id: "none", page: 1, limit: 3 });
+     useState<SearchMemberArticleObj>({
+       mb_id: "none" || verifiedMemberData?.mb_id,
+       page: 1,
+       limit: 3,
+     });
 
    useEffect(() => {
      if (!localStorage.getItem("member_data")) {
@@ -110,10 +116,10 @@ export function VisitMyPage(props: any) {
 
      const memberService = new MemberApiService();
      memberService
-       .getChosenMember(verifiedMemberdata?._id)
+       .getChosenMember(verifiedMemberData?._id)
        .then((data) => setChosenMember(data))
        .catch((err) => console.log(err));
-   }, [memberAticleSearchObj, articlesRebuild]);
+   }, [memberAticleSearchObj, articlesRebuild, followRebuild]);
   //** HANDLERS **//
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -175,15 +181,29 @@ export function VisitMyPage(props: any) {
                     <div className="order_user_img">
                       <img
                         style={{ objectFit: "cover" }}
-                        src="/auth/default_user.svg"
+                        src={
+                          chosenMember?.mb_image
+                            ? `${serverApi}/${chosenMember?.mb_image}`
+                            : "/auth/default_user.svg"
+                        }
                         className="order_user_avatar"
                       />
                       <div className="order_user_icon_box">
-                        <img src="/icons/user_icon.svg" />
+                        <img
+                          src={
+                            chosenMember?.mb_type === "SHOP"
+                              ? "/icons/shop.svg"
+                              : "/icons/user_icon.svg"
+                          }
+                        />
                       </div>
                     </div>
-                    <span className="order_user_name">Simon</span>
-                    <span className="order_user_prof">USER</span>
+                    <span className="order_user_name">
+                      {chosenMember?.mb_nick}
+                    </span>
+                    <span className="order_user_prof">
+                      {chosenMember?.mb_type}
+                    </span>
                   </Box>
                   <Box className="user_media_box">
                     <Facebook />
@@ -192,10 +212,17 @@ export function VisitMyPage(props: any) {
                     <YouTube />
                   </Box>
                   <Box className="user_media_box">
-                    <p className="follows">Followers: 3</p>
-                    <p className="follows">Followings: 2</p>
+                    <p className="follows">
+                      Followers: {chosenMember?.mb_subscriber_cnt}{" "}
+                    </p>
+                    <p className="follows">
+                      Followings: {chosenMember?.mb_follow_cnt}{" "}
+                    </p>
                   </Box>
-                  <p className="user_desc">"no information"</p>
+                  <p className="user_desc">
+                    {chosenMember?.mb_description ??
+                      "qo'shimcha malumot kiritilmagan"}
+                  </p>
                   <Box
                     display={"flex"}
                     justifyContent={"flex-end"}
@@ -299,7 +326,7 @@ export function VisitMyPage(props: any) {
                                   next: ArrowForward,
                                 }}
                                 {...item}
-                                color={"secondary"}
+                                color={"primary"}
                               />
                             )}
                             onChange={handlePaginationChange}
@@ -312,61 +339,24 @@ export function VisitMyPage(props: any) {
                   <TabPanel value={"2"}>
                     <Box className="menu_name">Followers</Box>
                     <Box className="menu_content">
-                      <MemberFollowers actions_enabled={true} />
-                      <Stack
-                        sx={{ my: "40px" }}
-                        direction={"row"}
-                        alignItems={"center"}
-                        justifyContent={"center"}
-                      >
-                        <Box className="bottom_box">
-                          <Pagination
-                            count={3}
-                            page={1}
-                            renderItem={(item) => (
-                              <PaginationItem
-                                components={{
-                                  previous: ArrowBack,
-                                  next: ArrowForward,
-                                }}
-                                {...item}
-                                color={"primary"}
-                              />
-                            )}
-                          />
-                        </Box>
-                      </Stack>
+                      <MemberFollowers
+                        actions_enabled={true}
+                        mb_id={props.verifiedMemberData?._id}
+                        followRebuild={followRebuild}
+                        setFollowRebuild={setFollowRebuild}
+                      />
                     </Box>
                   </TabPanel>
 
                   <TabPanel value={"3"}>
                     <Box className="menu_name">Following</Box>
                     <Box className="menu_content">
-                      <MemberFollowing actions_enabled={true} />
-                      <Stack
-                        sx={{ my: "40px" }}
-                        direction={"row"}
-                        alignItems={"center"}
-                        justifyContent={"center"}
-                      >
-                        <Box className="bottom_box">
-                          <Pagination
-                            count={3}
-                            page={1}
-                            renderItem={(item) => (
-                              <PaginationItem
-                                components={{
-                                  previous: ArrowBack,
-                                  next: ArrowForward,
-                                }}
-                                {...item}
-                                color={"primary"}
-                              />
-                            )}
-                            onChange={handlePaginationChange}
-                          />
-                        </Box>
-                      </Stack>
+                      <MemberFollowing
+                        actions_enabled={true}
+                        mb_id={props.verifiedMemberData?._id}
+                        followRebuild={followRebuild}
+                        setFollowRebuild={setFollowRebuild}
+                      />
                     </Box>
                   </TabPanel>
 

@@ -24,3 +24,8 @@ export interface Following {
   updatedAt: Date;
   follow_member_data: Member;
 }
+export interface FollowSearchObj {
+  page: number;
+  limit: number;
+  mb_id: string;
+}
