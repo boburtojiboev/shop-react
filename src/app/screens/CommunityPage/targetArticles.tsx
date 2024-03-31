@@ -1,14 +1,21 @@
 import React from "react";
-import { Box, Link, Stack } from "@mui/material";
-import { RemoveRedEye } from "@mui/icons-material";
+import { Box, Checkbox, Link, Stack } from "@mui/material";
+import { Favorite, RemoveRedEye } from "@mui/icons-material";
 import { FavoriteBorder } from "@mui/icons-material";
+import { BoArticle } from "../../../types/boArticle";
+import { serverApi } from "../../../lib/config";
 import moment from "moment";
 
 export function TargetArticles(props: any) {
   return (
     <Stack flexDirection={"row"} gap={"40px"} flexWrap={"wrap"}>
-      {props.targetBoArticles?.map((articles: any, index: string) => {
-        const art_image_url = "/community/default_articles.svg";
+      {props.targetBoArticles?.map((article: BoArticle) => {
+        const art_image_url = article?.art_image
+          ? `${serverApi}/${article.art_image}`
+          : "/community/default_articles.svg";
+        const image_path = article?.member_data.mb_image
+          ? `${serverApi}/${article.member_data.mb_image}`
+          : "/auth/default_user.svg";
         return (
           <Link
             className="all_article_box"
@@ -22,7 +29,7 @@ export function TargetArticles(props: any) {
             <Box className="all_article_container">
               <Box alignItems={"center"} display={"flex"}>
                 <img
-                  src="/auth/default_user.svg"
+                  src={image_path}
                   alt=""
                   width={"35px"}
                   style={{ borderRadius: "50%", backgroundSize: "cover" }}
@@ -31,7 +38,7 @@ export function TargetArticles(props: any) {
                   className="all_article_auth_user"
                   style={{ marginLeft: "10px" }}
                 >
-                  simon
+                  {article?.member_data.mb_nick}
                 </span>
               </Box>
               <Box
@@ -39,8 +46,10 @@ export function TargetArticles(props: any) {
                 flexDirection={"column"}
                 sx={{ mt: "15px" }}
               >
-                <span className="all_article_title">evaluation</span>
-                <p className="all_article_desc">Adidas ajoyib magazin</p>
+                <span className="all_article_title">{article?.bo_id}</span>
+                <p className="all_article_desc">
+                  {article?.art_subject}
+                </p>
               </Box>
               <Box>
                 <Box
@@ -49,14 +58,21 @@ export function TargetArticles(props: any) {
                 >
                   <Box className="article_share_main">
                     <span>{moment().format("YY-MM-DD HH:mm")}</span>
-                  </Box>
-
-                  <Box className="article_share_main">
-                    {/* <span style={{ marginRight: "35px" }}>23-11-24 23-41</span> */}
-                    <FavoriteBorder />
-                    <span style={{ margin: "0px 25px 0px 10px" }}>100</span>
+                    <Checkbox
+                      sx={{ ml: "10px" }}
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite style={{ color: "red" }} />}
+                      id={article?._id}
+                      /*@ts-ignore*/
+                      checked={false}
+                    />
+                    <span style={{ margin: "0px 25px 0px 0px" }}>
+                      {article?.art_likes}
+                    </span>
                     <RemoveRedEye />
-                    <span style={{ marginLeft: "10px" }}>1000</span>
+                    <span style={{ marginLeft: "10px" }}>
+                      {article?.art_views}
+                    </span>
                   </Box>
                 </Box>
               </Box>
