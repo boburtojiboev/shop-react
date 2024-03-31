@@ -28,6 +28,7 @@ import { setChosenProduct, setChosenShop,} from "./slice";
 import { serverApi } from "../../../lib/config";
 import { retrieveChosenProduct, retrieveChosenShop, } from "./selector";
 import { CommentPage } from "./comment";
+import { verifiedMemberData } from "../../apiServices/verify";
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
   setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
@@ -82,7 +83,7 @@ export function ChosenProduct(props: any) {
   /** HANDLERS */
   const targetLikeProduct = async (e: any) => {
     try {
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      assert.ok(verifiedMemberData, Definer.auth_err1);
 
       const memberService = new MemberApiService(),
         like_result: any = await memberService.memberLikeTarget({

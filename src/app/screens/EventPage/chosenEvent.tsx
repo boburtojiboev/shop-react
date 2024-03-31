@@ -25,6 +25,7 @@ import { Definer } from "../../../lib/Definer";
 import MemberApiService from "../../apiServices/memberApiService";
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 import { EventCommentPage } from "./commentEvent";
+import { verifiedMemberData } from "../../apiServices/verify";
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
   setChosenEvent: (data: Event) => dispatch(setChosenEvent(data)),
@@ -70,7 +71,7 @@ export function ChosenEvent() {
   /** HANDLERS */
   const targetLikeEvent = async (e: any) => {
     try {
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      assert.ok(verifiedMemberData, Definer.auth_err1);
 
       const memberService = new MemberApiService(),
         like_result: any = await memberService.memberLikeTarget({

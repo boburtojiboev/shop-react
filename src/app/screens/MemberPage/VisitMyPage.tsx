@@ -50,6 +50,7 @@ import {
   setChosenSingleBoArticle,
 } from "../../screens/MemberPage/slice";
 import { serverApi } from "../../../lib/config";
+import { verifiedMemberData } from "../../apiServices/verify";
 
 // REDUX SLICE
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -81,7 +82,6 @@ const chosenSingleBoArticleRetriever = createSelector(
 );
 export function VisitMyPage(props: any) {
   //** INITIALIZATIONS **//
-  const { verifiedMemberData } = props;
   const {
     setChosenMember,
     setChosenMemberBoArticles,
@@ -104,7 +104,7 @@ export function VisitMyPage(props: any) {
     });
 
   useEffect(() => {
-    if (!localStorage.getItem("member_data")) {
+    if (!verifiedMemberData) {
       sweetFailureProvider("Please login first!!!", true, true);
     }
 
@@ -343,7 +343,7 @@ export function VisitMyPage(props: any) {
                     <Box className="menu_content">
                       <MemberFollowers
                         actions_enabled={true}
-                        mb_id={props.verifiedMemberData?._id}
+                        mb_id={verifiedMemberData?._id}
                         followRebuild={followRebuild}
                         setFollowRebuild={setFollowRebuild}
                       />
@@ -355,7 +355,7 @@ export function VisitMyPage(props: any) {
                     <Box className="menu_content">
                       <MemberFollowing
                         actions_enabled={true}
-                        mb_id={props.verifiedMemberData?._id}
+                        mb_id={verifiedMemberData?._id}
                         followRebuild={followRebuild}
                         setFollowRebuild={setFollowRebuild}
                       />

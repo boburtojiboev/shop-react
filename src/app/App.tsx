@@ -30,9 +30,6 @@ import { Product } from "../types/product";
 
 function App() {
   // INITIALIZATIONS
-  const [verifiedMemberData, setVerifiedMemberData] = useState<Member | null>(
-    null
-  );
   const [ setPath] = useState();
   const main_path = window.location.pathname;
   const [signupOpen, setSignupOpen] = useState(false);
@@ -45,20 +42,6 @@ function App() {
      const cartJson: any = localStorage.getItem("cart_data");
      const current_cart: CartItem[] = JSON.parse(cartJson) ?? [];
      const [cartItems, setCartItems] = useState<CartItem[]>(current_cart);
-
-    useEffect(() => {
-      console.log("=== useEffect: App ===");
-      const memberDataJson: any = localStorage.getItem("member_data")
-        ? localStorage.getItem("member_data")
-        : null;
-      const member_data = memberDataJson ? JSON.parse(memberDataJson) : null;
-      if (member_data) {
-        member_data.mb_image = member_data.mb_image
-          ? `${serverApi}/${member_data.mb_image}`
-          : "auth/default_user.svg";
-        setVerifiedMemberData(member_data);
-      }
-    }, [signupOpen, loginOpen]);
 
   /** HANDLERS */
 
@@ -78,7 +61,6 @@ function App() {
       const memberApiService = new MemberApiService();
       await memberApiService.logOutRequest();
       await sweetTopSmallSuccessAlert("success", 700, true);
-      // localStorage.removeItem("member_data");
     } catch (err: any) {
       console.log(err);
       sweetFailureProvider(Definer.general_err1);
@@ -153,7 +135,6 @@ function App() {
           handleLogOutClick={handleLogOutClick}
           handleCloseLogOut={handleCloseLogOut}
           handleLogOutRequest={handleLogOutRequest}
-          verifiedMemberData={verifiedMemberData}
           cartItems={cartItems}
           onAdd={onAdd}
           onRemove={onRemove}
@@ -176,14 +157,13 @@ function App() {
           <OrdersPage
             orderRebuild={orderRebuild}
             setOrderRebuild={setOrderRebuild}
-            verifiedMemberData={verifiedMemberData}
           />
         </Route>
         <Route path="/community">
           <CommunityPage />
         </Route>
         <Route path="/member-page">
-          <MemberPage verifiedMemberData={verifiedMemberData} />
+          <MemberPage />
         </Route>
         <Route path="/help">
           <HelpPage />

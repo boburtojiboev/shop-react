@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import { Chatting } from "./chatting";
 import { Basket } from "./basket";
 import { Logout } from "@mui/icons-material";
+import { verifiedMemberData } from "../../apiServices/verify";
 
 export function Header(props: any) {
   return (
@@ -59,7 +60,7 @@ export function Header(props: any) {
                 Event
               </NavLink>
             </Box>
-            {props.verifiedMemberData ? (
+            {verifiedMemberData ? (
             <Box className="hover-line" onClick={props.setPath}>
               <NavLink to="/orders" activeClassName="underline">
                 Orders
@@ -71,7 +72,7 @@ export function Header(props: any) {
                 Community
               </NavLink>
             </Box>
-            {props.verifiedMemberData ? (
+            {verifiedMemberData ? (
               <Box className="hover-line" onClick={props.setPath}>
                 <NavLink to="/member-page" activeClassName="underline">
                   MyPage
@@ -94,7 +95,7 @@ export function Header(props: any) {
               setOrderRebuild={props.setOrderRebuild}
             />
 
-            {!props.verifiedMemberData ? (
+            {!verifiedMemberData ? (
               <Box className="login">
                 <Button
                   variant="contained"
@@ -111,7 +112,7 @@ export function Header(props: any) {
             ) : (
               <img
                 style={{ width: "48px", height: "48px", borderRadius: "24px" }}
-                src={props.verifiedMemberData.mb_image}
+                src={verifiedMemberData.mb_image}
                 alt="member_img"
                 onClick={props.handleLogOutClick}
               />
@@ -158,7 +159,7 @@ export function Header(props: any) {
               </MenuItem>
             </Menu>
 
-            {!props.verifiedMemberData ? (
+            {!verifiedMemberData ? (
               <Box className="login">
                 <Button
                   variant="contained"

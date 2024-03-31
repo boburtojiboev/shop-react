@@ -13,6 +13,7 @@ import { NavbarOthers } from "../../components/header/others";
 import { Close, Home } from "@mui/icons-material";
 import { useHistory } from "react-router-dom";
 import { Order } from "../../../types/order";
+import { verifiedMemberData } from "../../apiServices/verify";
 // REDUX
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -36,7 +37,6 @@ export function OrdersPage(props: any) {
   const { setPausedOrders, setProcessOrders, setFinishedOrders } =
     actionDispatch(useDispatch());
   const [value, setValue] = useState("1");
-  const verifiedMemberData: Member | null = props.verifiedMemberData;
   const history = useHistory();
 
   useEffect(() => {

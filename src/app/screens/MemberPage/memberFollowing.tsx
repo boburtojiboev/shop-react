@@ -11,6 +11,7 @@ import {
   sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 import { useHistory } from "react-router-dom";
+import { verifiedMemberData } from "../../apiServices/verify";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
@@ -33,12 +34,6 @@ const memberFollowingsRetriever = createSelector(
     memberFollowings,
   })
 );
-
-const followings = [
-  { mb_nick: "Khan" },
-  { mb_nick: "Shown" },
-  { mb_nick: "Leo" },
-];
 
 export function MemberFollowing(props: any) {
   /** INITIALIZATIONS **/
@@ -66,7 +61,7 @@ export function MemberFollowing(props: any) {
   const unsubscribeHandler = async (e: any, id: string) => {
     try {
       e.stopPropagation();
-      assert.ok(localStorage.getItem("member_data"), Definer.auth_err1);
+      assert.ok(verifiedMemberData, Definer.auth_err1);
 
       const followService = new FollowApiService();
       await followService.unsubscribe(id);
