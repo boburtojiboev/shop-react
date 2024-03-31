@@ -9,11 +9,66 @@ import { MemberFollowing } from "./memberFollowing";
 import { useHistory } from "react-router-dom";
 import TViewer from "../../components/tuiEditor/TViewer";
 
+import { Member } from "../../../types/user";
+import { BoArticle } from "../../../types/boArticle";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import {
+  retrieveChosenMember,
+  retrieveChosenMemberBoArticles,
+  retrieveChosenSingleBoArticle,
+} from "../../screens/MemberPage/selector";
+import { Dispatch } from "@reduxjs/toolkit";
+import {
+  setChosenMember,
+  setChosenMemberBoArticles,
+  setChosenSingleBoArticle,
+} from "../../screens/MemberPage/slice";
+
+// REDUX SLICE
+const actionDispatch = (dispatch: Dispatch) => ({
+  setChosenMember: (data: Member) => dispatch(setChosenMember(data)),
+  setChosenMemberBoArticles: (data: BoArticle[]) =>
+    dispatch(setChosenMemberBoArticles(data)),
+  setChosenSingleBoArticle: (data: BoArticle) =>
+    dispatch(setChosenSingleBoArticle(data)),
+});
+
+// REDUX SELECTOR
+const chosenMemberRetriever = createSelector(
+  retrieveChosenMember,
+  (chosenMember) => ({
+    chosenMember,
+  })
+);
+const chosenMemberBoArticlesRetriever = createSelector(
+  retrieveChosenMemberBoArticles,
+  (chosenMemberBoArticles) => ({
+    chosenMemberBoArticles,
+  })
+);
+const chosenSingleBoArticleRetriever = createSelector(
+  retrieveChosenSingleBoArticle,
+  (chosenSingleBoArticle) => ({
+    chosenSingleBoArticle,
+  })
+);
 export function VisitorOtherPage(props: any) {
-  //****Initializations ****//
+  //** INITIALIZATIONS **//
+  const {
+    setChosenMember,
+    setChosenMemberBoArticles,
+    setChosenSingleBoArticle,
+  } = actionDispatch(useDispatch());
+  const { chosenMember } = useSelector(chosenMemberRetriever);
+  const { chosenMemberBoArticles } = useSelector(
+    chosenMemberBoArticlesRetriever
+  );
+  const { chosenSingleBoArticle } = useSelector(chosenSingleBoArticleRetriever);
   const [value, setValue] = React.useState("1");
-   const history = useHistory();
-  // ****Handlers****//
+  const history = useHistory();
+  //** HANDLERS **//
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
