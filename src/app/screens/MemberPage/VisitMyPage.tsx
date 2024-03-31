@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -27,9 +27,14 @@ import { MySettings } from "./mySettings";
 import { TuiEditor } from "../../components/tuiEditor/TuiEditor";
 import TViewer from "../../components/tuiEditor/TViewer";
 import { useHistory } from "react-router-dom";
-
 import { Member } from "../../../types/user";
-import { BoArticle } from "../../../types/boArticle";
+import { BoArticle, SearchMemberArticleObj } from "../../../types/boArticle";
+import {
+  sweetErrorHandling,
+  sweetFailureProvider,
+} from "../../../lib/sweetAlert";
+import CommunityApiService from "../../apiServices/communityApiService";
+import MemberApiService from "../../apiServices/memberApiService";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
@@ -75,6 +80,7 @@ const chosenSingleBoArticleRetriever = createSelector(
 );
 export function VisitMyPage(props: any) {
   //** INITIALIZATIONS **//
+    const { verifiedMemberdata } = props;
   const {
     setChosenMember,
     setChosenMemberBoArticles,
@@ -87,10 +93,50 @@ export function VisitMyPage(props: any) {
   const { chosenSingleBoArticle } = useSelector(chosenSingleBoArticleRetriever);
   const [value, setValue] = React.useState("1");
   const history = useHistory();
+   const [articlesRebuild, setArticlesRebuild] = useState<Date>(new Date());
+   const [memberAticleSearchObj, setMemberAticleSearchObj] =
+     useState<SearchMemberArticleObj>({ mb_id: "none", page: 1, limit: 3 });
+
+   useEffect(() => {
+     if (!localStorage.getItem("member_data")) {
+       sweetFailureProvider("Please login first!!!", true, true);
+     }
+
+     const communityService = new CommunityApiService();
+     communityService
+       .getMemberCommunityArticles(memberAticleSearchObj)
+       .then((data) => setChosenMemberBoArticles(data))
+       .catch((err) => console.log(err));
+
+     const memberService = new MemberApiService();
+     memberService
+       .getChosenMember(verifiedMemberdata?._id)
+       .then((data) => setChosenMember(data))
+       .catch((err) => console.log(err));
+   }, [memberAticleSearchObj, articlesRebuild]);
   //** HANDLERS **//
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
+  const handlePaginationChange = (event: any, value: number) => {
+    memberAticleSearchObj.page = value;
+    setMemberAticleSearchObj({ ...memberAticleSearchObj });
+  };
+
+  const renderChosenArticleHandeler = async (art_id: string) => {
+    try {
+      const communityService = new CommunityApiService();
+      communityService
+        .getChosenArticle(art_id)
+        .then((data) => setChosenSingleBoArticle(data))
+        .catch((err) => console.log(err));
+    } catch (err: any) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
+
   return (
     <div className="">
       <div className="mobile_version">
@@ -222,7 +268,13 @@ export function VisitMyPage(props: any) {
                   <TabPanel value={"1"}>
                     <Box className="menu_name">My Articles</Box>
                     <Box className="menu_content">
-                      <MemberPosts />
+                      <MemberPosts
+                        chosenMemberBoArticles={chosenMemberBoArticles}
+                        renderChosenArticleHandeler={
+                          renderChosenArticleHandeler
+                        }
+                        setArticlesRebuild={setArticlesRebuild}
+                      />
                       <Stack
                         sx={{ my: "40px" }}
                         direction={"row"}
@@ -303,6 +355,7 @@ export function VisitMyPage(props: any) {
                                 color={"primary"}
                               />
                             )}
+                            onChange={handlePaginationChange}
                           />
                         </Box>
                       </Stack>
