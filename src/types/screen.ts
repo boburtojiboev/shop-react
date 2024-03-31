@@ -1,9 +1,10 @@
 import { Event } from "./event";
 import { Product } from "./product";
-import { Shop } from "./user";
+import { Member, Shop } from "./user";
 import {Comment} from "./comment"
 import { Order } from "./order";
 import { BoArticle } from "./boArticle";
+import { Follower, Following } from "./follow";
 
 // REACT APP STATE//
 export interface AppRootState {
@@ -13,6 +14,7 @@ export interface AppRootState {
   eventPage: EventPageState;
   ordersPage: OrdersPageState;
   communityPage: CommunityPageState;
+  memberPage: MemberPageState;
 }
 
 // HOME PAGE//
@@ -56,4 +58,12 @@ export interface OrdersPageState {
 // COMMUNITY PAGE//
 export interface CommunityPageState {
  targetBoArticles: BoArticle[]
+}
+// MEMBER PAGE//
+export interface MemberPageState {
+  chosenMember: Member | null;
+  chosenMemberBoArticles: BoArticle[];
+  chosenSingleBoArticle?: BoArticle | null;
+  memberFollowers: Follower[];
+  memberFollowings: Following[];
 }
