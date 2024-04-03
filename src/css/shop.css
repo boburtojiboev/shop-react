@@ -264,6 +264,18 @@
   color: #110e0e;
 }
 
+.single_shop .price_box_pro{
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  height: 32px;
+}
+.single_shop .price_box_pro_box{
+  font-size: 12px;
+  font-style: oblique;
+  margin-top: 16px;
+}
+
 /* .product_container {
   display: flex;
   flex-direction: row;
@@ -425,6 +437,19 @@
   font-weight: 600;
   line-height: normal;
   margin: 20px 0;
+}
+.chosen_product_info_box .pro_price_box2 {
+  display: flex;
+  /* gap: 20px; */
+  color: #000;
+  font-family: Poppins;
+  height: 30px;
+  line-height: 20px;
+  /* font-size: 15px; */
+  /* font-style: normal; */
+  /* font-weight: 600; */
+  /* line-height: normal; */
+  /* margin: 20px 0; */
 }
 
 .chosen_product_info_box .bottom_box {

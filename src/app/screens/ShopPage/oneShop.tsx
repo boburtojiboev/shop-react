@@ -9,7 +9,6 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import { useHistory } from "react-router-dom";
 import {
@@ -50,7 +49,10 @@ import { serverApi } from "../../../lib/config";
 import assert from "assert";
 import MemberApiService from "../../apiServices/memberApiService";
 import { Definer } from "../../../lib/Definer";
-import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import {
+  sweetErrorHandling,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
 import ShopApiService from "../../apiServices/shopApiService";
 import { verifiedMemberData } from "../../apiServices/verify";
 
@@ -99,7 +101,7 @@ export function OneShop(props: any) {
       limit: 9,
       order: "product_price",
       shop_mb_id: shop_id,
-      product_collection: "all"
+      product_collection: "all",
     });
 
   const [productRebuild, setProductRebuild] = useState<Date>(new Date());
@@ -131,21 +133,21 @@ export function OneShop(props: any) {
     setTargetProductSearchObj({ ...targetProductSearchObj });
     history.push(`/store/${id}`);
   };
-   const searchCollectionHandler = (product_collection: string) => {
-     targetProductSearchObj.page = 1;
-     targetProductSearchObj.product_collection =  product_collection;
-     setTargetProductSearchObj({ ...targetProductSearchObj });
-   };
+  const searchCollectionHandler = (product_collection: string) => {
+    targetProductSearchObj.page = 1;
+    targetProductSearchObj.product_collection = product_collection;
+    setTargetProductSearchObj({ ...targetProductSearchObj });
+  };
 
-   const searchOrderHandler = (order: string) => {
-     targetProductSearchObj.page = 1;
-     targetProductSearchObj.order = order;
-     setTargetProductSearchObj({ ...targetProductSearchObj });
-   };
+  const searchOrderHandler = (order: string) => {
+    targetProductSearchObj.page = 1;
+    targetProductSearchObj.order = order;
+    setTargetProductSearchObj({ ...targetProductSearchObj });
+  };
 
-   const chosenProductHandler = (id: string) => {
-     history.push(`/store/product/${id}`);
-   };
+  const chosenProductHandler = (id: string) => {
+    history.push(`/store/product/${id}`);
+  };
 
   const targetLikeTop = async (e: any, id: string) => {
     try {
@@ -172,10 +174,10 @@ export function OneShop(props: any) {
       sweetErrorHandling(err).then();
     }
   };
- const handlePaginationChange = (event: any, value: number) => {
-   targetProductSearchObj.page = value;
-   setTargetProductSearchObj({ ...targetProductSearchObj });
- };
+  const handlePaginationChange = (event: any, value: number) => {
+    targetProductSearchObj.page = value;
+    setTargetProductSearchObj({ ...targetProductSearchObj });
+  };
   return (
     <div className="single_div">
       <div className="mobile_version">
@@ -285,7 +287,7 @@ export function OneShop(props: any) {
                 alignItems={"center"}
                 width={"19%%"}
                 height={"400px"}
-                sx={{ color: "black",  }}
+                sx={{ color: "black" }}
                 className="sorting_box"
               >
                 <Box color="black" className="sortin_top">
@@ -376,6 +378,7 @@ export function OneShop(props: any) {
                   <CssVarsProvider>
                     {targetProducts.map((product: Product) => {
                       const image_path = `${serverApi}/${product.product_images[0]}`;
+                      const discountedPrice = (product.product_price * (100 - product.product_discount)) / 100;
                       return (
                         <Card
                           onClick={() => chosenProductHandler(product?._id)}
@@ -388,19 +391,21 @@ export function OneShop(props: any) {
                             <AspectRatio ratio="1">
                               <img src={image_path} alt="" />
                             </AspectRatio>
-                            <Box
-                              sx={{
-                                position: "absolute",
-                                zIndex: 5,
-                                left: "0rem",
-                                transform: "translateY(50%)",
-                                color: "#ffffff",
-                                backgroundColor: "red",
-                                borderRadius: "0",
-                              }}
-                            >
-                              {product.product_discount} %
-                            </Box>
+                            {product.product_discount > 0 ? (
+                              <Box
+                                sx={{
+                                  position: "absolute",
+                                  zIndex: 5,
+                                  left: "0rem",
+                                  transform: "translateY(50%)",
+                                  color: "#ffffff",
+                                  backgroundColor: "red",
+                                  borderRadius: "0",
+                                }}
+                              >
+                                {product.product_discount} %
+                              </Box>
+                            ) : null}
                             <IconButton
                               aria-label="Like minimal phtography"
                               size="md"
@@ -463,13 +468,25 @@ export function OneShop(props: any) {
                             level="body-md"
                             sx={{ lineHeight: "10px" }}
                           >
-                            <Link
+                            {/* <Link
                               href=""
                               startDecorator={<AttachMoneyIcon />}
                               textColor="neutral.700"
                             >
                               {product.product_price}
-                            </Link>
+                            </Link> */}
+                            {product.product_discount > 0 ? (
+                              <Box className="price_box_pro">
+                                <pre>${discountedPrice} </pre>
+                                <pre className="price_box_pro_box">
+                                  $<s>{product.product_price}</s>
+                                </pre>
+                              </Box>
+                            ) : (
+                              <Box className="price_box_pro">
+                                <pre>${product.product_price} </pre>
+                              </Box>
+                            )}
                           </Typography>
                           <Typography
                             level="body-md"

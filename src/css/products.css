@@ -173,6 +173,17 @@
     padding-left: 15px;
     display: flex;
 }
+.products_page .price_box_pro{
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  height: 32px;
+}
+.products_page .price_box_pro_box{
+  font-size: 12px;
+  font-style: oblique;
+  margin-top: 16px;
+}
 
 @media (max-width: 440px) {
   .products_page{

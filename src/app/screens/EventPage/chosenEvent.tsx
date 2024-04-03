@@ -164,51 +164,6 @@ export function ChosenEvent() {
             </Stack>
           </Stack>
           <EventCommentPage chosenEvent={chosenEvent} />
-          {/* <Stack className="commet_box">
-            <h1 className="comment">Comment Part</h1>
-            <Marginer
-              direction="horizontal"
-              height="1"
-              width="100%"
-              bg="#000"
-            />
-            {Array.from(Array(5).keys()).map((ele, index) => {
-              return (
-                <Box className="comment_wrap">
-                  <Box className="comment_txt">
-                    <img
-                      src={"/shops/sneakers.jpg"}
-                      alt="product_image"
-                      className="img_comment"
-                    />
-                    <span className="commenter">Commenter name</span>
-                    <p className="comment_time">2days ago</p>
-                  </Box>
-                  <Box className="comm_desc_box">
-                    <span className="comment_des_txt">Comment discription</span>
-                  </Box>
-                </Box>
-              );
-            })}
-          </Stack>
-
-          <Box className="input_frame">
-            <div className="long_input">
-              <label className="spec_label">Add comment</label>
-              <textarea
-                placeholder={"comment"}
-                name={"description"}
-                className={"spec_textarea mb_description"}
-              />
-            </div>
-          </Box>
-          <Box
-            display="flex"
-            justifyContent={"flex-end"}
-            sx={{ mt: "25px", mb: "20px" }}
-          >
-            <Button variant="contained">Post</Button>
-          </Box> */}
         </Container>
       </div>
     </div>

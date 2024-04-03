@@ -14,6 +14,7 @@ import {
   ArrowForward,
   Close,
   Facebook,
+  GitHub,
   Home,
   Instagram,
   Telegram,
@@ -209,10 +210,21 @@ export function VisitMyPage(props: any) {
                     </span>
                   </Box>
                   <Box className="user_media_box">
-                    <Facebook />
-                    <Instagram />
-                    <Telegram />
-                    <YouTube />
+                    <a href="https://github.com/boburtojiboev">
+                      <Facebook />
+                    </a>
+                    <a href="https://www.instagram.com/bobur_jontojiboyev/">
+                      <Instagram />
+                    </a>
+                    <a href="https://t.me/TOJIBOEV_95/">
+                      <Telegram />
+                    </a>
+                    <a href="https://www.instagram.com/bobur_jontojiboyev/">
+                      <YouTube />
+                    </a>
+                    <a href="https://github.com/boburtojiboev">
+                      <GitHub />
+                    </a>
                   </Box>
                   <Box className="user_media_box">
                     <p className="follows">

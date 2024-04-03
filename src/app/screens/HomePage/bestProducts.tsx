@@ -5,7 +5,6 @@ import Typography from "@mui/joy/Typography";
 import { CssVarsProvider } from "@mui/joy/styles";
 import { Box, Container, Stack } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import { AspectRatio, Link } from "@mui/joy";
@@ -24,7 +23,10 @@ import { useHistory } from "react-router-dom";
 import assert from "assert";
 import MemberApiService from "../../apiServices/memberApiService";
 import { Definer } from "../../../lib/Definer";
-import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
+import {
+  sweetErrorHandling,
+  sweetTopSmallSuccessAlert,
+} from "../../../lib/sweetAlert";
 import { verifiedMemberData } from "../../apiServices/verify";
 
 // REDUX SLICE
@@ -117,6 +119,8 @@ export function BestProducts(props: any) {
           >
             {bestProducts.map((product: Product) => {
               const image_path = `${serverApi}/${product.product_images[0]}`;
+               const discountedPrice =
+                 (product.product_price * (100 - product.product_discount)) / 100;
               return (
                 <CssVarsProvider key={product._id}>
                   <Card
@@ -129,19 +133,21 @@ export function BestProducts(props: any) {
                       <AspectRatio ratio="1">
                         <img src={image_path} alt="" />
                       </AspectRatio>
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          zIndex: 5,
-                          left: "0rem",
-                          transform: "translateY(50%)",
-                          color: "#ffffff",
-                          backgroundColor: "red",
-                          borderRadius: "0",
-                        }}
-                      >
-                        {product.product_discount} %
-                      </Box>
+                      {product.product_discount > 0 ? (
+                        <Box
+                          sx={{
+                            position: "absolute",
+                            zIndex: 5,
+                            left: "0rem",
+                            transform: "translateY(50%)",
+                            color: "#ffffff",
+                            backgroundColor: "red",
+                            borderRadius: "0",
+                          }}
+                        >
+                          {product.product_discount} %
+                        </Box>
+                      ) : null}
                       <IconButton
                         aria-label="Like minimal phtography"
                         size="md"
@@ -201,13 +207,25 @@ export function BestProducts(props: any) {
                       {product.product_name}
                     </Typography>
                     <Typography level="body-md" sx={{ lineHeight: "10px" }}>
-                      <Link
+                      {/* <Link
                         href=""
                         startDecorator={<AttachMoneyIcon />}
                         textColor="neutral.700"
                       >
                         {product.product_price}
-                      </Link>
+                      </Link> */}
+                      {product.product_discount > 0 ? (
+                        <Box className="price_box_pro">
+                          <pre>${discountedPrice} </pre>
+                          <pre className="price_box_pro_box">
+                            $<s>{product.product_price}</s>
+                          </pre>
+                        </Box>
+                      ) : (
+                        <Box className="price_box_pro">
+                          <pre>${product.product_price} </pre>
+                        </Box>
+                      )}
                     </Typography>
                     <Typography level="body-md" sx={{ lineHeight: "10px" }}>
                       <Link

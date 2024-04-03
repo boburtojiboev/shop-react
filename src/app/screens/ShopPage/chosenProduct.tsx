@@ -24,9 +24,9 @@ import {
 } from "../../../lib/sweetAlert";
 // REDUX
 import { createSelector } from "reselect";
-import { setChosenProduct, setChosenShop,} from "./slice";
+import { setChosenProduct, setChosenShop } from "./slice";
 import { serverApi } from "../../../lib/config";
-import { retrieveChosenProduct, retrieveChosenShop, } from "./selector";
+import { retrieveChosenProduct, retrieveChosenShop } from "./selector";
 import { CommentPage } from "./comment";
 import { verifiedMemberData } from "../../apiServices/verify";
 // REDUX SLICE
@@ -79,7 +79,7 @@ export function ChosenProduct(props: any) {
   const wide_img = `${serverApi}/${chosenProduct?.product_images.filter(
     (ele: string) => chosenProduct?.product_images.indexOf(ele) === imgChange
   )}`;
-
+  // const discountedPrice = (chosenProduct?.product_price * (100 - chosenProduct.product_discount)) / 100;
   /** HANDLERS */
   const targetLikeProduct = async (e: any) => {
     try {
@@ -231,7 +231,28 @@ export function ChosenProduct(props: any) {
                   <div className="bottom_price">
                     <div className="pro_price_box">
                       <span>Price:</span>
-                      <span>${chosenProduct?.product_price}</span>
+                      {chosenProduct &&
+                      chosenProduct?.product_discount * 1 > 0 ? (
+                        <Box className="pro_price_box2">
+                          <pre style={{ marginTop: "0" }}>
+                            {"$"}
+                            {(chosenProduct.product_price *
+                              (100 - chosenProduct.product_discount)) /
+                              100}{" "}
+                          </pre>
+                          <span style={{ fontSize: "12px" }}>
+                            $<s>{chosenProduct?.product_price}</s>
+                          </span>
+                          <span style={{ color: "red" }}>
+                            <pre style={{ marginTop: "0", fontSize: "12px" }}>
+                              {" "}
+                              sale:{chosenProduct.product_discount}{"%"}
+                            </pre>
+                          </span>
+                        </Box>
+                      ) : (
+                        <span>${chosenProduct?.product_price}</span>
+                      )}
                     </div>
                     <div className="bottom_box">
                       <Button

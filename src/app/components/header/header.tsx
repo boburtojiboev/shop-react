@@ -7,13 +7,14 @@ import {
   MenuItem,
   ListItemIcon,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { Chatting } from "./chatting";
 import { Basket } from "./basket";
 import { Logout } from "@mui/icons-material";
 import { verifiedMemberData } from "../../apiServices/verify";
 
 export function Header(props: any) {
+  const history = useHistory();
   return (
     <div className="format home_navbar">
       <Container className="zor">
@@ -29,7 +30,9 @@ export function Header(props: any) {
                 marginTop: "0px",
                 color: "#ffffff",
                 marginLeft: "30px",
+                cursor: "pointer",
               }}
+              onClick={() => history.push("/")}
             >
               ShoekerShop
             </h1>
@@ -61,11 +64,11 @@ export function Header(props: any) {
               </NavLink>
             </Box>
             {verifiedMemberData ? (
-            <Box className="hover-line" onClick={props.setPath}>
-              <NavLink to="/orders" activeClassName="underline">
-                Orders
-              </NavLink>
-            </Box>
+              <Box className="hover-line" onClick={props.setPath}>
+                <NavLink to="/orders" activeClassName="underline">
+                  Orders
+                </NavLink>
+              </Box>
             ) : null}
             <Box className="hover-line" onClick={props.setPath}>
               <NavLink to="/community" activeClassName="underline">

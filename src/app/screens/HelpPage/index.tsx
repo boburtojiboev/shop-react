@@ -18,12 +18,12 @@ import Marginer from "../../components/marginer";
 import { NavbarOthers } from "../../components/header/others";
 import { Close, Home } from "@mui/icons-material";
 import { useHistory } from "react-router-dom";
-// import { sweetTopSmallSuccessAlert } from "../../app/lib/sweetAlert";
+import { sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 
 export function HelpPage() {
-  // Initializations//
+  // INITIALIZATIONS
   const [value, setValue] = React.useState("1");
-   const history = useHistory();
+  const history = useHistory();
   const faq = [
     {
       question:
@@ -100,14 +100,14 @@ export function HelpPage() {
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   /*HANDLERS*/
-  //  const submitHandler = () => {
-  //    if (name !== "" && email !== "" && message !== "") {
-  //      setName("");
-  //      setEmail("");
-  //      setMessage("");
-  //      sweetTopSmallSuccessAlert("Sent successfully", 800, false);
-  //    }
-  //  };
+  const submitHandler = () => {
+    if (name !== "" && email !== "" && message !== "") {
+      setName("");
+      setEmail("");
+      setMessage("");
+      sweetTopSmallSuccessAlert("Sent successfully", 700, false);
+    }
+  };
 
   const handleChange = (event: any, newValue: string) => {
     setValue(newValue);
@@ -222,8 +222,8 @@ export function HelpPage() {
                             type="text"
                             name="mb_nick"
                             placeholder="Name"
-                            // value={name}
-                            // onChange={(e) => setName(e.target.value)}
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                           />
                         </div>
                         <div className="admin_input_box">
@@ -235,8 +235,8 @@ export function HelpPage() {
                             type="text"
                             name="mb_email"
                             placeholder="Your email address"
-                            // value={email}
-                            // onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                         </div>
                         <div className="admin_input_box">
@@ -245,8 +245,8 @@ export function HelpPage() {
                             required
                             name="mb_msg"
                             placeholder="Text"
-                            // value={message}
-                            // onChange={(e) => setMessage(e.target.value)}
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
                           ></textarea>
                         </div>
                         <Box
@@ -259,7 +259,7 @@ export function HelpPage() {
                             style={{ marginTop: "10px" }}
                             type="submit"
                             variant="contained"
-                            // onClick={submitHandler}
+                            onClick={submitHandler}
                             className="submit_btn"
                           >
                             Send

@@ -5,7 +5,6 @@ import Typography from "@mui/joy/Typography";
 import { CssVarsProvider } from "@mui/joy/styles";
 import { Box, Container, Stack } from "@mui/material";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import { AspectRatio, Link } from "@mui/joy";
 import ListAltIcon from "@mui/icons-material/ListAlt";
@@ -120,6 +119,7 @@ export function BigSales(props: any) {
           >
             {saleProducts.map((product: Product) => {
               const image_path = `${serverApi}/${product.product_images[0]}`;
+              const discountedPrice = (product.product_price * (100 - product.product_discount)) / 100;
               return (
                 <CssVarsProvider key={product._id}>
                   <Card
@@ -204,13 +204,18 @@ export function BigSales(props: any) {
                       {product.product_name}
                     </Typography>
                     <Typography level="body-md" sx={{ lineHeight: "10px" }}>
-                      <Link
-                        href=""
-                        startDecorator={<AttachMoneyIcon />}
-                        textColor="neutral.700"
-                      >
-                        {product.product_price}
-                      </Link>
+                      {product.product_discount > 0 ? (
+                        <Box className="price_box_pro">
+                          <pre>${discountedPrice} </pre>
+                          <pre className="price_box_pro_box">
+                            $<s>{product.product_price}</s>
+                          </pre>
+                        </Box>
+                      ) : (
+                        <Box className="price_box_pro">
+                          <pre>${product.product_price} </pre>
+                        </Box>
+                      )}
                     </Typography>
                     <Typography level="body-md" sx={{ lineHeight: "10px" }}>
                       <Link

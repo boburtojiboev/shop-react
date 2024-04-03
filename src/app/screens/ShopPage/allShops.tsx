@@ -139,25 +139,25 @@ export function AllShops() {
                   <FormControlLabel
                     value="best"
                     control={<Radio />}
-                    label="best"
+                    label="Best"
                     onClick={() => searchHandler("mb_point")}
                   />
                   <FormControlLabel
                     value="famous"
                     control={<Radio />}
-                    label="famous"
+                    label="Famous"
                     onClick={() => searchHandler("mb_views")}
                   />
                   <FormControlLabel
                     value="tranding"
                     control={<Radio />}
-                    label="tranding"
+                    label="Trand"
                     onClick={() => searchHandler("mb_likes")}
                   />
                   <FormControlLabel
                     value="new"
                     control={<Radio />}
-                    label="new"
+                    label="New"
                     onClick={() => searchHandler("createdAt")}
                   />
                 </RadioGroup>

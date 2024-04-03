@@ -1,7 +1,13 @@
 import { Box, Container, Stack } from "@mui/material";
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 export function CollectionType() {
+  // Initialization
+  const history = useHistory();
+   const moreProductsHandler = () => {
+     history.push(`/products`);
+   };
   return (
     <div className="collection_frame">
       <Container sx={{ padding: "0px" }}>
@@ -19,7 +25,12 @@ export function CollectionType() {
                   backgroundImage: `url("https://www.rankandstyle.com/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Frns-dev%2Fmedia%2Flists%2Fm%2Fmens-office-sneakers.jpg&w=640&q=75")`,
                 }}
               >
-                <button className={"view_btn"}>MAN</button>
+                <button
+                  onClick={() => moreProductsHandler()}
+                  className={"view_btn"}
+                >
+                  MAN
+                </button>
               </Stack>
             </Box>
 
@@ -30,7 +41,12 @@ export function CollectionType() {
                   backgroundImage: `url("https://www.jetsetter.com//uploads/sites/7/2018/05/K9LPCdvM.jpeg")`,
                 }}
               >
-                <button className={"view_btn"}>WOMEN</button>
+                <button
+                  onClick={() => moreProductsHandler()}
+                  className={"view_btn"}
+                >
+                  WOMEN
+                </button>
               </Stack>
             </Box>
 
@@ -41,7 +57,12 @@ export function CollectionType() {
                   backgroundImage: `url("https://neutral.com/cdn/shop/products/O30001KidsT-shirt_DustyMint_White_804x.jpg?v=1672222201")`,
                 }}
               >
-                <button className={"view_btn"}>KIDS</button>
+                <button
+                  onClick={() => moreProductsHandler()}
+                  className={"view_btn"}
+                >
+                  KIDS
+                </button>
               </Stack>
             </Box>
           </Stack>
