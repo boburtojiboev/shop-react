@@ -63,19 +63,20 @@ export default function ProcessOrders(props: any) {
                   const product: Product = order.product_data.filter(
                     (ele) => ele._id === item.product_id
                   )[0];
+                  const discountedPrice = (item.item_price * (100 - item.item_sale)) / 100;
                   const image_path = `${serverApi}/${product.product_images[0]}`;
                   return (
                     <Box className="ordersName_price">
                       <img src={image_path} alt="" className={"orderDishImg"} />
                       <p className="titleDish">{product.product_name}</p>
                       <Box className="priceBox">
-                        <p>${item.item_price}</p>
+                        <p>${discountedPrice}</p>
                         <img src="/icons/Close.svg" alt="" />
                         <p>{item.item_quantity}</p>
                         <img src="/icons/pause.svg" alt="" />
                         <p style={{ marginLeft: "15px" }}>
                           {" "}
-                          ${item.item_price * item.item_quantity}
+                          ${discountedPrice * item.item_quantity}
                         </p>
                       </Box>
                     </Box>

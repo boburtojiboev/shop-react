@@ -4,11 +4,11 @@ export interface OrderItems {
   _id: string;
   item_quantity: number;
   item_price: number;
+  item_sale: number;
   order_id: string;
   product_id: string;
   createdAt: Date;
   updatedAt: Date;
-  item_sale: number;
 }
 
 export interface Order {
