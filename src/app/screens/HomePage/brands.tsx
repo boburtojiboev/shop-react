@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Favorite, Visibility } from "@mui/icons-material";
 import { CardOverflow, IconButton } from "@mui/joy";
 import Card from "@mui/joy/Card";
@@ -25,6 +25,17 @@ import { Definer } from "../../../lib/Definer";
 import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 import { verifiedMemberData } from "../../apiServices/verify";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import { setTopShops } from "../../screens/HomePage/slice";
+// import { Shop } from "../../../types/user";
+import ShopApiService from "../../apiServices/shopApiService";
+
+// REDUX SLICE
+const actionDispatch = (dispatch: Dispatch) => ({
+  setTopShops: (data: Shop[]) => dispatch(setTopShops(data)),
+});
 
 // REDUX SELECTOR
 const topShopsRetriever = createSelector(retrieveTopShops, (topShops) => ({
@@ -34,6 +45,16 @@ const topShopsRetriever = createSelector(retrieveTopShops, (topShops) => ({
 
 export function Brands() {
   // Initialization
+  const { setTopShops } = actionDispatch(useDispatch());
+  useEffect(() => {
+    const shopService = new ShopApiService();
+    shopService
+      .getTopShops()
+      .then((data) => {
+        setTopShops(data);
+      })
+      .catch((err) => console.log(err));
+  }, [setTopShops]);
   const history = useHistory();
   const { topShops } = useSelector(topShopsRetriever);
 
@@ -92,13 +113,13 @@ export function Brands() {
           >
             <Swiper
               className={"brand_info swiper_wrapper"}
-              spaceBetween={20}
+              spaceBetween={0}
               slidesPerView={"auto"}
               loop={true}
               centeredSlides={true}
               autoplay={{
                 delay: 1000,
-                disableOnInteraction: false,
+                disableOnInteraction: true,
               }}
               modules={[Autoplay]}
             >
