@@ -45,3 +45,16 @@ export interface CartItem {
   image: string;
   sale: number;
 }
+ export interface ChatMessage {
+   msg: string;
+   mb_id: string;
+   mb_nick: string;
+   mb_image: string;
+ }
+
+ export interface ChatGreetMsg {
+   text: string;
+ }
+ export interface ChatInfoMsg {
+   total: number;
+ }
