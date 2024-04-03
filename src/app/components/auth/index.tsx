@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import Modal from "@material-ui/core/Modal";
@@ -37,23 +37,24 @@ const modelling = styled.img`
 export default function AuthentificationModal(props: any) {
   // INITIALIZATIONS
   const classes = useStyles();
-  let mb_nick: string = "",
-    mb_password: string = "",
-    mb_phone: number = 0;
+      const [mb_nick, set_mb_nick] = useState<string>("");
+      const [mb_phone, set_mb_phone] = useState<number>(0);
+      const [mb_password, set_mb_password] = useState<string>("");
 
   /** HANDLERS */
   const handleUsername = (e: any) => {
-    mb_nick = e.target.value;
+    set_mb_nick(e.target.value);
   };
   const handlePhone = (e: any) => {
-    mb_phone = e.target.value;
+    set_mb_phone(e.target.value);
   };
   const handlePassword = (e: any) => {
-    mb_password = e.target.value;
+    set_mb_password(e.target.value);
   };
   const handleSignupRequest = async () => {
     try {
-      const is_fullfilled = mb_nick !== "" && mb_password !== "" && mb_phone !== 0;
+      const is_fullfilled =
+        mb_nick !== "" && mb_password !== "" && mb_phone !== 0;
       assert.ok(is_fullfilled, Definer.input_err1);
 
       const sign_data = {
@@ -93,6 +94,14 @@ export default function AuthentificationModal(props: any) {
       sweetErrorHandling(err).then();
     }
   };
+
+    const passwordKeyPressHandler = (e: any) => {
+      if (e.key == "Enter" && props.signupOpen) {
+        handleSignupRequest().then();
+      } else if (e.key == "Enter" && props.loginOpen) {
+        handleLoginRequest().then();
+      }
+    };
   return (
     <div>
       {/*@ts-ignore */}
@@ -133,6 +142,7 @@ export default function AuthentificationModal(props: any) {
               />
               <TextField
                 onChange={handlePassword}
+                onKeyPress={passwordKeyPressHandler}
                 sx={{ marginTop: "7px" }}
                 id="outlined-basic"
                 label="password"
@@ -183,6 +193,7 @@ export default function AuthentificationModal(props: any) {
               />
               <TextField
                 onChange={handlePassword}
+                onKeyPress={passwordKeyPressHandler}
                 sx={{ marginTop: "7px" }}
                 id="outlined-basic"
                 label="password"
