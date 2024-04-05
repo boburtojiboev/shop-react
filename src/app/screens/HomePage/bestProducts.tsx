@@ -8,7 +8,7 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import { AspectRatio, Link } from "@mui/joy";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -67,6 +67,7 @@ export function BestProducts(props: any) {
   }, []);
 
   const refs: any = useRef([]);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   // HANDLERS//
   const chosenProductHandler = (id: string) => {
@@ -118,9 +119,13 @@ export function BestProducts(props: any) {
             className="bestpro_stack"
           >
             {bestProducts.map((product: Product) => {
-              const image_path = `${serverApi}/${product.product_images[0]}`;
-               const discountedPrice =
-                 (product.product_price * (100 - product.product_discount)) / 100;
+              const image_path = [
+                `${serverApi}/${product.product_images[0]}`,
+                `${serverApi}/${product.product_images[1]}`,
+              ];
+              const discountedPrice =
+                (product.product_price * (100 - product.product_discount)) /
+                100;
               return (
                 <CssVarsProvider key={product._id}>
                   <Card
@@ -128,10 +133,20 @@ export function BestProducts(props: any) {
                     className="img_cart"
                     variant="outlined"
                     sx={{ minHeight: 320, minWidth: 280 }}
+                    onMouseEnter={() => setHoveredCard(product._id)}
+                    onMouseLeave={() => setHoveredCard(null)}
                   >
                     <CardOverflow>
                       <AspectRatio ratio="1">
-                        <img src={image_path} alt="" />
+                        <img
+                          src={
+                            hoveredCard === product._id &&
+                            product.product_images.length > 1
+                              ? image_path[1]
+                              : image_path[0]
+                          }
+                          alt=""
+                        />
                       </AspectRatio>
                       {product.product_discount > 0 ? (
                         <Box
@@ -207,13 +222,6 @@ export function BestProducts(props: any) {
                       {product.product_name}
                     </Typography>
                     <Typography level="body-md" sx={{ lineHeight: "10px" }}>
-                      {/* <Link
-                        href=""
-                        startDecorator={<AttachMoneyIcon />}
-                        textColor="neutral.700"
-                      >
-                        {product.product_price}
-                      </Link> */}
                       {product.product_discount > 0 ? (
                         <Box className="price_box_pro">
                           <pre>${discountedPrice} </pre>
@@ -244,7 +252,6 @@ export function BestProducts(props: any) {
                         gap: 1.5,
                         py: 0.8,
                         borderTop: ".4px solid",
-                        // bgcolor: "Background.level1",
                         justifyContent: "flex-end",
                       }}
                     >

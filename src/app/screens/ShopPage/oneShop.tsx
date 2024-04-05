@@ -87,6 +87,7 @@ export function OneShop(props: any) {
   // INITIALIZATIONS
   const history = useHistory();
   const refs: any = useRef([]);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   let { shop_id } = useParams<{ shop_id: string }>();
   const { setRandomShops, setChosenShop, setTargetProducts } = actionDispatch(
     useDispatch()
@@ -294,9 +295,6 @@ export function OneShop(props: any) {
                   Default Sorting
                 </Box>
                 <FormControl className="filter_box">
-                  {/* <FormLabel id="demo-radio-buttons-group-label">
-                  Sorting
-                </FormLabel> */}
                   <RadioGroup
                     // row
                     aria-labelledby="demo-row-radio-buttons-group-label"
@@ -377,7 +375,10 @@ export function OneShop(props: any) {
                 <Stack className={"single_shop_box"}>
                   <CssVarsProvider>
                     {targetProducts.map((product: Product) => {
-                      const image_path = `${serverApi}/${product.product_images[0]}`;
+                      const image_path = [
+                        `${serverApi}/${product.product_images[0]}`,
+                        `${serverApi}/${product.product_images[1]}`,
+                      ];
                       const discountedPrice = (product.product_price * (100 - product.product_discount)) / 100;
                       return (
                         <Card
@@ -385,11 +386,26 @@ export function OneShop(props: any) {
                           key={product._id}
                           className="img_carts"
                           variant="outlined"
-                          sx={{ minHeight: 320, minWidth: 280, mb: "40px" }}
+                          sx={{
+                            minHeight: 320,
+                            minWidth: 280,
+                            mb: "40px",
+                            mr: "25px",
+                          }}
+                          onMouseEnter={() => setHoveredCard(product._id)}
+                          onMouseLeave={() => setHoveredCard(null)}
                         >
                           <CardOverflow>
                             <AspectRatio ratio="1">
-                              <img src={image_path} alt="" />
+                              <img
+                                src={
+                                  hoveredCard === product._id &&
+                                  product.product_images.length > 1
+                                    ? image_path[1]
+                                    : image_path[0]
+                                }
+                                alt=""
+                              />
                             </AspectRatio>
                             {product.product_discount > 0 ? (
                               <Box

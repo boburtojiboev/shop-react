@@ -61,6 +61,7 @@ export function ProductsPage(props: any) {
   // INITIALIZATIONS
   const history = useHistory();
   const refs: any = useRef([]);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const { setAllProducts } = actionDispatch(useDispatch());
 
   const { allProducts } = useSelector(allProductsRetriever);
@@ -373,7 +374,10 @@ export function ProductsPage(props: any) {
                 <Stack className={"single_shop_box"}>
                   <CssVarsProvider>
                     {allProducts.map((product: Product) => {
-                      const image_path = `${serverApi}/${product.product_images[0]}`;
+                      const image_path = [
+                        `${serverApi}/${product.product_images[0]}`,
+                        `${serverApi}/${product.product_images[1]}`,
+                      ];
                       const discountedPrice =
                         (product.product_price *
                           (100 - product.product_discount)) /
@@ -385,10 +389,20 @@ export function ProductsPage(props: any) {
                           className="img_carts"
                           variant="outlined"
                           sx={{ minHeight: 320, minWidth: 280 }}
+                          onMouseEnter={() => setHoveredCard(product._id)}
+                          onMouseLeave={() => setHoveredCard(null)}
                         >
                           <CardOverflow>
                             <AspectRatio ratio="1">
-                              <img src={image_path} alt="" />
+                              <img
+                                src={
+                                  hoveredCard === product._id &&
+                                  product.product_images.length > 1
+                                    ? image_path[1]
+                                    : image_path[0]
+                                }
+                                alt=""
+                              />
                             </AspectRatio>
                             {product.product_discount > 0 ? (
                               <Box

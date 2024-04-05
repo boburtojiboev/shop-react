@@ -8,7 +8,7 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import { AspectRatio, Link } from "@mui/joy";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -64,6 +64,8 @@ export function BigSales(props: any) {
   }, []);
 
   const refs: any = useRef([]);
+  // img change
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   // HANDLERS//
   const chosenProductHandler = (id: string) => {
@@ -118,7 +120,10 @@ export function BigSales(props: any) {
             className="big_sale_stack"
           >
             {saleProducts.map((product: Product) => {
-              const image_path = `${serverApi}/${product.product_images[0]}`;
+              const image_path = [
+                `${serverApi}/${product.product_images[0]}`,
+                `${serverApi}/${product.product_images[1]}`,
+              ];
               const discountedPrice = (product.product_price * (100 - product.product_discount)) / 100;
               return (
                 <CssVarsProvider key={product._id}>
@@ -127,10 +132,20 @@ export function BigSales(props: any) {
                     className="img_carts"
                     variant="outlined"
                     sx={{ minHeight: 320, minWidth: 280 }}
+                    onMouseEnter={() => setHoveredCard(product._id)}
+                    onMouseLeave={() => setHoveredCard(null)}
                   >
                     <CardOverflow>
                       <AspectRatio ratio="1">
-                        <img src={image_path} alt="" />
+                        <img
+                          src={
+                            hoveredCard === product._id &&
+                            product.product_images.length > 1
+                              ? image_path[1]
+                              : image_path[0]
+                          }
+                          alt=""
+                        />
                       </AspectRatio>
                       <Box
                         sx={{

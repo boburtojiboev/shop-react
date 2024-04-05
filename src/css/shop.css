@@ -194,8 +194,8 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  /* align-items: center; */
+  /* justify-content: space-between; */
 }
 
 .shop_page .single_shop .bottom_box {
@@ -276,19 +276,6 @@
   margin-top: 16px;
 }
 
-/* .product_container {
-  display: flex;
-  flex-direction: row;
-}
-.chosen_produc_wrap { */
-/* width: 55%;
-  height: 450px; */
-/* display: flex;
-  flex-direction: row;
-  min-height: 500px;
-  width: 60%;
-} */
-
 .img_box {
   width: 100px;
   min-height: 450px;
@@ -308,12 +295,10 @@
 }
 
 .main_img_box {
-  /* min-height: 450px; */
   width: 500px;
-  height: 500px;
 }
-.selected_item {
-  /* min-width: 500px; */
+ .main_img_box .selected_item {
+  min-width: 500px;
   z-index: 1;
 }
 
@@ -321,7 +306,6 @@
 .shop_page .chosen_product_page {
   position: relative;
   width: 100%;
-  /* height: auto; */
   display: flex;
   flex-direction: column;
 }
@@ -332,21 +316,18 @@
   justify-content: space-between;
   padding-top: 60px;
   padding-bottom: 60px;
+  height: auto;
 }
 
 .chosen_product_page .chosen_produc_wrap {
   width: 55%;
   display: flex;
   flex-direction: row;
-  /* width: 800px;
-  height: 800px; */
 }
 
 .chosen_product_page .dish_swiper {
   --swiper-navigation-color: #fff;
   --swiper-pagination-color: #fff;
-  /* width: 100%; */
-  /* height: auto; */
 }
 
 .chosen_product_page .bottom_wrap {
@@ -385,8 +366,8 @@
 }
 
 .chosen_product_info_box .pro_txt {
-  width: 288px;
-  height: 38px;
+  width: 100%;
+  height: auto;
   color: #000;
   font-family: Poppins;
   font-size: 30px;
@@ -418,7 +399,7 @@
 }
 
 .chosen_product_info_box .produt_desc_bottom {
-  position: absolute;
+  /* position: absolute; */
   display: flex;
   flex-direction: column;
   width: calc(100% - 80px);
@@ -440,16 +421,10 @@
 }
 .chosen_product_info_box .pro_price_box2 {
   display: flex;
-  /* gap: 20px; */
   color: #000;
   font-family: Poppins;
   height: 30px;
   line-height: 20px;
-  /* font-size: 15px; */
-  /* font-style: normal; */
-  /* font-weight: 600; */
-  /* line-height: normal; */
-  /* margin: 20px 0; */
 }
 
 .chosen_product_info_box .bottom_box {
@@ -589,7 +564,6 @@
   position: relative;
   width: 440px;
   height: auto;
-  /* margin-top: 50px; */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
