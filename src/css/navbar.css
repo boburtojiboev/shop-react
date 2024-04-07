@@ -528,6 +528,7 @@ margin-right: 50px;
   .home_navbar .shoekershop{
     display: flex;
     justify-content: center;
+    font-family: "Nunito", sans-serif;
   }
 
   .home_navbar .navbar_links {

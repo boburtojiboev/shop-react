@@ -23,20 +23,34 @@ export function Header(props: any) {
           className="navbar_config"
           justifyContent={"space-between"}
         >
-          <Box>
+          <Stack
+            style={{ cursor: "pointer" }}
+            flexDirection={"row"}
+            onClick={() => history.push("/")}
+          >
+            <Stack
+              style={{
+                backgroundColor: "white",
+                width: "45px",
+                height: "31px",
+                marginTop: "10px",
+                borderRadius: "50%",
+              }}
+            >
+              <img src="/icons/logo.png" height="42px" width={"45px"} alt="" />
+            </Stack>
             <h1
               className="shoekershop"
               style={{
                 marginTop: "0px",
                 color: "#ffffff",
-                marginLeft: "30px",
+                marginLeft: "5px",
                 cursor: "pointer",
               }}
-              onClick={() => history.push("/")}
             >
-              ShoekerShop
+              <span style={{ color: "#2ec3da" }}>Shoeker</span>Shop
             </h1>
-          </Box>
+          </Stack>
           <Stack
             flexDirection={"row"}
             justifyContent={"space-evenly"}
