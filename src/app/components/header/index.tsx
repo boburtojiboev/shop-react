@@ -1,18 +1,10 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Container,
-  IconButton,
-  Stack,
-} from "@mui/material";
+import { Stack } from "@mui/material";
 import React from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Header } from "./header";
 
 export function NavbarHome(props: any) {
   const history = useHistory();

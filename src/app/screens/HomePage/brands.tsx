@@ -113,7 +113,7 @@ export function Brands() {
           >
             <Swiper
               className={"brand_info swiper_wrapper"}
-              spaceBetween={0}
+              spaceBetween={10}
               slidesPerView={"auto"}
               loop={true}
               centeredSlides={true}

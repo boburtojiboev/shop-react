@@ -50,7 +50,7 @@ export function MemberFollowing(props: any) {
       .getMemberFollowings(followingsSearchObj)
       .then((data) => setMemberFollowings(data))
       .catch((err) => console.log(err));
-  }, [followingsSearchObj, followRebuild]);
+  }, [followingsSearchObj, followRebuild, setMemberFollowings]);
 
   //** HANDLERS**//
   const handlePaginationChange = (event: any, value: number) => {

@@ -18,7 +18,7 @@ class FollowApiService {
         withCredentials: true,
       });
       assert.ok(result?.data, Definer.general_err1);
-      assert.ok(result?.data?.state != "fail", result?.data?.message);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
       console.log("state:", result.data.state);
 
       const followers: Follower[] = result.data.data;
@@ -38,7 +38,7 @@ class FollowApiService {
         withCredentials: true,
       });
       assert.ok(result?.data, Definer.general_err1);
-      assert.ok(result?.data?.state != "fail", result?.data?.message);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
       console.log("state:", result.data.state);
 
       const followings: Following[] = result.data.data;
@@ -60,7 +60,7 @@ class FollowApiService {
         }
       );
       assert.ok(result?.data, Definer.general_err1);
-      assert.ok(result?.data?.state != "fail", result?.data?.message);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
       console.log("state:", result.data.state);
 
       return result.data.data === "subscribed";
@@ -81,7 +81,7 @@ class FollowApiService {
         }
       );
       assert.ok(result?.data, Definer.general_err1);
-      assert.ok(result?.data?.state != "fail", result?.data?.message);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
       console.log("state:", result.data.state);
 
       return result.data.data === "unsubscribed";

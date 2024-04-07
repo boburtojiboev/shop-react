@@ -29,7 +29,6 @@ import { Product } from "../types/product";
 function App() {
   // INITIALIZATIONS
   const [ setPath] = useState();
-  const main_path = window.location.pathname;
   const [signupOpen, setSignupOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [orderRebuild, setOrderRebuild] = useState<Date>(new Date());

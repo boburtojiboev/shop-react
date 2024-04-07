@@ -31,7 +31,7 @@ class CommunityApiService {
       });
 
       assert.ok(result?.data, Definer.general_err1);
-      assert.ok(result?.data?.state != "fail", result?.data?.message);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
       console.log("state:", result.data.data);
 
       const image_name: string = result.data.data;
@@ -51,7 +51,7 @@ class CommunityApiService {
         });
 
       assert.ok(result?.data, Definer.general_err1);
-      assert.ok(result?.data?.state != "fail", result?.data?.message);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
       console.log("state:", result.data.data);
 
       const article: BoArticle = result.data.data;
@@ -91,7 +91,7 @@ class CommunityApiService {
       });
 
       assert.ok(result?.data, Definer.general_err1);
-      assert.ok(result?.data?.state != "fail", result?.data?.message);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
       console.log("state:", result.data.state);
 
       const articles: BoArticle[] = result.data.data;
@@ -109,7 +109,7 @@ class CommunityApiService {
         });
 
       assert.ok(result?.data, Definer.general_err1);
-      assert.ok(result?.data?.state != "fail", result?.data?.message);
+      assert.ok(result?.data?.state !== "fail", result?.data?.message);
       console.log("state:", result.data.state);
 
       const article: BoArticle = result.data.data;

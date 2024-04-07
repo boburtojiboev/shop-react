@@ -4,7 +4,6 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Modal from "@material-ui/core/Modal";
 import Fade from "@material-ui/core/Fade";
 import { TextField, Stack, Fab } from "@mui/material";
-import styled from "styled-components";
 import { Login } from "@mui/icons-material";
 import assert from "assert";
 import { Definer } from "../../../lib/Definer";
@@ -24,15 +23,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 2, 2),
   },
 }));
-
-const modelling = styled.img`
-  width: 62%;
-  height: 100%;
-  border-radius: 10px;
-  background: #000;
-  margin-top: 5px;
-  margin-left: 10px;
-`;
 
 export default function AuthentificationModal(props: any) {
   // INITIALIZATIONS
@@ -96,9 +86,9 @@ export default function AuthentificationModal(props: any) {
   };
 
     const passwordKeyPressHandler = (e: any) => {
-      if (e.key == "Enter" && props.signupOpen) {
+      if (e.key === "Enter" && props.signupOpen) {
         handleSignupRequest().then();
-      } else if (e.key == "Enter" && props.loginOpen) {
+      } else if (e.key === "Enter" && props.loginOpen) {
         handleLoginRequest().then();
       }
     };

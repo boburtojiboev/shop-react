@@ -47,7 +47,7 @@ export function CommentPage({ chosenProduct }: any) {
       })
       .then((data) => setProductComment(data))
       .catch((err) => console.log(err));
-  }, [product_id, productRebuild]);
+  }, [product_id, productRebuild, setProductComment]);
   /*HANDLERS*/
   const submitHandler = async () => {
     try {
