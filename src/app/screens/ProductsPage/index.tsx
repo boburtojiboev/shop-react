@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../../css/products.css";
-import { Box, Button, Container, Stack } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { Box, Container, Stack } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -155,7 +154,7 @@ export function ProductsPage(props: any) {
             <Stack className={"avatar_big_box"}>
               <Box className={"top_text"}>
                 <p>All Products</p>
-                <Box className={"Single_search_big_box"}>
+                {/* <Box className={"Single_search_big_box"}>
                   <form
                     className={"Single_search_form"}
                     action={""}
@@ -175,7 +174,7 @@ export function ProductsPage(props: any) {
                       Izlash
                     </Button>
                   </form>
-                </Box>
+                </Box> */}
               </Box>
             </Stack>
 

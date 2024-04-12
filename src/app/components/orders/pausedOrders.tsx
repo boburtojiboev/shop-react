@@ -37,7 +37,7 @@ export default function PausedOrders(props: any) {
       }
 
       let confirmation = window.confirm(
-        "Buyurtmani bekor qilishni hohlaysizmi?"
+        "Do you want to cancel order?"
       );
       if (confirmation) {
         const orderService = new OrderApiService();
@@ -60,7 +60,7 @@ export default function PausedOrders(props: any) {
       }
 
       let confirmation = window.confirm(
-        "Buyurtmangizni tolshni tasdiqlaysizmi?"
+        "Do you confirm to pay?"
       );
       if (confirmation) {
         const orderService = new OrderApiService();

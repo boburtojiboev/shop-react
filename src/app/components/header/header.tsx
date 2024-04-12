@@ -78,7 +78,7 @@ export function Header(props: any) {
               </NavLink>
             </Box>
             {verifiedMemberData ? (
-              <Box className="hover-line" onClick={props.setPath}>
+              <Box className="hover-line member_img" onClick={props.setPath}>
                 <NavLink to="/orders" activeClassName="underline">
                   Orders
                 </NavLink>
@@ -90,7 +90,7 @@ export function Header(props: any) {
               </NavLink>
             </Box>
             {verifiedMemberData ? (
-              <Box className="hover-line" onClick={props.setPath}>
+              <Box className="hover-line member_img" onClick={props.setPath}>
                 <NavLink to="/member-page" activeClassName="underline">
                   MyPage
                 </NavLink>
@@ -128,6 +128,7 @@ export function Header(props: any) {
               </Box>
             ) : (
               <img
+                className="member_img"
                 style={{ width: "48px", height: "48px", borderRadius: "24px" }}
                 src={verifiedMemberData.mb_image}
                 alt="member_img"

@@ -38,7 +38,7 @@ export default function ProcessOrders(props: any) {
       }
 
       let confirmation = window.confirm(
-        "Buyurtmani olganingizni tasdiqlaysizmi?"
+        "Do you confirm that you gat your orders?"
       );
       if (confirmation) {
         const orderService = new OrderApiService();

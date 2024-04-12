@@ -18,7 +18,7 @@ const finishedOrdersRetriever = createSelector(
 
 export default function FinishedOrders(props: any) {
   // INITIALIZATIONS
-   const { finishedOrders } = useSelector(finishedOrdersRetriever);
+  const { finishedOrders } = useSelector(finishedOrdersRetriever);
   return (
     <TabPanel value={"3"}>
       <Stack>
@@ -30,7 +30,8 @@ export default function FinishedOrders(props: any) {
                   const product: Product = order.product_data.filter(
                     (ele) => ele._id === item.product_id
                   )[0];
-                  const discountedPrice = (item.item_price * (100 - item.item_sale)) / 100;
+                  const discountedPrice =
+                    (item.item_price * (100 - item.item_sale)) / 100;
                   const image_path = `${serverApi}/${product.product_images[0]}`;
                   return (
                     <Box className="ordersName_price">
@@ -54,10 +55,18 @@ export default function FinishedOrders(props: any) {
                 <Box className="boxTotal finish_total">
                   <p>Product price</p>
                   <p>${order.order_total_amount - order.order_delivery_cost}</p>
-                  <img src="/icons/plus.svg" alt="" style={{ marginLeft: "20px" }} />
+                  <img
+                    src="/icons/plus.svg"
+                    alt=""
+                    style={{ marginLeft: "20px" }}
+                  />
                   <p>Delivery fee</p>
                   <p>${order.order_delivery_cost}</p>
-                  <img src="/icons/pause.svg" alt="" style={{ marginLeft: "20px" }} />
+                  <img
+                    src="/icons/pause.svg"
+                    alt=""
+                    style={{ marginLeft: "20px" }}
+                  />
                   <p>Overall</p>
                   <p>${order.order_total_amount}</p>
                 </Box>

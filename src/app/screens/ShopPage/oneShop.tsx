@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Button, Container, Stack } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { Box, Container, Stack } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -249,7 +248,7 @@ export function OneShop(props: any) {
             <Stack className={"avatar_big_box"}>
               <Box className={"top_text"}>
                 <p>{chosenShop?.mb_nick} Store</p>
-                <Box className={"Single_search_big_box"}>
+                {/* <Box className={"Single_search_big_box"}>
                   <form
                     className={"Single_search_form"}
                     action={""}
@@ -269,7 +268,7 @@ export function OneShop(props: any) {
                       Izlash
                     </Button>
                   </form>
-                </Box>
+                </Box> */}
               </Box>
             </Stack>
 
