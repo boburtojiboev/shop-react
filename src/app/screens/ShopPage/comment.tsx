@@ -78,13 +78,13 @@ export function CommentPage({ chosenProduct }: any) {
             const auth = comment?.member_data;
             const image_path = auth?.mb_image
               ? `${serverApi}/${auth?.mb_image}`
-              : "/icons/user_avatar.jpg";
+              : "/auth/default_user.svg";
             return (
               <Box key={comment._id} className="comment_wrap">
                 <Box className="comment_txt">
                   <img
                     src={image_path}
-                    alt="product_image"
+                    alt=""
                     className="img_comment"
                   />
                   <span className="commenter">{auth?.mb_nick}</span>

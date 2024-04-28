@@ -131,7 +131,7 @@ export function Header(props: any) {
                 className="member_img"
                 style={{ width: "48px", height: "48px", borderRadius: "24px" }}
                 src={verifiedMemberData.mb_image}
-                alt="member_img"
+                alt=""
                 onClick={props.handleLogOutClick}
               />
             )}
