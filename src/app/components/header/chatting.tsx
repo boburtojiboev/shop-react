@@ -23,7 +23,7 @@ import { RippleBadge } from "../../MaterialTheme/styled";
 
 const NewMessage = (data: any) => {
   console.log(data.new_message);
-  if (data.new_message.mb_id === verifiedMemberData?.mb_id) {
+  if (data.new_message.mb_id === verifiedMemberData?._id) {
     return (
       <Box
         flexDirection={"row"}
@@ -136,7 +136,7 @@ export function Chatting() {
         : "/auth/default_user.svg";
       socket.emit("createMsg", {
         msg: message,
-        mb_id: verifiedMemberData?.mb_id,
+        mb_id: verifiedMemberData?._id,
         mb_nick: verifiedMemberData?.mb_nick,
         mb_image: mb_image_url,
       });

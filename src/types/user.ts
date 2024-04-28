@@ -4,7 +4,7 @@ import { MeLiked } from "./product";
 export interface Shop {
   _id: string;
   mb_nick: string;
-  mb_phone: string;
+  mb_phone: number;
   mb_password: string;
   mb_type: string;
   mb_status: string;
@@ -23,7 +23,7 @@ export interface Shop {
 export interface Member {
   _id: string;
   mb_nick: string;
-  mb_phone: string;
+  mb_phone: number;
   mb_password: string;
   mb_type: string;
   mb_status: string;
